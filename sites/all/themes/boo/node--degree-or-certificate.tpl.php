@@ -33,6 +33,7 @@
     $node = node_load($nid);
     $field = field_get_items('node', $node, 'field_another_entity_test');
     $class = $field[0]['entity'];
+   
    // print_r($class);
     echo "<tr>";
     echo "<td>";
