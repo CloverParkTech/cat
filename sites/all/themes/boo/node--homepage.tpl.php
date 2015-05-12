@@ -81,8 +81,26 @@ $vid = 2;
 </ul>
 
 <h2>Academic Information</h2>
+<ul>
+  <?php 
+    $node = node_load($nid);
+    $field = field_get_items('node', $node, 'field_academic_information_toc');
 
-
+    foreach($field as $item) {
+    $aca_page = $item['entity'];
+ 
+    echo "<li>";
+    echo "<a href=\"";
+    echo boo_url($aca_page->nid);
+    echo "\">";
+    echo $aca_page->title;
+    echo "</a>";
+    echo "</li>";
+    // there's a better way to access these. Once I have that, make this a function
+}
+//    $output = field_view_value('node', $node, 'field_another_entity_test', $field[$delta]);
+  ?>
+</ul>
   </div>
 
 
