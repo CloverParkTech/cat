@@ -16,7 +16,7 @@
 
   <?php print render($title_prefix); ?>
   <?php if (!$page): ?>
-    <h1<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a> TEST</h1>
+    <h1<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h1>
   <?php endif; ?>
   <?php print render($title_suffix); ?>
 
@@ -27,12 +27,26 @@
   <?php endif; ?>
 
   <div class="content"<?php print $content_attributes; ?>>
+  <div class="body">
+    <?php print render($content['body']); ?>
+ </div>
+
+ <div class="glance">
+<?php print render($content['field_type_of_degree']); ?>
+<?php print render($content['field_quarters']); ?>
+<?php print render($content['field_estimated_cost']); ?>
+<?php print render($content['field_admission_dates']); ?>
+<?php print render($content['field_degree_prereqs']); ?>
+ </div>
   <h2>Classes in This Degree</h2>
   <table>
   <?php 
     $node = node_load($nid);
     $field = field_get_items('node', $node, 'field_another_entity_test');
-    $class = $field[0]['entity'];
+    foreach($field as $item) {
+
+
+    $class = $item['entity'];
    
    // print_r($class);
     echo "<tr>";
@@ -48,6 +62,7 @@
      echo "</td>";
       echo "</tr>";
 //    $output = field_view_value('node', $node, 'field_another_entity_test', $field[$delta]);
+    }
   ?>
 
 </table>
