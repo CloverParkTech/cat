@@ -92,9 +92,13 @@
       <th>Credits</th>
     </thead>
   <?php 
+
+
+    // display all the courses associated with this degree and their credit values
     $node = node_load($nid);
     $field = field_get_items('node', $node, 'field_another_entity_test');
     $total_credits = 0;
+    $total_credits_max = 0;
     foreach($field as $item) {
 
 
@@ -112,6 +116,13 @@
      echo "</td>";
     echo "<td>";
     echo $class->field_credits['und'][0]['value'];
+     // check to see if there's a credit maximum on this class
+      if ($class->field_credit_maximum['und'][0]['value']) {
+        echo "-";
+        echo $class->field_credit_maximum['und'][0]['value'];
+        $total_credits_max += $class->field_credit_maximum['und'][0]['value'];
+      }
+
      echo "</td>";
       echo "</tr>";
 //    $output = field_view_value('node', $node, 'field_another_entity_test', $field[$delta]);
@@ -151,7 +162,6 @@
 
 
 
-
     echo "<tr>";
     echo "<td></td>";
     echo "<td>";
@@ -159,6 +169,12 @@
     echo "</td>";
     echo "<td>";
     echo $total_credits;
+    if($total_credits_max !== 0) {
+      $total_credits_max = $total_credits + $total_credits_max;
+      echo "-";
+      echo $total_credits_max;
+    }
+
     echo "</td>";
     echo "</tr>";
   ?>
