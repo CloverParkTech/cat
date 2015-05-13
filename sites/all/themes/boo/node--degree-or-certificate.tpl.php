@@ -40,9 +40,15 @@
  </div>
   <h2>Classes in This Degree</h2>
   <table>
+    <thead>
+      <th>Course Number</th>
+      <th>Class Title</th>
+      <th>Credits</th>
+    </thead>
   <?php 
     $node = node_load($nid);
     $field = field_get_items('node', $node, 'field_another_entity_test');
+    $total_credits = 0;
     foreach($field as $item) {
 
 
@@ -51,18 +57,64 @@
    // print_r($class);
     echo "<tr>";
     echo "<td>";
-    echo $class->title;
+    echo $class->field_item_number['und'][0]['value'];
     echo "</td>";
     // there's a better way to access these. Once I have that, make this a function
     echo "<td>";
-    echo $class->field_item_number['und'][0]['value'];
+    echo $class->title;
+    
      echo "</td>";
     echo "<td>";
     echo $class->field_credits['und'][0]['value'];
      echo "</td>";
       echo "</tr>";
 //    $output = field_view_value('node', $node, 'field_another_entity_test', $field[$delta]);
+
+      // add the credits from this class to the total credits number
+      $total_credits += $class->field_credits['und'][0]['value'];
     }
+
+    $node = node_load($nid);
+    $field = field_get_items('node', $node, 'field_elective_groups');
+    foreach($field as $item) {
+
+
+    $class = $item['entity'];
+   
+   // print_r($class);
+    echo "<tr>";
+    echo "<td>";
+  //  echo $class->field_item_number['und'][0]['value'];
+    echo "</td>";
+    // there's a better way to access these. Once I have that, make this a function
+    echo "<td>";
+    echo $class->title;
+    
+     echo "</td>";
+    echo "<td>";
+    echo $class->field_elective_credits['und'][0]['value'];
+     echo "</td>";
+      echo "</tr>";
+//    $output = field_view_value('node', $node, 'field_another_entity_test', $field[$delta]);
+
+      // add the credits from this class to the total credits number
+      $total_credits += $class->field_elective_credits['und'][0]['value'];
+    }
+
+
+
+
+
+
+    echo "<tr>";
+    echo "<td></td>";
+    echo "<td>";
+    echo "Total Credits";
+    echo "</td>";
+    echo "<td>";
+    echo $total_credits;
+    echo "</td>";
+    echo "</tr>";
   ?>
 
 </table>
