@@ -108,6 +108,20 @@
     echo "<tr>";
     echo "<td>";
     echo $class->field_item_number['und'][0]['value'];
+
+      // check for superscripts, e.g. DIV, CAP, etc.
+      if ($class->field_capstone['und'][0]['value'] == 1) {
+        echo "<sup>CAP</sup>";
+      }
+
+      if ($class->field_computer_literacy['und'][0]['value'] == 1) {
+        echo "<sup>COM</sup>";
+      }
+      if ($class->field_diversity_requirement['und'][0]['value'] == 1) {
+        echo "<sup>DIV</sup>";
+      }
+
+
     echo "</td>";
     // there's a better way to access these. Once I have that, make this a function
     echo "<td>";
@@ -188,5 +202,11 @@
     ?>
   </div>
 
-
 </div>
+
+<?php 
+$path = path_to_theme();
+$path .= "/snippets/datestamp.php";
+include($path);
+?>
+
