@@ -1,0 +1,9 @@
+.catalog-header {
+	background-color: $brand-purple;
+	color: white;
+	padding: $gutter;
+}
+
+.catalog-header a {
+	@include linx(white, white, white, white);
+}

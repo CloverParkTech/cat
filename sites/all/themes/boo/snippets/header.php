@@ -1,6 +1,6 @@
 <header class="catalog-header">
 	<div class="container">
-  Clover Park Technical College Academic Catalog
+  <a href="<?php echo base_path(); ?>">Clover Park Technical College Academic Catalog</a>
 	</div>
 </header>
 <nav>

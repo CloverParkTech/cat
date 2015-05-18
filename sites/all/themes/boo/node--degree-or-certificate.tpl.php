@@ -162,7 +162,7 @@
 </div>
 
 <div class="col9">
-
+<?php boo_snippet('search.php'); ?>
   <nav>
   <h3>Related Degrees & Certificates</h3>
 
@@ -192,17 +192,22 @@
 
 
 
-  
-
-
-  // display node's title and url in nav
-
-
 
   }
   ?>
 
 </ul>
+<h3>Resources</h3>
+<?php // probably a better way to get the taxonomy name 
+
+  $current_cat = taxonomy_term_load($navtid);
+  $path = taxonomy_term_uri($current_cat);
+  $url = url($path['path']);
+?>
+  <a href="<?php echo $url;?>">View All <?php echo $current_cat->name; ?> Classes</a>
+
+
+
 
 
 
@@ -211,7 +216,8 @@
 </div>
 
 
+
 <?php 
   boo_snippet('datestamp.php');
 ?>
-
+</div>

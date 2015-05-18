@@ -1,17 +1,34 @@
 /* fonts */
 $heading-font: "futura-pt-n5","futura-pt",sans-serif; 
 $text-font: "futura-pt-n5","futura-pt",sans-serif; 
-$text-color: #313131;
+// Arial, "Helvetica Neue", Helvetica, sans-serif;
+$text-color: #343433;
+
+/* typographic scale based on 1:1.2 ratio, with base font size of 14px. SASS converts all these to relative units. */
+
+$font-unit: 1rem;
+$base-font-size: 14px;
+$base-line-height: 21px;
+$rhythm-unit: rem;
 
 
-$base: 23px;
-$medium: 23px*1.4;
-$large: 23px*1.4*1.4;
-$xl: 23px*1.4*1.4*1.4;
+$small: $base-font-size/1.2;
+$base: $base-font-size;
+$medium: $base-font-size*1.2;
+$mediumlarge: $base-font-size*1.2*1.2;
+$large: $base-font-size*1.2*1.2*1.2;
+$xl: $base-font-size*1.2*1.2*1.2*1.2;
+$xxl: $base-font-size*1.2*1.2*1.2*1.2*1.2;
+$largest: $base-font-size*1.2*1.2*1.2*1.2*1.2*1.2;
+$superbig: $base-font-size*1.2*1.2*1.2*1.2*1.2*1.2*1.2*1.2*1.2*1.2;  
+
+
+
+
 
 
 body {
-	font-size: $base;
+	font-size: $mediumlarge;
 	line-height: 1.2;
 	font-family: $text-font;
 	color: $text-color;
@@ -21,24 +38,59 @@ body {
 
 /* this is all the common properties for the headings. Size changes for each one */
 @mixin heading-size ($h-size) {
-	font-size: $h-size;
-	margin: rhythm(1, $h-size) 0 rhythm(1, $h-size) 0; /* 1 line below */
+	font-size: ($h-size);
+	margin: $h-size 0 $h-size 0; /* 1 line below */
 	font-family: $heading-font;
 	line-height: 1.2;
 	font-weight: 700;
-	letter-spacing: 2px;
 }
 
 h1 {
-	@include heading-size($xl);
+	@include heading-size($largest);
 }
 
 h2 {
-	@include heading-size($large);
+	@include heading-size($xxl);
 }
 
 h3 {
+	@include heading-size($xl);
+}
+
+h4 {
+	@include heading-size($large);
+}
+
+h5 {
+	@include heading-size($mediumlarge);
+	text-transform: uppercase;
+	color: $brand-purple;
+}
+
+h6 {
 	@include heading-size($medium);
+	text-transform: uppercase;
+	color: $brand-purple;
 }
 
 
+
+.small-text {
+	font-size: $small;
+	line-height: 1.2;
+}
+
+// this is an example of why you should never call something by the color you originally had it.
+.grey-header {
+	background-color: $brand-purple;
+	color: white;
+	padding: 2*$gutter;
+	text-transform: uppercase;
+	clear: both;
+}
+
+/* used in headings on the apply page, for example */
+small {
+	display: block;
+	font-size: .8em;
+}

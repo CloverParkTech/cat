@@ -13,6 +13,10 @@
 ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
+<div class="grid">
+  <div class="col17">
+
+
 <h2>About Clover Park Technical College</h2>
 
   <ul>
@@ -102,6 +106,10 @@ $vid = 2;
   ?>
 </ul>
   </div>
-
+  <div class="col7">
+    <?php boo_snippet('search.php'); ?>
+    <h3>Resources</h3>
+    <a href="#">Printable Version</a>
+  </div>
 
 </div>
