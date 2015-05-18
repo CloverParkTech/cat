@@ -1,0 +1,39 @@
+/* Buttons */
+@mixin button($color) {
+	border: solid 3px $color;
+	color: $color;
+	border-radius: $radius;
+	padding: 8px;
+	text-transform: uppercase;
+	display: inline-block;
+	margin-top: 0;
+	text-decoration: none !important;
+	background: none;
+	&:hover {
+		cursor: pointer;
+		border-color: lighten($color, 10%);
+		color: lighten($color, 10%);
+	}		
+	&:visited {
+		color: $color;
+	}
+	&:focus {
+		color: $color;
+	}
+}
+
+
+.btn,
+button,
+.webform-submit,
+.form-submit {
+	@include button($brand-alt-green);
+}
+
+.btn-arrow{
+	background-image: url(images/chevron15.svg);
+	background-repeat: no-repeat;
+	background-size: 3em 3em;
+	padding-right: 2em;
+	background-position: 110% 50%;
+}

@@ -73,28 +73,16 @@
  */
 ?>
 
-<header>
-  Clover Park Technical College Academic Catalog
-</header>
-<nav>
-    <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
-       Homepage
-    </a> 
+<?php boo_snippet('header.php'); ?>
 
-    <?php
-    // not working yet
-     if ($breadcrumb): ?>
-      <div id="breadcrumb"><?php print $breadcrumb; ?></div>
-    <?php endif; ?>
-</nav>
-
-
-
+<div class="container">
+<div class="grid">
+	<div class="col15">
 <h1><?php 
 // this is probably the worst way to do this. will fix later
 echo $page['content']['system_main']['term_heading']['term']['#term']->name; 
 ?> Classes</h1>
-<div class="content">
+
 
 
 <?php // this is a sort of hacky way to do this, but I'm not quite sure how else to only access what I want.
@@ -136,8 +124,7 @@ echo $page['content']['system_main']['term_heading']['term']['#term']->name;
 //   ?>
 
 </div>
-
-<div>
+<div class="col9">
 	<h2>Degrees & Certificates in This Program</h2>
 	<?php 
 		foreach($classes as $class) {
@@ -156,7 +143,7 @@ echo $page['content']['system_main']['term_heading']['term']['#term']->name;
 
 
 </div>
+</div>
+</div>
 
-<footer>
-&copy; <?php echo date("Y") ?> Clover Park Technical College
-</footer>
+<?php boo_snippet('footer.php'); ?>

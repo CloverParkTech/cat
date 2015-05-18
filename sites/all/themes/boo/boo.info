@@ -3,7 +3,7 @@ description = This theme demonstrates Drupal's default HTML markup and CSS style
 package = Core
 version = VERSION
 core = 7.x
-stylesheets[all][] = layout.css
+stylesheets[all][] = style.css
 
 ; Information added by Drupal.org packaging script on 2014-11-19
 version = "7.34"

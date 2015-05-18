@@ -1,0 +1,28 @@
+.site-header-menu {
+	list-style-type: none;
+	margin: 0;
+	margin-bottom: $gutter;
+	clear: both;
+	@include breakpoint(baby-bear) {
+		margin: 0;
+		display: flex;
+		justify-content: space-between;
+	}
+}
+
+.site-header-menu > li {
+	width: 100%;
+	display: inline-block;
+	text-transform: uppercase;
+	line-height: 1;
+	padding: $gutter;
+	@include breakpoint(baby-bear) {
+		
+		padding: $gutter;
+		text-align: center;
+		width: auto;
+	}
+	@include breakpoint(mama-bear) {
+		font-size: $medium;
+	}
+}

@@ -1,0 +1,8 @@
+.keeping-connected-wrapper {
+	border: solid 5px $brand-purple;
+	border-radius: $radius;
+	padding: $gutter;
+	@include breakpoint(reverso-baby-bear) {
+		margin: 2*$gutter 0;
+	}
+}

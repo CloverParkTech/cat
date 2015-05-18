@@ -1,0 +1,131 @@
+/* 
+******
+Sets global variables and mixins, 
+i.e., anything used globally that doesn't produce its own css. 
+******
+*/
+
+
+/*
+*********
+COLORS
+*********
+*/
+$brand-purple: #502d7f;
+$brand-green: #bed600;
+$brand-alt-purple: #8d6cd1;
+$brand-alt-green: #719500;
+$brand-grey: #939598;
+$darker-green: shade($brand-green, 27%);
+$site-grey: #f2f2f2;
+$lighter-purple: tint($brand-purple, 27%);
+
+/* 
+*********
+GUTTER WIDTH
+*********
+*/
+
+$gutter: 20px;
+$radius: 5px;
+
+/* 
+************
+breakpoints 
+************
+*/
+
+$baby-bear: 962px;
+$mama-bear: 962px;
+$papa-bear: 1300px;
+
+/* 
+*********
+Constants
+*********
+*/
+$search-width: 50px;
+$mobile-nav-height: 20em; // used to match up the different parts of the mobile nav
+
+/*
+******
+Breakpoint mixin
+use this like so: @include breakpoint(papa-bear) { whatevs; } 
+*******
+*/
+
+@mixin breakpoint($point) {
+	@if $point == papa-bear {
+		@media (min-width: $papa-bear) { @content; }
+	}
+	@if $point == mama-bear {
+		@media (min-width: $mama-bear) { @content; } // gives us a little room for the search bar stuff
+	}
+	@if $point == baby-bear {
+		@media (min-width: $baby-bear)  { @content; }
+	}
+	@if $point == exclusive-baby-bear {
+		@media (max-width: $baby-bear) { @content; }
+	}
+	@if $point == exclusive-mama-bear {
+		@media (min-width: $baby-bear + 1px) and (max-width: $mama-bear) { @content; }
+	}
+	@if $point == exclusive-papa-bear {
+		@media (min-width: $mama-bear + 1px) and (max-width: $papa-bear) { @content; }
+    }
+    @if $point == reverso-baby-bear {
+		@media (max-width: $baby-bear + 1px) { @content; }
+    }
+    @if $point == reverso-mama-bear {
+    	@media (max-width: $mama-bear + 1px) { @content; }
+    }
+    @if $point == reverso-papa-bear {
+    	@media (max-width: $papa-bear + 1px) { @content; }
+	}
+}
+
+/* 
+*********
+Fade animation
+so we can keep these consistent throughout
+*********
+*/
+
+@mixin fade {
+	transition: all .2s ease-in;
+}
+
+/* triangles. used on program pages */
+@mixin program-triangle($size, $color, $bg-color) {
+	position: absolute;
+	top: -$size;
+	left: 50%;
+	margin-left: -$size; /* horizontal center */
+	width: 0; 
+	height: 0; 
+	border-left: $size solid $bg-color;
+	border-right: $size solid $bg-color;
+	border-top: $size solid $color;
+	&:before{
+		content:'';
+		display: inline-block;
+		position: absolute;
+		width: 100000px; /* run off the edge of the page */
+		height: $size;
+		background: $bg-color;
+		top: -$size;
+		right: $size;
+	}
+	&:after{
+		content:'';
+		display: inline-block;
+		position: absolute;
+		width: 100000px; /* run off the edge of the page */
+		height: $size;
+		background: $bg-color;
+		top: -$size;
+		left: $size;
+	}	
+}
+
+

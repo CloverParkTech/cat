@@ -1,0 +1,17 @@
+@mixin linx ($link, $visit, $hover, $active) {
+    color: $link;
+    &:visited {
+      color: $visit;
+    }
+    &:hover {
+      color: $hover;   
+    }
+    &:active {
+      color: $active;
+    }
+}
+
+a {
+	@include linx($brand-purple, $brand-purple, $brand-alt-green, $brand-alt-green);
+	text-decoration: none;
+}

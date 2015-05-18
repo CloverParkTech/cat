@@ -1,0 +1,14 @@
+.site-header {
+	background: $site-grey;
+	margin-bottom: 2*$gutter;
+	@include breakpoint(baby-bear) {
+		padding: 0 0 0 0;
+	}
+}
+
+.site-title {
+	background-color: $brand-alt-green;
+	font-size: .8rem;
+	color: white;
+	padding: 4px 0;
+}

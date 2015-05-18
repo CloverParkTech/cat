@@ -1,0 +1,53 @@
+label {
+	display: block;
+}
+
+option:hover {
+	background-color: $brand-green;
+}
+
+input {
+	border: 2px solid $brand-purple;
+	padding: 3px;
+	margin-bottom: 7px;
+	outline: none;
+	border-radius: 0;
+	max-width: 100%;
+	&:focus {
+		border: 2px solid $brand-green;
+	}
+}
+
+select {
+	background-color: $brand-grey;
+	max-width: 200px;
+	color: #fff;
+	padding: 5px;
+}
+
+// the class that drupal webforms gives to submit buttons
+
+
+/* hacks for comments 
+* I should remove all this through template.php, but don't have the time right now
+*/
+
+.node-type-policy-or-procedure {
+	.comment-wrapper {
+		h3 {
+			display: none;
+		}
+		.form-item-homepage {
+			display: none;
+		}
+		.filter-guidelines-item {
+			display: none;
+		}
+		.permalink {
+			display: none;
+		}
+		.submitted {
+			font-weight: bold;
+		}
+	}
+}

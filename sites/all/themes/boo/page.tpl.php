@@ -73,12 +73,10 @@
  */
 ?>
 
-<header>
-  Clover Park Technical College Academic Catalog
-</header>
- <?php print render($page['header']); ?>
-<nav>
 
+<?php 
+	boo_snippet('header.php');
+?>
 
     <?php
     // not working yet
@@ -86,18 +84,14 @@
       <div id="breadcrumb"><?php print $breadcrumb; ?></div>
     <?php endif; ?>
 </nav>
-<div class="content">
+<div class="container">
     <?php print render($page['content']); ?>
 </div>
 
 
-<div>
-<pre>
 
-</pre>
-
-</div>
-
-<footer>
-&copy; <?php echo date("Y") ?> Clover Park Technical College
+<footer class="catalog-footer">
+	<div class="container">
+	&copy; <?php echo date("Y") ?> Clover Park Technical College
+	</div>
 </footer>

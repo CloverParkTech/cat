@@ -1,0 +1,70 @@
+*, 
+*:after, 
+*:before {
+	box-sizing: border-box;
+}
+
+
+img {
+	max-width: 100%;
+}
+
+em {
+	font-style: italic;
+}
+
+strong {
+	font-weight: bold;
+}
+
+/* clearfix */
+.cf:before,
+.cf:after {
+	    content: " "; 
+	    display: table; 
+	}
+
+.cf:after {
+    clear: both;
+}
+
+.img-row {
+	margin-bottom: 30px;
+	padding: 15px 0;
+	border-bottom: solid 2px $site-grey;
+	float: left;
+	width: 100%;
+}
+
+.cover {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+
+// extend for pretty bullets. use it on the actual li
+.cool-bullets {
+	padding-left: 14px;
+	background: url('images/bullet-arrow.png') no-repeat 4.5px 5px;
+	list-style-type: none;
+	background-position: 3px 8px; // makes these line up right
+}
+
+// global margins for text elements
+p,
+address,
+.btn {
+	margin: 14px 0;
+}
+
+.hidden {
+	display: none;
+}
+
+.filter-wrapper {
+	// hack to hide the text format select options
+	display: none;
+}

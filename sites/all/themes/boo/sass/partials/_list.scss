@@ -1,0 +1,53 @@
+.tabs {
+	margin: 0; /* kees the drupal tabs from causing a space in the layout */
+}
+
+ul {
+    list-style-type: disc; 
+}
+
+ol { 
+	list-style-type: decimal;
+}
+
+.unstyled {
+	list-style-type: none;
+	margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  margin-left: $gutter;
+}
+
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  margin-bottom: 0;
+}
+
+li {
+  line-height: 1.2;
+  padding-bottom: $gutter;
+}
+
+dl {
+  margin-bottom: 20px;
+}
+
+dt,
+dd {
+  line-height: 1.2;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin-left: $gutter;
+  margin-bottom: $gutter/2;
+}

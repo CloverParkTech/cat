@@ -13,7 +13,8 @@
 ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
-
+<div class="grid">
+  <div class="col15">
   <?php print render($title_prefix); ?>
   <?php if (!$page): ?>
     <h1<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h1>
@@ -27,50 +28,6 @@
   <?php endif; ?>
 
 
-  <nav>
-  <h3>Related Degrees & Certificates</h3>
-
-  <ul>
-  <?php 
-
-  // lists all degrees & certificates in the same program, as determined by their taxonomy.
-  $items = field_get_items('node', $node, 'field_degree_program');
-  $navtid = $items[0]['tid'];
-  // returns node IDs for all nodes with the same program taxonomy term as this one
-  $navnids = taxonomy_select_nodes($navtid);
-  foreach($navnids as $navnid) {
-  // check if node's content type is degree or certificate
-    $navnode = node_load($navnid);
-    $type =$navnode->type;
-    // check if node is the current node we're on
-    if($type == 'degree_or_certificate' && $navnid !== $nid) {
-      echo "<li>";
-      echo "<a href=\">";
-      echo boo_url($navnid);
-      echo "\">";
-      echo $navnode->title;
-      echo "</a>";
-      echo "</li>";
-
-    }
-
-
-
-  
-
-
-  // display node's title and url in nav
-
-
-
-  }
-  ?>
-
-</ul>
-
-
-
-  </nav>
 
   <div class="content"<?php print $content_attributes; ?>>
   <div class="body">
@@ -204,9 +161,57 @@
 
 </div>
 
+<div class="col9">
+
+  <nav>
+  <h3>Related Degrees & Certificates</h3>
+
+  <ul>
+  <?php 
+
+  // lists all degrees & certificates in the same program, as determined by their taxonomy.
+  $items = field_get_items('node', $node, 'field_degree_program');
+  $navtid = $items[0]['tid'];
+  // returns node IDs for all nodes with the same program taxonomy term as this one
+  $navnids = taxonomy_select_nodes($navtid);
+  foreach($navnids as $navnid) {
+  // check if node's content type is degree or certificate
+    $navnode = node_load($navnid);
+    $type =$navnode->type;
+    // check if node is the current node we're on
+    if($type == 'degree_or_certificate' && $navnid !== $nid) {
+      echo "<li>";
+      echo "<a href=\">";
+      echo boo_url($navnid);
+      echo "\">";
+      echo $navnode->title;
+      echo "</a>";
+      echo "</li>";
+
+    }
+
+
+
+  
+
+
+  // display node's title and url in nav
+
+
+
+  }
+  ?>
+
+</ul>
+
+
+
+  </nav>
+</div>
+</div>
+
+
 <?php 
-$path = path_to_theme();
-$path .= "/snippets/datestamp.php";
-include($path);
+  boo_snippet('datestamp.php');
 ?>
 
