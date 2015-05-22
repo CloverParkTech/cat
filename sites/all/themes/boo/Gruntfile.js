@@ -16,7 +16,7 @@ module.exports = function(grunt) {
         concat: {
             global: {
                 src: [
-                    'js/**/*.js',
+                    'js/plugins/*.js',
                 ],
                 dest: 'js/global.js',
             },
@@ -77,9 +77,10 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-autoprefixer');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-concat');
+     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+   
 
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.

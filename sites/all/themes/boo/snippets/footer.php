@@ -3,3 +3,8 @@
 	&copy; <?php echo date("Y") ?> Clover Park Technical College
 	</div>
 </footer>
+
+<script>
+    var lightbox = new Lightbox();
+    lightbox.load();
+</script>

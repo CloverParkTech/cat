@@ -1,0 +1,36 @@
+.class-popup-window {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(black, .7);
+}
+
+.class-popup-window-inner {
+  background: white;
+  width: 90%;
+  max-width: 20em;
+   position: absolute;
+   left: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  padding: $gutter;
+}
+
+
+.class-popup-window-active {
+  display: block;
+  
+}
+
+.class-popup-window-close {
+  background: white;
+  position: absolute;
+  top: 70%;
+  @include button($brand-green);
+}
+
+

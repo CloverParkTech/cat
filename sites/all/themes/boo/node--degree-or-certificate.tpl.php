@@ -10,16 +10,28 @@
  *
  * @ingroup themeable
  */
+
+  // lists all degrees & certificates in the same program, as determined by their taxonomy.
+  $items = field_get_items('node', $node, 'field_degree_program');
+  $navtid = $items[0]['tid'];
+  // returns node IDs for all nodes with the same program taxonomy term as this one
+  $navnids = taxonomy_select_nodes($navtid);
+
+
+
+
+    $current_cat = taxonomy_term_load($navtid);
+  $path = taxonomy_term_uri($current_cat);
+  $caturl = url($path['path']);
 ?>
+
+
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
 <div class="grid">
   <div class="col15">
-  <?php print render($title_prefix); ?>
-  <?php if (!$page): ?>
-    <h1<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h1>
-  <?php endif; ?>
-  <?php print render($title_suffix); ?>
+    <h1><?php print $title; ?></h1>
+ 
 
   <?php if ($display_submitted): ?>
     <div class="submitted">
@@ -56,6 +68,8 @@
     $field = field_get_items('node', $node, 'field_another_entity_test');
     $total_credits = 0;
     $total_credits_max = 0;
+    // counter for js IDs
+    $i = 0;
     foreach($field as $item) {
 
 
@@ -64,7 +78,7 @@
    // print_r($class);
     echo "<tr>";
     echo "<td>";
-    echo $class->field_item_number['und'][0]['value'];
+    echo $class->title;
 
       // check for superscripts, e.g. DIV, CAP, etc.
       if ($class->field_capstone['und'][0]['value'] == 1) {
@@ -81,8 +95,64 @@
 
     echo "</td>";
     // there's a better way to access these. Once I have that, make this a function
+    // adding IDs for javascript lightbox
     echo "<td>";
-    echo $class->title;
+    echo "<span data-js=\"js-popup\" class=\"class-popup\" id=\"js-class-popup-";
+    echo $i;
+    echo "\">";
+    echo $class->field_class_title['und'][0]['value'];
+
+    echo "</span>";
+        echo "<div class=\"class-popup-window\"  id=\"js-class-popup-window-";
+    echo $i;
+     echo "\">";
+     echo "<div class=\"class-popup-window-inner\">";
+     echo "<h2>";
+   echo $class->title;
+   echo "</h2>";
+   echo "<dl>";
+   echo "<dt>";
+   echo "Item Number";
+   echo "</dt>";
+   echo "<dd>";
+   echo $class->title;
+   echo "</dd>";
+   echo "<dt>";
+   echo "Credits";
+   echo "</dt>";
+   echo "<dd>";
+   echo $class->field_credits['und'][0]['value'];
+     // check to see if there's a credit maximum on this class
+      if ($class->field_credit_maximum['und'][0]['value']) {
+        echo "-";
+        echo $class->field_credit_maximum['und'][0]['value'];
+        $total_credits_max += $class->field_credit_maximum['und'][0]['value'];
+      }
+      echo "</dd>";
+   echo "<p>";
+
+   echo $class->field_description['und'][0]['value'];
+   echo "<a href=\"";
+
+
+    echo $caturl;
+    echo "\">";
+    echo "View All"; 
+
+
+
+
+     echo $current_cat->name; 
+     echo "Classes";
+     echo "</a>";
+
+    echo "<div class=\"class-popup-window-close\" id=\"js-class-popup-window-close-";
+    echo $i;
+    echo "\">CLOSE</div>";
+    echo "</div>";
+    echo "</div>";
+    
+   
     
      echo "</td>";
     echo "<td>";
@@ -100,6 +170,7 @@
 
       // add the credits from this class to the total credits number
       $total_credits += $class->field_credits['und'][0]['value'];
+      $i++;
     }
 
     $node = node_load($nid);
@@ -169,11 +240,7 @@
   <ul>
   <?php 
 
-  // lists all degrees & certificates in the same program, as determined by their taxonomy.
-  $items = field_get_items('node', $node, 'field_degree_program');
-  $navtid = $items[0]['tid'];
-  // returns node IDs for all nodes with the same program taxonomy term as this one
-  $navnids = taxonomy_select_nodes($navtid);
+
   foreach($navnids as $navnid) {
   // check if node's content type is degree or certificate
     $navnode = node_load($navnid);
@@ -200,11 +267,9 @@
 <h3>Resources</h3>
 <?php // probably a better way to get the taxonomy name 
 
-  $current_cat = taxonomy_term_load($navtid);
-  $path = taxonomy_term_uri($current_cat);
-  $url = url($path['path']);
+
 ?>
-  <a href="<?php echo $url;?>">View All <?php echo $current_cat->name; ?> Classes</a>
+  <a href="<?php echo $caturl;?>">View All <?php echo $current_cat->name; ?> Classes</a>
 
 
 

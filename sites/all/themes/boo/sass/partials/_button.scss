@@ -1,25 +1,19 @@
-/* Buttons */
 @mixin button($color) {
-	border: solid 3px $color;
-	color: $color;
-	border-radius: $radius;
+	background-color: $color;
+	border: none;
+	color: white;
+	font-weight: bold;
 	padding: 8px;
 	text-transform: uppercase;
 	display: inline-block;
 	margin-top: 0;
 	text-decoration: none !important;
-	background: none;
+	@include linx(white, white, white, white);
 	&:hover {
+		@include fade;
+		background-color: shade($color, 30%);
 		cursor: pointer;
-		border-color: lighten($color, 10%);
-		color: lighten($color, 10%);
 	}		
-	&:visited {
-		color: $color;
-	}
-	&:focus {
-		color: $color;
-	}
 }
 
 
@@ -27,7 +21,7 @@
 button,
 .webform-submit,
 .form-submit {
-	@include button($brand-alt-green);
+	@include button($brand-green);
 }
 
 .btn-arrow{

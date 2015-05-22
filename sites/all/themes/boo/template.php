@@ -20,4 +20,11 @@ function boo_snippet($filename) {
 	$path .= $filename;
 	include($path);
 }      
+
+// add global js file
+function boo_preprocess_node(&$variables) {
+	// add global js
+      drupal_add_js(drupal_get_path('theme', 'boo') . '/js/global.min.js');
+
+      }
 ?>
