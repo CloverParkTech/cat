@@ -11,48 +11,40 @@
  * @ingroup themeable
  */
 
-  // lists all degrees & certificates in the same program, as determined by their taxonomy.
+
+
+/**
+* Let's set up some variables for use throughout the page
+**/
+
+ 
+// get the program taxonomy term for the current degree and use it to get an array of all the nodes in the same taxonomy.
   $items = field_get_items('node', $node, 'field_degree_program');
   $navtid = $items[0]['tid'];
   // returns node IDs for all nodes with the same program taxonomy term as this one
   $navnids = taxonomy_select_nodes($navtid);
 
-
-
-
-    $current_cat = taxonomy_term_load($navtid);
+// get the path for the program taxonomy term in question, so that we can link to all the class descriptions is this category.
+  $current_cat = taxonomy_term_load($navtid);
   $path = taxonomy_term_uri($current_cat);
   $caturl = url($path['path']);
 ?>
 
-
-<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-
 <div class="grid">
-  <div class="col15">
-    <h1><?php print $title; ?></h1>
- 
-
-  <?php if ($display_submitted): ?>
-    <div class="submitted">
-      <?php print $submitted; ?>
+  <div class="col17">
+     <div class="glance-wrapper">
+      <h5>Degree Info at a Glance</h5>
+      <?php print render($content['field_type_of_degree']); ?>
+      <?php print render($content['field_quarters']); ?>
+      <?php print render($content['field_estimated_cost']); ?>
+      <?php print render($content['field_admission_dates']); ?>
+      <?php print render($content['field_degree_prereqs']); ?>
     </div>
-  <?php endif; ?>
-
-
-
-  <div class="content"<?php print $content_attributes; ?>>
-  <div class="body">
+  <div class="degree-body">
     <?php print render($content['body']); ?>
  </div>
 
- <div class="glance">
-<?php print render($content['field_type_of_degree']); ?>
-<?php print render($content['field_quarters']); ?>
-<?php print render($content['field_estimated_cost']); ?>
-<?php print render($content['field_admission_dates']); ?>
-<?php print render($content['field_degree_prereqs']); ?>
- </div>
+
   <h2>Classes in This Degree</h2>
   <table>
     <thead>
@@ -61,39 +53,29 @@
       <th>Credits</th>
     </thead>
   <?php 
-
-
     // display all the courses associated with this degree and their credit values
     $node = node_load($nid);
-    $field = field_get_items('node', $node, 'field_another_entity_test');
+    $field = field_get_items('node', $node, 'field_classes_in_this_degree');
     $total_credits = 0;
     $total_credits_max = 0;
     // counter for js IDs
     $i = 0;
     foreach($field as $item) {
-
-
-    $class = $item['entity'];
-   
-   // print_r($class);
-    echo "<tr>";
-    echo "<td>";
-    echo $class->title;
-
+      $class = $item['entity'];
+      echo "<tr>";
+      echo "<td>";
+      echo $class->title;
       // check for superscripts, e.g. DIV, CAP, etc.
       if ($class->field_capstone['und'][0]['value'] == 1) {
         echo "<sup>CAP</sup>";
       }
-
       if ($class->field_computer_literacy['und'][0]['value'] == 1) {
         echo "<sup>COM</sup>";
       }
       if ($class->field_diversity_requirement['und'][0]['value'] == 1) {
         echo "<sup>DIV</sup>";
       }
-
-
-    echo "</td>";
+     echo "</td>";
     // there's a better way to access these. Once I have that, make this a function
     // adding IDs for javascript lightbox
     echo "<td>";
@@ -222,17 +204,10 @@
   ?>
 
 </table>
-    <?php
-      // We hide the comments and links now so that we can render them later.
-     // hide($content['comments']);
-     // hide($content['links']);
-     // print render($content);
-    ?>
   </div>
 
-</div>
 
-<div class="col9">
+<div class="col7">
 <?php boo_snippet('search.php'); ?>
   <nav>
   <h3>Related Degrees & Certificates</h3>
@@ -264,12 +239,15 @@
   ?>
 
 </ul>
-<h3>Resources</h3>
+
 <?php // probably a better way to get the taxonomy name 
 
 
 ?>
   <a href="<?php echo $caturl;?>">View All <?php echo $current_cat->name; ?> Classes</a>
+
+
+  <?php boo_snippet('sidebar-menu.php'); ?>
 
 
 
@@ -280,9 +258,9 @@
 </div>
 </div>
 
+<div class="datestamp-wrapper">
+This page was last updated on <?php echo date("F d, Y", $node->revision_timestamp); ?>.
+</div>
 
 
-<?php 
-  boo_snippet('datestamp.php');
-?>
 </div>

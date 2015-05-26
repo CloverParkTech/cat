@@ -1,0 +1,15 @@
+.class-wrapper {
+	background: $site-grey;
+	padding: $gutter;
+	margin-bottom: 2*$gutter;
+}
+
+.class-title {
+	display: block;
+	color: white;
+	background: $brand-alt-green;
+	padding: $gutter;
+	text-transform: uppercase;
+	font-weight: 200;
+	margin: 0;
+}

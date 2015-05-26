@@ -17,10 +17,21 @@
   <div class="col17">
 
 
-<h2>About Clover Park Technical College</h2>
+<h2>Welcome to Clover Park Technical College</h2>
+<?php print render($content['body']); ?>
 
+<h2>About Clover Park Technical College</h2>
+<?php
+// display menu that's being used for table of contents
+$menu = menu_navigation_links('menu-about-pages-nav');
+ print theme('links__menu_about-pages-nav', array('links' => $menu));
+ ?>
+
+<?php 
+/* not using this right now
   <ul>
-  <?php 
+  
+  /*
     $node = node_load($nid);
     $field = field_get_items('node', $node, 'field_about_toc');
 
@@ -37,9 +48,12 @@
     // there's a better way to access these. Once I have that, make this a function
 }
 //    $output = field_view_value('node', $node, 'field_another_entity_test', $field[$delta]);
-  ?>
 
 </ul>
+*/
+  ?>
+
+
 
 <h2>Degrees & Certificates</h2>
 <?php /* List all degrees and certificates here */ ?>
@@ -108,8 +122,10 @@ $vid = 2;
   </div>
   <div class="col7">
     <?php boo_snippet('search.php'); ?>
-    <h3>Resources</h3>
+    <h3>Catalog Downloads</h3>
     <a href="#">Printable Version</a>
+    <?php boo_snippet('sidebar-menu.php'); ?>
   </div>
 
+</div>
 </div>

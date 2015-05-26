@@ -9,4 +9,6 @@ stylesheets[all][] = style.css
 version = "7.34"
 project = "drupal"
 datestamp = "1416429488"
+regions[content] = Content
+regions[breadcrumb] = Breadcrumb
 

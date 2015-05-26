@@ -75,23 +75,24 @@
 
 
 <?php 
-	boo_snippet('header.php');
+  boo_snippet('header.php');
 ?>
 
-    <?php
-    // not working yet
-     if ($breadcrumb): ?>
-      <div id="breadcrumb"><?php print $breadcrumb; ?></div>
-    <?php endif; ?>
-</nav>
 <div class="container">
-    <?php print render($page['content']); ?>
+  <?php if(!$is_front) {
+    // display title if it's not the front page.
+    echo "<h1>";
+    echo $title;
+    echo "</h1>";
+    // display breadcrumb if it's not the front page
+    echo "<div class=\"breadcrumb-wrapper\">";
+    print render($page['breadcrumb']);
+    echo "</div>";
+  }
+?>
+  <?php print render($page['content']); ?>
 </div>
 
-
-
-<footer class="catalog-footer">
-	<div class="container">
-	&copy; <?php echo date("Y") ?> Clover Park Technical College
-	</div>
-</footer>
+<?php 
+  boo_snippet('footer.php');
+?>

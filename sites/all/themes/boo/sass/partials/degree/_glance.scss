@@ -1,0 +1,11 @@
+.glance-wrapper {
+	background: $site-grey;
+	padding: $gutter;
+	border: solid 2px $brand-alt-green;
+	float: right;
+	
+	margin: $gutter;
+	@include breakpoint(mama-bear){
+		width: 50%;
+	}
+}
