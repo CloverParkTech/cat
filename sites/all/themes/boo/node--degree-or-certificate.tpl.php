@@ -53,6 +53,10 @@
       <th>Credits</th>
     </thead>
   <?php 
+
+
+
+
     // display all the courses associated with this degree and their credit values
     $node = node_load($nid);
     $field = field_get_items('node', $node, 'field_classes_in_this_degree');
@@ -60,9 +64,228 @@
     $total_credits_max = 0;
     // counter for js IDs
     $i = 0;
+    $j = 0;
+    $degree_classes = array();
     foreach($field as $item) {
       $class = $item['entity'];
-      echo "<tr>";
+
+      // create array of all classes to use in template. 
+      $degree_classes[$i]['number'] = $i;
+      $degree_classes[$i]['item'] = $class->title;
+      $degree_classes[$i]['title'] = $class->field_class_title['und'][0]['value'];
+      $degree_classes[$i]['credits'] = $class->field_credits['und'][0]['value'];
+      if ($class->field_credit_maximum['und'][0]['value']) {
+        $degree_classes[$i]['creditsmax'] = $class->field_credit_maximum['und'][0]['value'];
+        $total_credits_max += $class->field_credit_maximum['und'][0]['value'];
+      }
+      else {
+         $degree_classes[$i]['creditsmax'] = null;
+      }
+      $degree_classes[$i]['description'] = $class->field_description['und'][0]['value'];
+
+      if ($class->field_capstone['und'][0]['value'] == 1) {
+        $degree_classes[$i]['superscript'] = "CAP";
+      }
+      elseif ($class->field_computer_literacy['und'][0]['value'] == 1) {
+        $degree_classes[$i]['superscript'] = "CL";
+      }
+      elseif ($class->field_diversity_requirement['und'][0]['value'] == 1) {
+        $degree_classes[$i]['superscript'] = "DIV";
+      }
+      else {
+        $degree_classes[$i]['superscript'] = null;
+      }
+
+
+
+
+
+      $total_credits += $class->field_credits['und'][0]['value'];
+      $i++;
+    }
+
+    // add electives to degree_classes array
+    $field_elective = field_get_items('node', $node, 'field_elective_groups');
+    
+
+    foreach($field_elective as $item) {
+
+      $elective = $item['entity'];
+      
+      $degree_classes[$i]['number'] = $i;
+      $degree_classes[$i]['title'] = $elective->title;
+      $degree_classes[$i]['credits'] = $elective->field_elective_credits['und'][0]['value'];
+      $degree_classes[$i]['description'] = $elective->field_elective_description['und'][0]['value'];
+       // get the nid for the courses assigned to this elective group, put it in sub-array
+        foreach($elective->field_elective_group_courses['und'] as $sub_class) {
+          $sub_node = node_load($sub_class['target_id']);
+          $degree_classes[$i]['sub_classes'][$j]['item'] = $sub_node->title;
+
+          if ($sub_class->field_capstone['und'][0]['value'] == 1) {
+                  $degree_classes[$i]['sub_classes'][$j]['superscript'] = "CAP";
+                }
+                elseif ($sub_class->field_computer_literacy['und'][0]['value'] == 1) {
+                  $degree_classes[$i]['sub_classes'][$j]['superscript'] = "CL";
+                }
+                elseif ($sub_class->field_diversity_requirement['und'][0]['value'] == 1) {
+                  $degree_classes[$i]['sub_classes'][$j]['superscript'] = "DIV";
+                }
+                else {
+                  $degree_classes[$i]['sub_classes'][$j]['superscript'] = null;
+                }
+
+
+
+          $degree_classes[$i]['sub_classes'][$j]['title'] = $sub_node->field_class_title['und'][0]['value'];
+          $degree_classes[$i]['sub_classes'][$j]['credits'] = $sub_node->field_credits['und'][0]['value'];
+          if($class->field_credit_maximum['und'][0]['value']) {
+            $degree_classes[$i]['sub_classes'][$j]['max_credit'] = $class->field_credit_maximum['und'][0]['value'];
+          }
+          $j++;
+      }
+      $i++;
+    }
+
+
+
+// output field_classes array into classes table    
+    foreach($degree_classes as $class) { ?>
+     <tr class="class-popup" id="js-class-popup-<?php echo $class['number'];?>">
+      <td><?php echo $class['item']; ?>
+        <?php if($class['superscript']) {
+          echo "<sup>";
+          echo $class['superscript'];
+          echo "</sup>";
+        }
+          ?>
+      </td>
+      <td><?php echo $class['title']; ?></td>
+      <td><?php echo $class['credits']; ?>
+      <?php if($class['creditsmax']) {
+        echo "-";
+        echo $class['creditsmax'];
+      }
+      ?>
+      </td>
+    </tr>
+
+
+<?php
+}
+
+// output total credits and range, if there is one
+echo "<tr><td>&nbsp;</td><td>Total Credits</td><td>";
+echo $total_credits;
+if ($total_credits_max !== 0) {
+  echo "-";
+  echo $total_credits_max;
+}
+echo "</td></tr></table>";
+
+
+
+// go through the degree_classes array again and output info into the lightbox divs
+
+foreach($degree_classes as $class) { ?>
+<div class="class-popup-window" id="js-class-popup-window-<?php echo $class['number'];?>">
+  <div class="class-popup-window-inner">
+    <h4 class="class-title">
+      <?php echo $class['title']; ?>
+    </h4>
+    <div class="class-wrapper">
+      <dl>
+        <dt>Item Number</dt>
+        <dd><?php echo $class['item']; ?>
+        <?php if($class['superscript']) {
+          echo "<sup>";
+          echo $class['superscript'];
+          echo "</sup>";
+        }
+        ?>
+        </dd>
+        <dt>Credits</dt>
+        <dd><?php echo $class['credits']; ?>
+        <?php if($class['creditsmax']) {
+          echo "-";
+          echo $class['creditsmax'];
+        }
+        ?>
+        </dd>
+      </dl>
+      <p><?php echo $class['description']; ?></p>
+        <?php if($class['sub_classes']) {
+          echo "
+            <table>
+            <thead>
+              <th>Course Number</th>
+              <th>Class Title</th>
+              <th>Credits</th>
+            </thead>
+          ";
+          foreach($class['sub_classes'] as $elective_sub_class) 
+          {
+            
+            ?>
+            <tr>
+              <td><?php echo $elective_sub_class['item']; ?>
+
+              <?php 
+               if($elective_sub_class['superscript']){ 
+              echo $elective_sub_class['superscript'];
+              } ?>
+
+              </td>
+              <td><?php echo $elective_sub_class['title']; ?></td>
+              <td><?php echo $elective_sub_class['credits']; ?>
+
+              <?php 
+               if($elective_sub_class['max_credit']){ 
+                echo "-";
+              echo $elective_sub_class['max_credit'];
+              } ?>
+
+              </td>
+           </tr>
+
+
+            <?php
+         
+           
+          }
+    }
+
+
+       ?>
+      </table>
+
+
+      <a href="<?php echo $caturl; ?>">View All <?php echo $current_cat->name; ?> Classes</a>
+    </div>
+    <div class="class-popup-window-close" id="js-popup-window-close-<?php echo $class['number'];?>">
+      CLOSE
+    </div>
+  </div>
+</div>
+
+
+
+<?php
+}
+
+
+
+
+
+
+/*
+
+
+
+
+      
+      echo "<tr data-js=\"js-popup\" class=\"class-popup\" id=\"js-class-popup-";
+      echo $i;
+      echo "\">";
       echo "<td>";
       echo $class->title;
       // check for superscripts, e.g. DIV, CAP, etc.
@@ -79,19 +302,43 @@
     // there's a better way to access these. Once I have that, make this a function
     // adding IDs for javascript lightbox
     echo "<td>";
-    echo "<span data-js=\"js-popup\" class=\"class-popup\" id=\"js-class-popup-";
-    echo $i;
-    echo "\">";
     echo $class->field_class_title['und'][0]['value'];
+    echo "</td>";
 
-    echo "</span>";
-        echo "<div class=\"class-popup-window\"  id=\"js-class-popup-window-";
+  
+
+
+    echo "<td>";
+    echo $class->field_credits['und'][0]['value'];
+     // check to see if there's a credit maximum on this class
+      if ($class->field_credit_maximum['und'][0]['value']) {
+        echo "-";
+        echo $class->field_credit_maximum['und'][0]['value'];
+        
+      }
+
+     echo "</td>";
+      echo "</tr>";
+
+*/
+// going to write all of the popup divs to an array that we can output after the table so that our HTML is remotely compliant
+      
+   
+
+
+
+
+
+// popup lightbox window. need to extract this as a function
+/*
+    echo "<div class=\"class-popup-window\"  id=\"js-class-popup-window-";
     echo $i;
      echo "\">";
      echo "<div class=\"class-popup-window-inner\">";
-     echo "<h2>";
+     echo "<h4 class=\"class-title\">";
    echo $class->title;
-   echo "</h2>";
+   echo "</h4>";
+   echo "<div class=\"class-wrapper\">";
    echo "<dl>";
    echo "<dt>";
    echo "Item Number";
@@ -119,67 +366,137 @@
 
     echo $caturl;
     echo "\">";
-    echo "View All"; 
+    echo "View All "; 
 
 
 
 
      echo $current_cat->name; 
-     echo "Classes";
+     echo " Classes";
      echo "</a>";
-
+     echo "</div>";
     echo "<div class=\"class-popup-window-close\" id=\"js-class-popup-window-close-";
     echo $i;
     echo "\">CLOSE</div>";
     echo "</div>";
     echo "</div>";
-    
-   
-    
-     echo "</td>";
-    echo "<td>";
-    echo $class->field_credits['und'][0]['value'];
-     // check to see if there's a credit maximum on this class
-      if ($class->field_credit_maximum['und'][0]['value']) {
-        echo "-";
-        echo $class->field_credit_maximum['und'][0]['value'];
-        $total_credits_max += $class->field_credit_maximum['und'][0]['value'];
-      }
 
-     echo "</td>";
-      echo "</tr>";
+
+
+
 //    $output = field_view_value('node', $node, 'field_another_entity_test', $field[$delta]);
 
       // add the credits from this class to the total credits number
-      $total_credits += $class->field_credits['und'][0]['value'];
+      
       $i++;
+      // end class table loop
     }
 
+
+
+// start loop for elective groups
     $node = node_load($nid);
     $field = field_get_items('node', $node, 'field_elective_groups');
     foreach($field as $item) {
 
 
-    $class = $item['entity'];
+    $elective = $item['entity'];
    
    // print_r($class);
-    echo "<tr>";
+    echo "<tr data-js=\"js-popup\" class=\"class-popup\" id=\"js-class-popup-";
+      echo $i;
+      echo "\">";
     echo "<td>";
   //  echo $class->field_item_number['und'][0]['value'];
     echo "</td>";
     // there's a better way to access these. Once I have that, make this a function
     echo "<td>";
-    echo $class->title;
+    echo $elective->title;
     
      echo "</td>";
     echo "<td>";
-    echo $class->field_elective_credits['und'][0]['value'];
+    echo $elective->field_elective_credits['und'][0]['value'];
      echo "</td>";
       echo "</tr>";
-//    $output = field_view_value('node', $node, 'field_another_entity_test', $field[$delta]);
+
+
+
+
+
+// lightbox popups for elective group
+    echo "<div class=\"class-popup-window\"  id=\"js-class-popup-window-";
+    echo $i;
+     echo "\">";
+     echo "<div class=\"class-popup-window-inner\">";
+     echo "<h4 class=\"class-title\">";
+   echo $elective->title;
+   echo "</h4>";
+   echo "<div class=\"class-wrapper\">";
+   echo "<dl>";
+   echo "<dt>";
+   echo "Credits";
+   echo "</dt>";
+   echo "<dd>";
+   echo $elective->field_elective_credits['und'][0]['value'];
+     // check to see if there's a credit maximum on this class 
+   /*
+      if ($class->field_credit_maximum['und'][0]['value']) {
+        echo "-";
+        echo $class->field_credit_maximum['und'][0]['value'];
+        $total_credits_max += $class->field_credit_maximum['und'][0]['value'];
+      } */
+
+      /*
+      echo "</dd>";
+      echo "</dl>";
+   echo "<p>";
+
+ echo $elective->field_elective_description['und'][0]['value'];
+   echo "</p>";
+  
+// start table of available electives
+    echo "
+      <table>
+    <thead>
+      <th>Course Number</th>
+      <th>Class Title</th>
+      <th>Credits</th>
+    </thead>";
+    echo "<tr>";
+    echo "<td>";
+    echo "hey";
+    echo "</td>";
+    echo "<td>";
+    echo "hey";
+    echo "</td>";
+    echo "<td>";
+    echo "hey";
+    echo "</td>";
+    echo "</tr>";
+
+
+
+    echo "</table>";
+
+
+     echo "</div>";
+    echo "<div class=\"class-popup-window-close\" id=\"js-class-popup-window-close-";
+    echo $i;
+    echo "\">CLOSE</div>";
+    echo "</div>";
+    echo "</div>";
+
+
+
+// field_elective_group_courses
+
+
+
 
       // add the credits from this class to the total credits number
       $total_credits += $class->field_elective_credits['und'][0]['value'];
+
+
     }
 
 
@@ -201,6 +518,7 @@
 
     echo "</td>";
     echo "</tr>";
+    */
   ?>
 
 </table>
@@ -257,7 +575,9 @@
   </nav>
 </div>
 </div>
+<pre>
 
+</pre>
 <div class="datestamp-wrapper">
 This page was last updated on <?php echo date("F d, Y", $node->revision_timestamp); ?>.
 </div>

@@ -79,6 +79,8 @@
 ?>
 
 <div class="container">
+
+    <?php if ($tabs): ?><?php print render($tabs); ?><?php endif; ?>
   <?php if(!$is_front) {
     // display title if it's not the front page.
     echo "<h1>";

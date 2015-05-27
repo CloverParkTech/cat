@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Default theme implementation to display a degree or certificate
+ * Template for the homepage
  *
  * @see template_preprocess()
  * @see template_preprocess_node()
@@ -11,48 +11,16 @@
  * @ingroup themeable
  */
 ?>
-<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-
 <div class="grid">
   <div class="col17">
-
-
-<h2>Welcome to Clover Park Technical College</h2>
-<?php print render($content['body']); ?>
-
-<h2>About Clover Park Technical College</h2>
+  <h2>Welcome to Clover Park Technical College</h2>
+  <?php print render($content['body']); ?>
+  <h2>About Clover Park Technical College</h2>
 <?php
 // display menu that's being used for table of contents
 $menu = menu_navigation_links('menu-about-pages-nav');
  print theme('links__menu_about-pages-nav', array('links' => $menu));
  ?>
-
-<?php 
-/* not using this right now
-  <ul>
-  
-  /*
-    $node = node_load($nid);
-    $field = field_get_items('node', $node, 'field_about_toc');
-
-    foreach($field as $item) {
-    $content_page = $item['entity'];
- 
-    echo "<li>";
-    echo "<a href=\"";
-    echo boo_url($content_page->nid);
-    echo "\">";
-    echo $content_page->title;
-    echo "</a>";
-    echo "</li>";
-    // there's a better way to access these. Once I have that, make this a function
-}
-//    $output = field_view_value('node', $node, 'field_another_entity_test', $field[$delta]);
-
-</ul>
-*/
-  ?>
-
 
 
 <h2>Degrees & Certificates</h2>
@@ -122,8 +90,12 @@ $vid = 2;
   </div>
   <div class="col7">
     <?php boo_snippet('search.php'); ?>
-    <h3>Catalog Downloads</h3>
-    <a href="#">Printable Version</a>
+
+    <?php 
+    $field = field_get_items('node', $node, 'field_sidebar');
+    $output = field_view_value('node', $node, 'field_sidebar', $field[0]);
+    print render($output);
+    ?>
     <?php boo_snippet('sidebar-menu.php'); ?>
   </div>
 

@@ -17,8 +17,6 @@ function ready(fn) {
   }
   // call ready function
 ready(function() {
-
-
       var status = 0;
       var popupWindowActiveClass = "class-popup-window-active";
       // create function to open windows when a popup link is clicked
@@ -26,13 +24,14 @@ ready(function() {
         el.onclick = function() {
          if (status === 0) {
             var id = this.id;
-            id = id.substr(id.length - 1);
+            id = id.substr(id.lastIndexOf("-")+1);
+            console.log(id);
             var windowId = "js-class-popup-window-" + id;
+            console.log(windowId);
             var closeButtonId = "js-class-popup-window-close-" + id;
             var popupWindow = document.getElementById(windowId);
             popupWindow.classList.add(popupWindowActiveClass);
              status = 1;
-             console.log(status);
           }
         };
       }
@@ -49,7 +48,6 @@ ready(function() {
               }
             }
             status = 0;
-           console.log(status);
           };
       }
           // use popClick function for each element with class of 'class-popup'
@@ -65,7 +63,7 @@ ready(function() {
 
     function openWindows() {
         var popupLinks = document.getElementsByClassName('class-popup');
-        console.log(popupLinks);
+    
         for (var i = 0; i < popupLinks.length; i++) {
           var popupLink = popupLinks[i];
           popupClick(popupLink);
@@ -85,4 +83,3 @@ ready(function() {
 
         });
 
-œ

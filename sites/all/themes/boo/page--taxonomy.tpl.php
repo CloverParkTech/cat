@@ -16,12 +16,18 @@
 <?php boo_snippet('header.php'); ?>
 
 <div class="container">
-<div class="grid">
-	<div class="col15">
-<h1><?php 
+	<h1><?php 
 // this is probably the worst way to do this. will fix later
 echo $page['content']['system_main']['term_heading']['term']['#term']->name; 
 ?> Classes</h1>
+<?php
+echo "<div class=\"breadcrumb-wrapper\">";
+print render($page['breadcrumb']);
+echo "</div>";
+?>
+<div class="grid">
+	<div class="col15">
+
 
 
 
@@ -87,7 +93,7 @@ if($i == 0) {
 		foreach($classes as $class) {
 		if ($class['#node']->type == 'degree_or_certificate') {
 			if($p == 0) {
-				echo "<h2>Degrees & Certificates in This Program</h2>";
+				echo "<h2 class=\"sidebar-top-header\">Degrees & Certificates in This Program</h2>";
 				$p++;
 			}
 			echo "<p>";
