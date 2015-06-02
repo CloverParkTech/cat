@@ -47,6 +47,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language; ?>" version="XHTML+RDFa 1.0" dir="<?php print $language->dir; ?>"<?php print $rdf_namespaces; ?>>
 
 <head profile="<?php print $grddl_profile; ?>">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php print $head; ?>
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
@@ -55,6 +56,9 @@
       <script type="text/javascript">
   try{Typekit.load();}catch(e){}
       </script>
+
+     <style type="text/css" media="all">
+</style> 
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <div id="skip-link">

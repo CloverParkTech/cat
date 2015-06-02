@@ -1,7 +1,17 @@
-.catalog-header {
+.catalog-header-wrapper {
 	background-color: $brand-purple;
+	
+	width: 100%;
+	margin-bottom: 2*$gutter;
+	@include breakpoint(mama-bear) {
+		display: flex;
+	}
+}
+
+.catalog-header {
+	
 	color: white;
-	padding: $gutter;
+	padding: $gutter/2 0;
 }
 
 .catalog-header a {

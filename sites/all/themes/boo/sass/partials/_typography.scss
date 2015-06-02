@@ -42,7 +42,11 @@ body {
 	margin: $h-size 0 $h-size 0; /* 1 line below */
 	font-family: $heading-font;
 	line-height: 1.2;
-	font-weight: 700;
+	font-weight: 200;
+	text-transform: uppercase;
+	&:first-child {
+		margin-top: 0;
+	}
 }
 
 h1 {
@@ -75,16 +79,18 @@ h6 {
 
 
 
+
+
 .small-text {
 	font-size: $small;
 	line-height: 1.2;
 }
 
 // this is an example of why you should never call something by the color you originally had it.
-.grey-header {
-	background-color: $brand-purple;
+.bar-heading {
+	background-color: $brand-alt-green;
 	color: white;
-	padding: 2*$gutter;
+	padding: $gutter/2 $gutter;
 	text-transform: uppercase;
 	clear: both;
 }

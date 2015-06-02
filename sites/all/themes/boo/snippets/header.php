@@ -1,8 +1,9 @@
-<header class="catalog-header">
+<div class="catalog-header-wrapper">
 	<div class="container">
-  <a href="<?php echo base_path(); ?>">Clover Park Technical College Academic Catalog</a>
+	<header class="catalog-header">
+		
+	  <a href="<?php echo base_path(); ?>">Clover Park Technical College Academic Catalog</a>
+		
+	</header>
 	</div>
-</header>
-<nav>
- <?php print render($page['header']); ?>
-<nav>
+</div>

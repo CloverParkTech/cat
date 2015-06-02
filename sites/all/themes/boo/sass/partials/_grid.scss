@@ -1,23 +1,24 @@
 .container {
 	margin: 0 auto;
 	padding: 0 $gutter;
+	width: 100%;
 	@include breakpoint(baby-bear) {
 		width: $baby-bear; 
+		padding: 0;
 	}
 	@include breakpoint(mama-bear) {
 		width: $mama-bear; 
+		display: flex;
+		flex-flow: row wrap;
 	}
 	@include breakpoint(papa-bear) {
 		width: $papa-bear ; 
 	}
-}
-
-.grid {
-	clear: both;
-	@include breakpoint(baby-bear) {
-		margin: -2*$gutter 0 0 -2*$gutter;
+	h1 {
+		flex: 1 100%;
 	}
 }
+
 
 .single-wrapper {
 	@include breakpoint(baby-bear) {
@@ -27,165 +28,31 @@
 }
 
 
-$col1: 4.1666666%;
-$col2: 4.1666666%*2;
-$col3: 4.1666666%*3;
-$col4: 4.1666666%*4;
-$col5: 4.1666666%*5;
-$col6: 4.1666666%*6;
-$col7: 4.1666666%*7;
-$col8: 4.1666666%*8;
-$col9: 4.1666666%*9;
-$col10: 4.1666666%*10;
-$col11: 4.1666666%*11;
-$col12: 4.1666666%*12;
-$col13: 4.1666666%*13;
-$col14: 4.1666666%*14;
-$col15: 4.1666666%*15;
-$col16: 4.1666666%*16;
-$col17: 4.1666666%*17;
-$col18: 4.1666666%*18;
-$col19: 4.1666666%*19;
-$col20: 4.1666666%*20;
-$col21: 4.1666666%*21;
-$col22: 4.1666666%*22;
-$col23: 4.1666666%*23;
-$col24: 4.1666666%*24;
 
-.grid:after,
-.grid:before {
-  content: "";
-  display: table;
-
-}
-
-.grid:after {
-	  clear: both;
-}
-
-/* mixin so that all the columns get the same properties; width varies for larger screens */
-@mixin column($width) {
+.left-col {
 	width: 100%;
-	float: left;
-	@include breakpoint(mama-bear) {
-		width: $width;
-		margin-top: 0;
-		padding: 2*$gutter 0 0 2*$gutter;
-
-	}
 	
+	@include breakpoint(mama-bear) {
+		width: ($mama-bear - 4*$gutter) * .7;
+		padding-right: 2*$gutter;
+		float: left;
+	}
+	@include breakpoint(papa-bear) {
+		width: ($papa-bear - 4*$gutter) * .7;
+	}
 }
 
-@include breakpoint(mama-bear) {
-
-.col1, {
-	@include column($col1);
+.right-col {
+	width: 100%;
+	
+	@include breakpoint(mama-bear) {
+		width: ($mama-bear - 4*$gutter) * .3;
+		padding-left: 2*$gutter;
+		float: left;
+		border-left: solid 1px $site-grey;
+	}
+	@include breakpoint(papa-bear) {
+		width: ($papa-bear - 4*$gutter) * .3;
+	}
 }
-
-.col2,
-.span1 {
-	@include column($col2);
-}
-
-.col3 {
-	@include column($col3);
-}
-
-.col4,
-.span2 {
-	@include column($col4);
-}
-
-.col5 {
-	@include column($col5);
-}
-
-.col6,
-.span3 {
-	@include column($col6);
-}
-
-.col7 {
-	@include column($col7);
-}
-
-.col8,
-.span4{
-	@include column($col8);
-}
-
-.col9 {
-	@include column($col9);
-}
-
-.col10,
-.span5 {
-	@include column($col10);
-}
-
-.col11 {
-	@include column($col11);
-}
-
-.col12,
-.span6 {
-	@include column($col12);
-}
-.col13 {
-	@include column($col13);
-}
-
-.col14,
-.span7 {
-	@include column($col14);
-}
-
-.col15 {
-	@include column($col15);
-}
-
-.col16,
-.span8 {
-	@include column($col16);
-}
-
-.col17 {
-	@include column($col17);
-}
-
-.col18,
-.span9 {
-	@include column($col18);
-}
-
-.col19 {
-	@include column($col19);
-}
-
-.col20,
-.span10 {
-	@include column($col20);
-}
-
-.col21 {
-	@include column($col21);
-}
-
-.col22,
-.span11 {
-	@include column($col22);
-}
-
-.col23 {
-	@include column($col23);
-}
-
-.col24,
-.span12 {
-	@include column($col24);
-}
-
-}
-
-
 

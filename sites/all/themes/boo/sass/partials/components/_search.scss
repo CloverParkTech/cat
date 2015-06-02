@@ -1,9 +1,43 @@
 .search-wrapper {
-  background: $site-grey;
-  padding: $gutter;
-  margin: $gutter 0;
+  position: relative;
+  margin-bottom: 2*$gutter;
+  float: left;
+  width: 100%;
 }
 
 .search-wrapper h3 {
-  margin: 0 0 $gutter 0;
+	padding: $gutter/2;
+  background: $brand-alt-green;
+margin: 0;
+  color: white;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.search-box {
+	background: $site-grey;
+	padding: $gutter;
+	float: left;
+	width: 100%;
+}
+
+.search-box-inner {
+	position: relative;
+	height: 2.5rem;
+	.form-text {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 60%;
+	}
+
+	.form-submit {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		width: 35%;
+	}
 }

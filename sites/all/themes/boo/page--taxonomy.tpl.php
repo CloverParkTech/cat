@@ -15,6 +15,7 @@
 
 <?php boo_snippet('header.php'); ?>
 
+<?php $current_tid = $page['content']['system_main']['term_heading']['term']['#term']->tid; ?>
 <div class="container">
 	<h1><?php 
 // this is probably the worst way to do this. will fix later
@@ -25,43 +26,45 @@ echo "<div class=\"breadcrumb-wrapper\">";
 print render($page['breadcrumb']);
 echo "</div>";
 ?>
-<div class="grid">
-	<div class="col15">
+	<div class="left-col">
 
 
 
 
 <?php // this is a sort of hacky way to do this, but I'm not quite sure how else to only access what I want.
 
-	$classes = $page['content']['system_main']['nodes'];
+	
+	$program_nodes = node_load_multiple(taxonomy_select_nodes($current_tid, false, false, false));
+	// $classes = $page['content']['system_main']['nodes'];
+//	print_r($program_nodes);
 	echo "<pre>";
-	//print_r($classes);
+	// print_r($program_nodes);
 	echo "</pre>";
 	// sort classes by item number
 	function cmp($a, $b) {
-		return strcmp($a['#node']->title, $b['#node']->title);
+		return strcmp($a->title, $b->title);
 	}
-	usort($classes, "cmp");
+	usort($program_nodes, "cmp");
 
 	$i = 0;
-	foreach($classes as $class) {
-		if ($class['#node']->type == 'class') {
+	foreach($program_nodes as $class) {
+		if ($class->type == 'class') {
 			echo "<h4 class=\"class-title\">";
-			echo $class['#node']->field_class_title['und'][0]['safe_value'];
+			echo $class->field_class_title['und'][0]['safe_value'];
 			echo "</h4>";
 			echo "<div class=\"class-wrapper\">";
 			
 			echo "<dl><dt>Item Number</dt><dd>";
-			echo $class['#node']->title;
+			echo $class->title;
 			echo "</dd><dt>Credits</dt>";
 			echo "<dd>";
-			echo $class['#node']->field_credits['und'][0]['value'];
+			echo $class->field_credits['und'][0]['value'];
 			echo "</dd></dl>";
 			echo "<p>";
 			// definitely a better way to access safe field values
-			echo $class['#node']->field_description['und'][0]['value'];
+			echo $class->field_description['und'][0]['value'];
 			echo "</p>";
-			if ($class['#node']->field_course_outcomes[$node->language][0]['value']) {
+			if ($class->field_course_outcomes[$node->language][0]['value']) {
 			echo "<h5>";
 			echo "Course Outcomes";
 			echo "</h5>";
@@ -89,35 +92,36 @@ if($i == 0) {
 //   ?>
 
 </div>
-<div class="col9">
+<div class="right-col">
 	
 	<?php 
 		$p = 0;
-		$current_tid = $page['content']['system_main']['term_heading']['term']['#term']->tid; 
-		$navnids = taxonomy_select_nodes($current_tid, false, false, false);
-		foreach($navnids as $degreenid) {
-			$degreenode = node_load($degreenid);
+		
+		foreach($program_nodes as $degreenode) {
 			$type = $degreenode->type;
 			if($type == 'degree_or_certificate') {
 			if($p == 0) {
 				echo "<h2 class=\"sidebar-top-header\">Degrees & Certificates in This Program</h2>";
 				$p++;
+				echo "<ul>";
 			}
-			echo "<p>";
+			echo "<li>";
 			echo "<a href=\"";
-			echo boo_url($degreenid);
+			echo boo_url($degreenode->nid);
 			echo "\">";
 			echo $degreenode->title;
 			echo "</a>";
-			echo "</p>";
+			echo "</li>";
 
 		}
 	}
 			?>
+		</ul>
 
+<?php boo_snippet('lead-form.php'); ?>
 
 </div>
 </div>
-</div>
+
 
 <?php boo_snippet('footer.php'); ?>

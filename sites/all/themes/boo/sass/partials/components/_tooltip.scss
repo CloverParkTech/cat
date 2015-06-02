@@ -1,0 +1,38 @@
+.tooltip {
+	position: relative;
+	&:hover {
+		&:before {
+			display: block;
+			background: $site-grey;
+			font-size: $medium;
+			position: absolute;
+			content: attr(data-hover);
+			width: 20rem;
+			color: $text-color;
+			padding: 20px;
+		
+			line-height: 1.2;
+			border: solid 1px $brand-purple;
+			left: 100%;
+			bottom: 100%;
+			margin-bottom: 10px;
+    	
+		}
+
+		&:after {
+
+			content: "";
+			position: absolute;
+			border-left: solid 10px $brand-purple;
+			border-bottom: solid 10px $brand-purple;
+			border-top: solid 10px transparent;
+			border-right: solid 10px transparent;
+			display: block;
+			width: 10px;
+			height: 10px;
+			left: 100%;
+			bottom: 100%;
+			margin-bottom: 10px;
+		}
+	}
+}

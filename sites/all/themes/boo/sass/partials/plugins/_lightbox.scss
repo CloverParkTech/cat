@@ -9,16 +9,21 @@
 }
 
 .class-popup-window-inner {
-  max-width: 50em;
-   position: absolute;
-   left: 50%;
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%);
+  max-width: 80em;
+  position: absolute;
+  max-height: 80vh;
+  overflow: scroll;
+  @include breakpoint(mama-bear) {
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
 }
 
 
 .class-popup-window-active {
   display: block;
+  z-index: 10;
   
 }
 
@@ -36,3 +41,7 @@
   color: white;
 } 
 
+
+.class-title {
+  padding-right: 6rem; // sort of a magic number. makes room for the close button.
+}

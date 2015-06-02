@@ -1,7 +1,12 @@
+.breadcrumb-wrapper {
+	flex: 1 100%;
+}
+
 .easy-breadcrumb {
   background: $site-grey;
   padding: $gutter;
-  margin: $gutter 0;
+  margin: 0;
   display: inline-block;
+
 }
 

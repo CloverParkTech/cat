@@ -27,9 +27,11 @@ thead th {
 }
 
 
-.table-condensed th,
-.table-condensed td {
-  padding: 4px 5px;
+.table-small th,
+.table-small td {
+  padding: 2px 5px;
+  font-size: $medium;
+  line-height: 1.2;
 }
 
 .table-bordered {
@@ -93,6 +95,7 @@ td:before {
 	width: 45%; 
 	padding-right: 10px; 
 	white-space: nowrap;
+
 }
 	
 /*

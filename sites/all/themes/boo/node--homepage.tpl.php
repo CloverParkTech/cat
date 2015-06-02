@@ -11,21 +11,21 @@
  * @ingroup themeable
  */
 ?>
-<div class="grid">
-  <div class="col17">
-  <h2>Welcome to Clover Park Technical College</h2>
+
+  <div class="left-col">
+  <h1>Clover Park Technical College Catalog</h1>
   <?php print render($content['body']); ?>
-  <h2>About Clover Park Technical College</h2>
+  <h2 class="bar-heading">About Clover Park Technical College</h2>
 <?php
 // display menu that's being used for table of contents
 $menu = menu_navigation_links('menu-about-pages-nav');
- print theme('links__menu_about-pages-nav', array('links' => $menu));
+ print theme('links__menu_about-pages-nav', array('links' => $menu, 'attributes' => array('class' =>array('styled-list'))));
  ?>
 
 
-<h2>Degrees & Certificates</h2>
+<h2 class="bar-heading">Degrees & Certificates</h2>
 <?php /* List all degrees and certificates here */ ?>
-<ul>
+<ul class="styled-list">
 <?php 
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'node')
@@ -47,8 +47,8 @@ $menu = menu_navigation_links('menu-about-pages-nav');
 </ul>
 
 
-<h2>Course Descriptions</h2>
-<ul>
+<h2 class="bar-heading">Course Descriptions</h2>
+<ul class="styled-list">
 <?php
 $vid = 2;         
   $terms = taxonomy_get_tree($vid);    
@@ -66,8 +66,8 @@ $vid = 2;
 
 </ul>
 
-<h2>Academic Information</h2>
-<ul>
+<h2 class="bar-heading">Academic Information</h2>
+<ul class="styled-list">
   <?php 
     $node = node_load($nid);
     $field = field_get_items('node', $node, 'field_academic_information_toc');
@@ -88,16 +88,19 @@ $vid = 2;
   ?>
 </ul>
   </div>
-  <div class="col7">
+  <div class="right-col">
     <?php boo_snippet('search.php'); ?>
+    
 
+  <?php boo_snippet('sidebar-menu.php'); ?>
     <?php 
     $field = field_get_items('node', $node, 'field_sidebar');
     $output = field_view_value('node', $node, 'field_sidebar', $field[0]);
     print render($output);
     ?>
-    <?php boo_snippet('sidebar-menu.php'); ?>
+
+    <?php boo_snippet('lead-form.php'); ?>
+    
   </div>
 
-</div>
-</div>
+
