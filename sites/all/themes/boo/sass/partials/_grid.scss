@@ -33,26 +33,26 @@
 	width: 100%;
 	
 	@include breakpoint(mama-bear) {
-		width: ($mama-bear - 4*$gutter) * .7;
-		padding-right: 2*$gutter;
+		width: ($mama-bear) * .7;
+		padding-right: 3*$gutter;
 		float: left;
 	}
 	@include breakpoint(papa-bear) {
-		width: ($papa-bear - 4*$gutter) * .7;
+		width: ($papa-bear) * .7;
 	}
 }
 
 .right-col {
 	width: 100%;
-	
+
 	@include breakpoint(mama-bear) {
-		width: ($mama-bear - 4*$gutter) * .3;
-		padding-left: 2*$gutter;
+		width: ($mama-bear) * .3;
+		padding-left: 3*$gutter;
 		float: left;
 		border-left: solid 1px $site-grey;
 	}
 	@include breakpoint(papa-bear) {
-		width: ($papa-bear - 4*$gutter) * .3;
+		width: ($papa-bear) * .3;
 	}
 }
 

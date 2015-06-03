@@ -1,43 +1,33 @@
-.search-wrapper {
-  position: relative;
-  margin-bottom: 2*$gutter;
-  float: left;
-  width: 100%;
-}
 
-.search-wrapper h3 {
-	padding: $gutter/2;
-  background: $brand-alt-green;
-margin: 0;
-  color: white;
-  position: relative;
-  top: 0;
-  left: 0;
-  right: 0;
-}
+
+
 
 .search-box {
-	background: $site-grey;
-	padding: $gutter;
-	float: left;
-	width: 100%;
-}
-
-.search-box-inner {
-	position: relative;
-	height: 2.5rem;
-	.form-text {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		width: 60%;
+	@include breakpoint(reverso-papa-bear) {
+		padding-bottom: $gutter/2;
 	}
-
 	.form-submit {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		width: 35%;
+		
+		width: 28px; // arbitrary to make the SVG a nice size
+		vertical-align: top;
+		margin-left: $gutter/2;
+		// default button overrides
+		background: transparent;
+		padding: 0;
+	}
+
+	.form-item,
+	.form-actions {
+		// just a default Drupal wrapper. better to adjust CSS than delete it through PHP
+		margin: 0;
+		display: inline;
+	}
+
+	@include breakpoint(papa-bear) {
+		// center it in the menu at large sizes
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 }
+

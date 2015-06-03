@@ -15,7 +15,8 @@
 
 <?php boo_snippet('header.php'); ?>
 
-<?php $current_tid = $page['content']['system_main']['term_heading']['term']['#term']->tid; ?>
+<?php $current_tid = $page['content']['system_main']['term_heading']['term']['#term']->tid; 
+?>
 <div class="container">
 	<h1><?php 
 // this is probably the worst way to do this. will fix later
@@ -31,16 +32,11 @@ echo "</div>";
 
 
 
-<?php // this is a sort of hacky way to do this, but I'm not quite sure how else to only access what I want.
-
+<?php 
 	
-	$program_nodes = node_load_multiple(taxonomy_select_nodes($current_tid, false, false, false));
-	// $classes = $page['content']['system_main']['nodes'];
-//	print_r($program_nodes);
-	echo "<pre>";
-	// print_r($program_nodes);
-	echo "</pre>";
-	// sort classes by item number
+	$program_nodes = node_load_multiple(taxonomy_select_nodes($current_tid, false, false));
+
+
 	function cmp($a, $b) {
 		return strcmp($a->title, $b->title);
 	}
@@ -64,7 +60,7 @@ echo "</div>";
 			// definitely a better way to access safe field values
 			echo $class->field_description['und'][0]['value'];
 			echo "</p>";
-			if ($class->field_course_outcomes[$node->language][0]['value']) {
+			if (isset($class->field_course_outcomes['und'][0]['value'])) {
 			echo "<h5>";
 			echo "Course Outcomes";
 			echo "</h5>";

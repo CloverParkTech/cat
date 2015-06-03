@@ -4,6 +4,19 @@
 	box-sizing: border-box;
 }
 
+html {
+	// for sticky footer
+	position: relative;
+	min-height: 100%;
+}
+
+$footer-height: 70px;
+
+body {
+	// sticky footer. rest is in footer partial
+	margin: 0 0 $footer-height;
+}
+
 
 img {
 	max-width: 100%;

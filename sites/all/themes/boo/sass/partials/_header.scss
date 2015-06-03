@@ -2,7 +2,7 @@
 	background-color: $brand-purple;
 	
 	width: 100%;
-	margin-bottom: 2*$gutter;
+	
 	@include breakpoint(mama-bear) {
 		display: flex;
 	}
@@ -17,3 +17,49 @@
 .catalog-header a {
 	@include linx(white, white, white, white);
 }
+
+.header-nav {
+	background: $site-grey;
+	margin-bottom: 2*$gutter;
+}
+
+.header-nav-ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+//	width: 100%;
+
+	
+	
+
+}
+
+
+.header-nav .container {
+	@include breakpoint(mama-bear) {
+		justify-content: space-between;
+	}
+}
+
+.header-nav-ul li {
+	margin: 0;
+	padding: 0;
+	text-transform: uppercase;
+	margin-right: 2rem;
+	display: inline-block;
+	padding: $gutter/2 0;
+	@include breakpoint(reverso-mama-bear) {
+	padding: $gutter 0;
+	}
+	
+	.active {
+		color: $brand-purple;
+		border-bottom: solid 1px $brand-purple;
+	}
+
+}
+
+.header-nav-ul	.last a {
+		@include linx($brand-alt-green, $brand-alt-green, $brand-purple, $brand-purple);
+		font-weight: bold;
+	}

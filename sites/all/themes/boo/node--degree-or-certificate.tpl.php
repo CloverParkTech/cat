@@ -22,7 +22,7 @@
   $items = field_get_items('node', $node, 'field_degree_program');
   $navtid = $items[0]['tid'];
   // returns node IDs for all nodes with the same program taxonomy term as this one
-  $navnids = taxonomy_select_nodes($navtid, false, false, false);
+  $navnids = taxonomy_select_nodes($navtid, false, false);
 
 // get the path for the program taxonomy term in question, so that we can link to all the class descriptions is this category.
   $current_cat = taxonomy_term_load($navtid);
@@ -160,8 +160,12 @@ $i = 0;
                   if (isset($sub_course_node->field_credits[$pagenode->language][0]['value'])) {
                     $classes[$i]['sub_elective_group'][$j]['sub_courses'][$k]['credits'] = $sub_course_node->field_credits[$pagenode->language][0]['value'];
                   }
+                  if (isset($sub_course_node->field_credit_maximum[$pagenode->language][0]['value'])) {
                    $classes[$i]['sub_elective_group'][$j]['sub_courses'][$k]['creditsmax'] = $sub_course_node->field_credit_maximum[$pagenode->language][0]['value'];
+                  }
+                  if (isset($sub_course_node->field_class_title[$pagenode->language][0]['value'])) {
                    $classes[$i]['sub_elective_group'][$j]['sub_courses'][$k]['title'] = $sub_course_node->field_class_title[$pagenode->language][0]['value'];
+                 }
                    // set superscript value
                     if ($sub_course_node->field_capstone[$pagenode->language][0]['value'] == 1) {
                       $classes[$i]['sub_elective_group'][$j]['sub_courses'][$k]['superscript'] = "<sup class=\"tooltip\" data-hover=\"CAP designates that this course meets the capstone requirement.\">CAP</sup>";
@@ -249,7 +253,9 @@ $i = 0;
       echo $class_item['index'];
       echo "\">";
       echo "<td>";
-      echo $class_item['item'];
+      if(isset($class_item['item'])) {
+        echo $class_item['item'];
+      }
         if($class_item['superscript']) {
      
           echo $class_item['superscript'];
@@ -257,18 +263,24 @@ $i = 0;
         }
       echo "</td>";
       echo "<td>";
-      echo $class_item['title'];
+      if (isset($class_item['title'])) {
+        echo $class_item['title'];
+      }
       echo "</td>";
       echo "<td>";
-      echo $class_item['credits'];
-      if($class_item['creditsmax']) {
+      if (isset($class_item['credits'])) {
+        echo $class_item['credits'];
+      }
+      if(isset($class_item['creditsmax'])) {
           echo "-";
           echo $class_item['creditsmax'];
         }
       echo "</td>";
       echo "</tr>";
       $total_credits += $class_item['credits'];
-      $max_credits += $class_item['creditsmax'];
+      if (isset($class_item['creditsmax'])) {
+        $max_credits += $class_item['creditsmax'];
+      }
 
     }
 
@@ -316,17 +328,18 @@ $i = 0;
       echo "\">";
       echo "<div class=\"class-popup-window-inner\">";
       echo "<h4 class=\"class-title\">";
-      echo $class_item['title'];
+      if (isset($class_item['title'])) {
+        echo $class_item['title'];
+      }
       echo "</h4>";
       echo "<div class=\"class-wrapper\">";
       echo "<dl>";
-      if($class_item['item'] !== null) {
+      if(isset($class_item['item'])) {
         echo "<dt>Item #</dt>";
         echo "<dd>";
         echo $class_item['item'];
       }  
-      if ($class_item['superscript'] !== null) {
-  
+      if (isset($class_item['superscript'])) {
         echo $class_item['superscript'];
 
       }
@@ -334,7 +347,7 @@ $i = 0;
       echo "<dt>Total Credits</dt>";
       echo "<dd>";
       echo $class_item['credits'];
-      if($class_item['creditsmax'] !== null) {
+      if(isset($class_item['creditsmax'])) {
         echo "-";
         echo $class_item['creditsmax'];
       }
@@ -343,18 +356,22 @@ $i = 0;
 
 
       echo "<p>";
-      echo $class_item['description'];
+      if (isset($class_item['description'])) {
+        echo $class_item['description'];
+      }
       echo "</p>";
       echo "<div class=\"popup-tables-wrapper\">";
       // output descriptions and tables for electives
 
-      if($class_item['sub_elective_group'] !== null) {
+      if(isset($class_item['sub_elective_group'])) {
         //count the number of tables in this array. If there are more than two, we apply the small-table class
         $count = count($class_item['sub_elective_group']);
         foreach ($class_item['sub_elective_group'] as $sub_sub_elective_group) {
           echo "<div class=\"popup-table-item\">";
           echo "<h5>";
-          echo $sub_sub_elective_group['description'];
+          if (isset($sub_sub_elective_group['description'])) {
+            echo $sub_sub_elective_group['description'];
+          }
           echo "</h5>";
             echo "<table class=\"degree-table";
             if($count > 2) {
@@ -373,8 +390,10 @@ $i = 0;
                 echo $sub_sub_courses['title'];
                 echo "</td>";
                 echo "<td>";
-                echo $sub_sub_courses['credits'];
-                if($sub_sub_courses['creditsmax']) {
+                if (isset($sub_sub_courses['credits'])) {
+                  echo $sub_sub_courses['credits'];
+                }
+                if(isset($sub_sub_courses['creditsmax'])) {
                    echo "-";
                   echo $sub_sub_courses['creditsmax'];
                  }

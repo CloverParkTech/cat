@@ -55,6 +55,7 @@ dd {
 .styled-list {
   list-style-type: none;
   font-size: $large;
+  margin: 0;
   li {
     width: 100%;
     border-bottom: solid 1px $site-grey;

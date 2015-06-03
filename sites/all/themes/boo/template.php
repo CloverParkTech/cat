@@ -29,4 +29,10 @@ function boo_snippet($filename) {
 	$path .= $filename;
 	include($path);
 }      
+
+
+function boo_form_search_block_form_alter(&$form, &$form_state) {
+  $form['actions']['submit']['#type'] = 'image_button';
+  $form['actions']['submit']['#src'] = drupal_get_path('theme', 'boo') . '/images/search.svg';
+}
 ?>

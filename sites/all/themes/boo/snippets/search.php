@@ -1,3 +1,5 @@
+<?php /*
+
 <div class="search-wrapper">
 	<h3>Search the Catalog</h3>
 	<div class="search-box">
@@ -7,3 +9,4 @@
 		</div>
 	</div>
 </div>	
+*/ ?>
