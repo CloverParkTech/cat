@@ -85,6 +85,7 @@ td {
 	border-bottom: 1px solid #eee; 
 	position: relative;
 	padding-left: 50% !important; 
+	min-height: 2rem; // keep the :before element from overflowing in case there's no actual TD element
 }
 	
 td:before { 

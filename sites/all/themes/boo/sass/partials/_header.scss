@@ -49,7 +49,7 @@
 	display: inline-block;
 	padding: $gutter/2 0;
 	@include breakpoint(reverso-mama-bear) {
-	padding: $gutter 0;
+//	padding: $gutter 0;
 	}
 	
 	.active {
