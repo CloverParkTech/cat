@@ -12,7 +12,7 @@
   max-width: 80em;
   position: absolute;
   max-height: 80vh;
-  overflow: scroll;
+ // overflow: scroll;
   @include breakpoint(mama-bear) {
     left: 50%;
     top: 50%;
@@ -28,7 +28,7 @@
 }
 
 .class-popup-window-close {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   @include button($brand-purple);

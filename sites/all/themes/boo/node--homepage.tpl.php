@@ -82,7 +82,7 @@ $vid = 2;
     echo $aca_page->title;
     echo "</a>";
     echo "</li>";
-    // there's a better way to access these. Once I have that, make this a function
+    
 }
 //    $output = field_view_value('node', $node, 'field_another_entity_test', $field[$delta]);
   ?>

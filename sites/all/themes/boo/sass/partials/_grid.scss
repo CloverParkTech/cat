@@ -31,7 +31,7 @@
 
 .left-col {
 	width: 100%;
-	
+	overflow: hidden; // just in case it overflows on mobile views.
 	@include breakpoint(mama-bear) {
 		width: ($mama-bear) * .7;
 		padding-right: 3*$gutter;

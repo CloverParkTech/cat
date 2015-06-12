@@ -1,0 +1,7 @@
+input {
+  border: 1px solid $brand-purple;
+  &:focus {
+    outline: none;
+    border: 1px solid $brand-alt-green;
+  }
+}

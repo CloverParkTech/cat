@@ -34,54 +34,14 @@ echo "</div>";
 
 <?php 
 	
-	$program_nodes = node_load_multiple(taxonomy_select_nodes($current_tid, false, false));
-
-
-	function cmp($a, $b) {
-		return strcmp($a->title, $b->title);
-	}
-	usort($program_nodes, "cmp");
-
-	$i = 0;
-	foreach($program_nodes as $class) {
-		if ($class->type == 'class') {
-			echo "<h4 class=\"class-title\">";
-			echo $class->field_class_title['und'][0]['safe_value'];
-			echo "</h4>";
-			echo "<div class=\"class-wrapper\">";
-			
-			echo "<dl><dt>Item Number</dt><dd>";
-			echo $class->title;
-			echo "</dd><dt>Credits</dt>";
-			echo "<dd>";
-			echo $class->field_credits['und'][0]['value'];
-			echo "</dd></dl>";
-			echo "<p>";
-			// definitely a better way to access safe field values
-			echo $class->field_description['und'][0]['value'];
-			echo "</p>";
-			if (isset($class->field_course_outcomes['und'][0]['value'])) {
-			echo "<h5>";
-			echo "Course Outcomes";
-			echo "</h5>";
-			echo "<p>";
-			echo $class['#node']->field_course_outcomes['und'][0]['value'];
-			echo "</p>";
-		}
-			
-			echo "</div>";
-			$i++;
-			
-		}
+boo_function('class_descriptions.php');
 
 
 
+class_descriptions($current_tid);
 
 
-	}
-if($i == 0) {
-			echo "<h5>No classes found</h5>";
-		}
+
 
 
 
@@ -92,7 +52,7 @@ if($i == 0) {
 	
 	<?php 
 		$p = 0;
-		
+		$program_nodes = node_load_multiple(taxonomy_select_nodes($current_tid, false, false));
 		foreach($program_nodes as $degreenode) {
 			$type = $degreenode->type;
 			if($type == 'degree_or_certificate') {

@@ -4,19 +4,8 @@
 // this should probably move to a base js file if I add more functions
 
 //this needs to be cleaned up. don't need all this status nonsense. This can be done more simply, I think
-function ready(fn) {
-    if (document.readyState != 'loading') {
-      fn();
-    } else if (document.addEventListener) {
-      document.addEventListener('DOMContentLoaded', fn);
-    } else {
-      document.attachEvent('onreadystatechange', function() {
-        if (document.readyState != 'loading') fn();
-      });
-    }
-  }
-  // call ready function
-ready(function() {
+/*
+document.addEventListener('DOMContentLoaded', function () {
       var status = 0;
       var popupWindowActiveClass = "class-popup-window-active";
       // create function to open windows when a popup link is clicked
@@ -72,9 +61,7 @@ ready(function() {
 
     openWindows();
     closeWindows();
-
-
-       
+     
 
 
 
@@ -82,4 +69,5 @@ ready(function() {
 
 
         });
+*/
 

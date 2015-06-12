@@ -15,6 +15,7 @@ $footer-height: 70px;
 body {
 	// sticky footer. rest is in footer partial
 	margin: 0 0 $footer-height;
+	hyphens: auto;
 }
 
 

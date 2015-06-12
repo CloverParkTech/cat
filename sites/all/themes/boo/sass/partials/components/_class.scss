@@ -13,3 +13,22 @@
 	font-weight: 200;
 	margin: 0;
 }
+
+.course-outcome-text {
+	display: none; // hide and show with js
+}
+
+.course-outcome-text-active,
+.active-window {
+	display: block !important;
+}
+
+.course-outcome-title {
+	text-transform: uppercase;
+	color: $brand-purple;
+	&:hover {
+		cursor: pointer;
+		color: $brand-alt-green;
+	}
+}
+

@@ -21,13 +21,7 @@
 button,
 .webform-submit,
 .form-submit {
-	@include button($brand-green);
+	@include button($brand-alt-green);
 }
 
-.btn-arrow{
-	background-image: url(images/chevron15.svg);
-	background-repeat: no-repeat;
-	background-size: 3em 3em;
-	padding-right: 2em;
-	background-position: 110% 50%;
-}
+

@@ -1,0 +1,69 @@
+<?php
+/**
+ * @file
+ * A module I'm using to hide classes and elective groups from the general public
+ */
+
+
+function hidenode_help($path, $arg) {
+  switch ($path) {
+    case "admin/help#hidenode":
+      return '<p>' . t("Displays links to nodes created on this date") . '</p>';
+      break;
+  }
+} 
+
+ function hidenode_node_access($node, $op, $account){
+ 	// hides all of the elective_clusters and classes
+
+ 	// load the node
+ 	if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) != 'edit') {
+   	if (!($node)) {
+      $node = node_load(arg(1));
+   }
+
+   // deny access by content type
+
+ 	if($node->type == "elective_cluster") {
+ 		return NODE_ACCESS_DENY;
+ 	}
+ 	if($node->type == "class") {
+ 		return NODE_ACCESS_DENY;
+ 	}
+
+ }
+
+
+ // 
+
+
+}
+
+function hidenode_query_node_access_alter(QueryAlterableInterface $query) {
+	// hides content types from search
+  global $user;
+
+  if ($user->uid == 1) {
+    return;
+  }
+
+	$search = FALSE;
+	$node = FALSE;
+	
+	foreach ($query->getTables() as $alias => $table) {
+	  if ($table['table'] == 'search_index') {
+	    $search = $alias;
+	  }
+	  elseif ($table['table'] == 'node') {
+	    $node = $alias;
+	  }
+	}
+
+  if ($node && $search) {
+    $excluded_content_types = array("class", "elective_cluster");
+
+    if (!empty($excluded_content_types)) {
+      $query->condition($node . '.type', array($excluded_content_types), 'NOT IN');
+    }
+  }
+}

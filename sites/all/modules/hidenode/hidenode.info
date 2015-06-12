@@ -1,0 +1,3 @@
+name = Hide Node
+description = Hides certain nodes from users.
+core = 7.x
