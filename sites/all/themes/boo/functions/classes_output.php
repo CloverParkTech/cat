@@ -1,6 +1,6 @@
 <?php
 
-// give this the name of the field, the node object, and whether we want the popup boxes
+// give this the name of the field, the node object, an index counter set to 0, and whether we want the popup boxes
 
   function boo_classes_output($field_name, $pagenode, $popups = true) {
   // set the variables used throughout as counters
@@ -9,33 +9,30 @@
   $max_credits_total = 0;
   global $i;
 
-
-
-  
-  
   // set the array that we'll use to store all the data from classes
   $classes = array();
-
   $field = field_get_items('node', $pagenode, $field_name);
- 
+ // print_r($field);
 
   foreach($field as $item) {
-  //  print_r($item);
-    $class = $item['entity'];
-    $subnode = node_load($class->nid);
+    $class_id = $item['target_id'];
+    
+    $subnode = node_load($class_id);
+   
   
 
+
     if($subnode->type == 'elective_cluster') {
-       $classes[$i]['index'] = $i;
+      $classes[$i]['index'] = $i;
       $classes[$i]['item'] = null;
-      $classes[$i]['title'] = $class->title;
-      $classes[$i]['credits'] = $class->field_total_credits[$pagenode->language][0]['value'];
+      $classes[$i]['title'] = $subnode->title;
+      $classes[$i]['credits'] = $subnode->field_total_credits[$pagenode->language][0]['value'];
       $classes[$i]['superscript'] = null;
     
       // create the sub array of classes assigned to the elective cluster
       $j = 0;
       
-      foreach($class->field_elective_group[$pagenode->language] as $sub_class) {
+      foreach($subnode->field_elective_group[$pagenode->language] as $sub_class) {
         // load the fields associated with the field group
         $entity = entity_load('field_collection_item', array($sub_class['value']));
         
@@ -99,22 +96,22 @@
 
     if($subnode->type == 'class') {
       $classes[$i]['index'] = $i;
-      $classes[$i]['item'] = $class->title;
-      $classes[$i]['title'] = $class->field_class_title[$pagenode->language][0]['value'];
-      $classes[$i]['credits']= $class->field_credits[$pagenode->language][0]['value'];
-      $classes[$i]['description'] = $class->field_description[$pagenode->language][0]['safe_value'];
-      if (isset($class->field_credit_maximum[$pagenode->language][0]['value'])) {
-        $classes[$i]['creditsmax'] = $class->field_credit_maximum[$pagenode->language][0]['value'];
+      $classes[$i]['item'] = $subnode->title;
+      $classes[$i]['title'] = $subnode->field_class_title[$pagenode->language][0]['value'];
+      $classes[$i]['credits']= $subnode->field_credits[$pagenode->language][0]['value'];
+      $classes[$i]['description'] = $subnode->field_description[$pagenode->language][0]['safe_value'];
+      if (isset($subnode->field_credit_maximum[$pagenode->language][0]['value'])) {
+        $classes[$i]['creditsmax'] = $subnode->field_credit_maximum[$pagenode->language][0]['value'];
       }
 
       // set superscript value
-      if ($class->field_capstone[$pagenode->language][0]['value'] == 1) {
+      if ($subnode->field_capstone[$pagenode->language][0]['value'] == 1) {
         $classes[$i]['superscript'] = "<sup class=\"tooltip\" data-hover=\"CAP designates that this course meets the capstone requirement.\">CAP</sup>";
       }
-      elseif ($class->field_computer_literacy[$pagenode->language][0]['value'] == 1) {
+      elseif ($subnode->field_computer_literacy[$pagenode->language][0]['value'] == 1) {
         $classes[$i]['superscript'] = "<sup class=\"tooltip\" data-hover=\"CL designates that this course meets the computer literacy requirement.\">CL</sup>";
       }
-      elseif ($class->field_diversity_requirement[$pagenode->language][0]['value'] == 1) {
+      elseif ($subnode->field_diversity_requirement[$pagenode->language][0]['value'] == 1) {
         $classes[$i]['superscript'] = "<sup class=\"tooltip\" data-hover=\"DIV designates that this course meets the diversity requirement.\">DIV</sup>";
       }
       else {

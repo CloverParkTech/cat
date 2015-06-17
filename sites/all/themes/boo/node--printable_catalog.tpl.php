@@ -23,6 +23,17 @@ echo "</div>";
 
 // degrees and certificates
 
+
+
+
+
+
+
+
+
+
+
+
 echo "<h1>Degrees & Certificates</h1>";
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'node')
@@ -36,48 +47,45 @@ echo "<h1>Degrees & Certificates</h1>";
             echo "<div class=\"print-page\">";
             echo "<h2>";
             echo $node->title;
-            echo "</h2>";
-            echo "<pre>";
-          //  print_r($node);
-            echo "</pre>";
+            echo "</h2>";          
 
-            
+            if (isset($node->field_quarters[$node->language][0]['safe_value'])) {
+              echo "<p>";
+              echo "<strong>Estimated number of quarters:</strong> ";
+              echo $node->field_quarters[$node->language][0]['safe_value'];
+              echo "</p>";
+            }
 
-            // number of quarters
-            echo "<p>";
-            echo "<strong>Estimated number of quarters:</strong> ";
-            echo $node->field_quarters[$node->language][0]['safe_value'];
-            echo "</p>";
+            if(isset($node->field_estimated_cost[$node->language][0]['safe_value'])) {
+              echo "<p>";
+              echo "<strong>Estimated cost:</strong> "; 
+              echo $node->field_estimated_cost[$node->language][0]['safe_value'];
+              echo "</p>";
+            }
 
-            echo "<p>";
-            echo "<strong>Estimated cost:</strong> "; 
+            if (isset($node->field_admission_dates[$node->language][0]['safe_value'])) {
+              echo "<p>";
+              echo "<strong>Admission dates:</strong> "; 
+              echo $node->field_admission_dates[$node->language][0]['safe_value'];
+              echo "</p>";
+            }
 
-            echo $node->field_estimated_cost[$node->language][0]['safe_value'];
-            echo "</p>";
+            if (isset($node->field_degree_prereqs[$node->language][0]['safe_value'])) {
+              echo "<p>";
+              echo "<strong>Prerquisites:</strong> "; 
+              echo $node->field_degree_prereqs[$node->language][0]['safe_value'];
+              echo "</p>";
+            }
 
+            if (isset($node->body[$node->language][0]['safe_value'])) {
+              echo "<p>";
+              echo $node->body[$node->language][0]['safe_value'];
+              echo "</p>";
+            }
 
-            echo "<p>";
-            echo "<strong>Admission dates:</strong> "; 
-            echo $node->field_admission_dates[$node->language][0]['safe_value'];
-            echo "</p>";
-
-
-            echo "<p>";
-            echo "<strong>Prerquisites:</strong> "; 
-            echo $node->field_degree_prereqs[$node->language][0]['safe_value'];
-            echo "</p>";
-
-            // body
-            echo "<p>";
-            echo $node->body[$node->language][0]['safe_value'];
-            echo "</p>";
-
-            // array
-            $elective_group_tid_array = $node->field_elective_groups[$node->language];
-
-
-            // array
-            $classes_tid_array = $node->field_classes_in_this_degree[$node->language];
+            boo_function('classes_output.php');
+            boo_function('degree_table_display.php');
+            degree_table_display($node);
             echo "</div>";
           }
         }

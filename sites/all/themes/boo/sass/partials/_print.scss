@@ -1,0 +1,31 @@
+@media print {
+	.catalog-header-wrapper {
+		display: none;
+	}
+
+	.header-nav {
+		display: none;
+	}
+
+	.easy-breadcrumb {
+		display: none;
+	}
+
+	.catalog-footer {
+		display: none;
+	}
+
+
+	body {
+		color: black;
+	}
+
+
+	h1,
+	h2,
+	h3 {
+		padding: 0 !important;
+		color: black !important;
+	}
+
+}

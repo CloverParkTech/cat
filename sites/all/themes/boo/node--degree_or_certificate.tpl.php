@@ -106,45 +106,24 @@
 
 
 $node = node_load($nid);
+// set the index counter that we'll use for the classes output function
+// sort of hacky. Shouldn't be using a global variable here.
 $i = 0;
+
 
 
 // give this function the name of an entity reference field that contains classes and elective clusters
 // it outputs the whole table and popup boxes
 
   boo_function('classes_output.php');
+  boo_function('degree_table_display.php');
 
 
 
 
-echo "<h2 class=\"bar-heading\">";
-echo "Degree Requirements";
-echo "</h2>";
-
-boo_classes_output('field_classes_in_this_degree', $node);
-
-$degree_1_title = field_get_items('node', $node, 'field_degree_option_1_title'); 
-$degree_1_title_val = $degree_1_title[0]['value'];
-if($degree_1_title_val !== null) {
-
-  echo "<h2 class=\"bar-heading\">";
-  echo $degree_1_title_val;
-  echo "</h2>";
-  boo_classes_output('field_degree_option_1_courses', $node);
-
-}
+degree_table_display($node);
 
 
-$degree_2_title = field_get_items('node', $node, 'field_degree_option_2_title'); 
-$degree_2_title_val = $degree_2_title[0]['value'];
-if($degree_2_title_val !== null) {
-
-  echo "<h2 class=\"bar-heading\">";
-  echo $degree_2_title_val;
-  echo "</h2>";
-  boo_classes_output('field_degree_option_2_courses', $node);
-
-}
 
       ?>
 

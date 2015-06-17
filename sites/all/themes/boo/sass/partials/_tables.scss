@@ -62,7 +62,7 @@ thead th {
 }
 
 // responsive tables solution
-
+@media not print {
 @include breakpoint(reverso-baby-bear) {
 	
 table, thead, tbody, th, td, tr { 
@@ -98,6 +98,7 @@ td:before {
 	padding-right: 10px; 
 	white-space: nowrap;
 
+}
 }
 	
 /*
