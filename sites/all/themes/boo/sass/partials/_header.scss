@@ -40,6 +40,14 @@ $title-color: lighten($brand-purple, 50%);
 	margin-bottom: 2*$gutter;
 }
 
+
+.header-nav .container {
+	@include breakpoint(mama-bear) {
+		// puts the search bar on the right side
+		justify-content: space-between;
+	}
+}
+
 .header-nav-ul {
 	list-style-type: none;
 	padding: 0;

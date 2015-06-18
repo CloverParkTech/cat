@@ -1,7 +1,8 @@
 <div class="catalog-header-wrapper">
 	<div class="container">
 	<header class="catalog-header">
-	<a href="<?php echo base_path(); ?>"><img src="<?php echo base_path(); ?>/<?php echo drupal_get_path('theme', 'boo'); ?>/images/logo.png" class="catalog-header-logo" /></a>
+		<?php global $base_url; ?>
+	<a href="<?php echo base_path(); ?>"><img src="<?php echo $base_url; ?>/<?php echo drupal_get_path('theme', 'boo'); ?>/images/logo.png" class="catalog-header-logo" /></a>
 	  <a href="<?php echo base_path(); ?>" class="catalog-header-title">Academic Catalog</a>
 	
 
