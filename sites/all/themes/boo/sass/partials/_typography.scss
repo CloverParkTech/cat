@@ -1,30 +1,20 @@
 /* fonts */
 $heading-font: "futura-pt-n5","futura-pt",sans-serif; 
 $text-font: "futura-pt-n5","futura-pt",sans-serif; 
-// Arial, "Helvetica Neue", Helvetica, sans-serif;
 $text-color: #343433;
 
-/* typographic scale based on 1:1.2 ratio, with base font size of 14px. SASS converts all these to relative units. */
-
-$font-unit: 1rem;
-$base-font-size: 14px;
-$base-line-height: 21px;
-$rhythm-unit: rem;
-
+/* typographic scale based on 1:1.2 ratio, starting at 14px */
+$base-font-size: .875rem;
 
 $small: $base-font-size/1.2;
 $base: $base-font-size;
-$medium: $base-font-size*1.2;
-$mediumlarge: $base-font-size*1.2*1.2;
-$large: $base-font-size*1.2*1.2*1.2;
-$xl: $base-font-size*1.2*1.2*1.2*1.2;
-$xxl: $base-font-size*1.2*1.2*1.2*1.2*1.2;
-$largest: $base-font-size*1.2*1.2*1.2*1.2*1.2*1.2;
-$superbig: $base-font-size*1.2*1.2*1.2*1.2*1.2*1.2*1.2*1.2*1.2*1.2;  
-
-
-
-
+$medium: $base-font-size * pow(1.2, 1);
+$mediumlarge: $base-font-size * pow(1.2, 2);
+$large: $base-font-size * pow(1.2, 3);
+$xl: $base-font-size * pow(1.2, 4);
+$xxl: $base-font-size * pow(1.2, 5);
+$largest: $base-font-size * pow(1.2, 6);
+$superbig: $base-font-size * pow(1.2, 10);
 
 
 body {
@@ -78,9 +68,6 @@ h6 {
 }
 
 
-
-
-
 .small-text {
 	font-size: $small;
 	line-height: 1.2;
@@ -93,12 +80,6 @@ h6 {
 	padding: $gutter/2 $gutter;
 	text-transform: uppercase;
 	clear: both;
-}
-
-/* used in headings on the apply page, for example */
-small {
-	display: block;
-	font-size: .8em;
 }
 
 

@@ -1,13 +1,8 @@
-
-
-
-
 .search-box {
 	@include breakpoint(reverso-papa-bear) {
 		padding-bottom: $gutter/2;
 	}
 	.form-submit {
-		
 		width: 28px; // arbitrary to make the SVG a nice size
 		vertical-align: top;
 		margin-left: $gutter/2;
@@ -15,14 +10,12 @@
 		background: transparent;
 		padding: 0;
 	}
-
 	.form-item,
 	.form-actions {
 		// just a default Drupal wrapper. better to adjust CSS than delete it through PHP
 		margin: 0;
 		display: inline;
 	}
-
 	@include breakpoint(papa-bear) {
 		// center it in the menu at large sizes
 		display: flex;

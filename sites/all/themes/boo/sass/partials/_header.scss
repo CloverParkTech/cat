@@ -1,22 +1,39 @@
 .catalog-header-wrapper {
 	background-color: $brand-purple;
-	
 	width: 100%;
-	
 	@include breakpoint(mama-bear) {
 		display: flex;
 	}
 }
 
 .catalog-header {
-	
+	width: 100%;
 	color: white;
 	padding: $gutter/2 0;
 }
 
-.catalog-header a {
-	@include linx(white, white, white, white);
+// set color for header title
+$title-color: lighten($brand-purple, 50%);
+
+.catalog-header-title {
+	text-transform: uppercase;
+	letter-spacing: .2rem;
+	display: block;
+	margin-top: $gutter/2;
+ 	@include linx($title-color, $title-color, $title-color, $title-color);
+ 	@include breakpoint(mama-bear) {
+ 		margin-top: 0;
+ 		font-size: $xxl;
+ 		float: right;
+ 		letter-spacing: 1.3rem;
+ 		margin-right: -1.3rem; // remove letter spacing from last letter
+ 	}
+ 	@include breakpoint(papa-bear) {
+ 		letter-spacing: 1.7rem;
+ 		margin-right: -1.7rem; // remove letter spacing from last letter
+ 	}
 }
+
 
 .header-nav {
 	background: $site-grey;
@@ -27,18 +44,6 @@
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
-//	width: 100%;
-
-	
-	
-
-}
-
-
-.header-nav .container {
-	@include breakpoint(mama-bear) {
-		justify-content: space-between;
-	}
 }
 
 .header-nav-ul li {
@@ -48,18 +53,13 @@
 	margin-right: 2rem;
 	display: inline-block;
 	padding: $gutter/2 0;
-	@include breakpoint(reverso-mama-bear) {
-//	padding: $gutter 0;
-	}
-	
 	.active {
-		color: $brand-purple;
 		border-bottom: solid 1px $brand-purple;
 	}
 
 }
 
 .header-nav-ul	.last a {
-		@include linx($brand-alt-green, $brand-alt-green, $brand-purple, $brand-purple);
+	@include linx($brand-alt-green, $brand-alt-green, $brand-purple, $brand-purple);
 		font-weight: bold;
 	}

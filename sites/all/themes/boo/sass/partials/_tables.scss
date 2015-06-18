@@ -16,7 +16,7 @@ td {
   line-height: 20px;
   text-align: left;
   vertical-align: top;
-  border-top: 1px solid $site-grey;
+  border-bottom: 1px solid $site-grey;
 }
 
 th {
@@ -27,6 +27,10 @@ thead th {
   vertical-align: bottom;
 }
 
+thead tr {
+	border-bottom: solid 3px $site-grey;
+}
+
 
 .table-small th,
 .table-small td {
@@ -35,101 +39,42 @@ thead th {
   line-height: 1.2;
 }
 
-.table-bordered {
-  border: 1px solid $site-grey;
-  border-collapse: separate;
-  *border-collapse: collapse;
-  border-left: 0;
-}
 
-.table-bordered th,
-.table-bordered td {
-  border-left: 1px solid $site-grey;
-}
-
-.table-striped tbody > tr:nth-child(odd) > td,
-.table-striped tbody > tr:nth-child(odd) > th {
-  background-color: $site-grey;
-}
-
-
-.table-hover tbody tr:hover > td,
-.table-hover tbody tr:hover > th {
-  background-color: $brand-green; 
-  a:hover {
-	  color: white;
-  }
-}
-
-// responsive tables solution
+// responsive tables solution. Exclude it from print stylesheet
 @media not print {
-@include breakpoint(reverso-baby-bear) {
-	
-table, thead, tbody, th, td, tr { 
-	display: block; 
-}
-	
-thead tr { 
-	position: absolute;
-	top: -9999px;
-	left: -9999px;
-}
-	
-tr { 
-	border: 1px solid #ccc; 
-}
-	
-td { 
-	/* Behave  like a "row" */
-	border: none;
-	border-bottom: 1px solid #eee; 
-	position: relative;
-	padding-left: 50% !important; 
-	min-height: 2rem; // keep the :before element from overflowing in case there's no actual TD element
-}
-	
-td:before { 
-	/* Now like a table header */
-	position: absolute;
-	/* Top/left values mimic padding */
-	top: 6px;
-	left: 6px;
-	width: 45%; 
-	padding-right: 10px; 
-	white-space: nowrap;
+	@include breakpoint(reverso-baby-bear) {
+		table, thead, tbody, th, td, tr { 
+			display: block; 
+		}
 
-}
-}
-	
-/*
-Label the directory data
-*/
-
-/*
-.directory {
-	td:nth-of-type(1):before { content: "Photo"; }
-	td:nth-of-type(2):before { content: "First Name"; }
-	td:nth-of-type(3):before { content: "Last Name"; }
-	td:nth-of-type(4):before { content: "Title"; }
-	td:nth-of-type(5):before { content: "Dept."; }
-	td:nth-of-type(6):before { content: "Bldg."; }
-	td:nth-of-type(7):before { content: "Room"; }
-	td:nth-of-type(8):before { content: "Email"; }
-	td:nth-of-type(9):before { content: "Phone"; }
-}
-
-
-.table-hr {
-	td:nth-of-type(1):before { content: "Job Title"; }
-	td:nth-of-type(2):before { content: "Open Date"; }
-	td:nth-of-type(3):before { content: "Close Date"; }
-}
-
-.site-calendar {
-	td:nth-of-type(1):before { content: "Day"; }
-	td:nth-of-type(2):before { content: "Event"; }
-}
-
-*/
-
+		thead tr { 
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+			
+		tr { 
+			border: 1px solid #ccc; 
+		}
+			
+		td { 
+			/* Behave  like a "row" */
+			border: none;
+			border-bottom: 1px solid #eee; 
+			position: relative;
+			padding-left: 50% !important; 
+			min-height: 2rem; // keep the :before element from overflowing in case there's no actual TD element
+		}
+			
+		td:before { 
+			/* Now like a table header */
+			position: absolute;
+			/* Top/left values mimic padding */
+			top: 6px;
+			left: 6px;
+			width: 45%; 
+			padding-right: 10px; 
+			white-space: nowrap;
+		}
+	}
 }

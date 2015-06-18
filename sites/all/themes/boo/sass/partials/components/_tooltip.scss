@@ -1,38 +1,47 @@
+$triangle-size: 10px;
+
 .tooltip {
 	position: relative;
 	&:hover {
 		&:before {
+			//basic display elements
 			display: block;
 			background: $site-grey;
 			font-size: $medium;
-			position: absolute;
-			content: attr(data-hover);
-			width: 20rem;
-			color: $text-color;
-			padding: 20px;
-		
-			line-height: 1.2;
 			border: solid 1px $brand-purple;
-			left: 100%;
-			bottom: 100%;
-			margin-bottom: 10px;
-    	
+			content: attr(data-hover);
+			color: $text-color;
+			padding: $gutter;
+			line-height: 1.2;
+
+			// size and position
+			position: absolute;
+			width: 20rem;
+			bottom: $triangle-size * 3;
+			@include breakpoint(baby-bear) {
+				left: 100%;
+				bottom: 100%;
+    		}
 		}
 
 		&:after {
-
+			// triangle display
+			border-left: solid $triangle-size $brand-purple;
+			border-bottom: solid $triangle-size $brand-purple;
+			border-top: solid $triangle-size transparent;
+			border-right: solid $triangle-size transparent;
 			content: "";
-			position: absolute;
-			border-left: solid 10px $brand-purple;
-			border-bottom: solid 10px $brand-purple;
-			border-top: solid 10px transparent;
-			border-right: solid 10px transparent;
 			display: block;
-			width: 10px;
-			height: 10px;
+
+			// triangle size and position
+			width: $triangle-size;
+			height: $triangle-size;
+			bottom: $triangle-size * 2;
+			position: absolute;
 			left: 100%;
-			bottom: 100%;
-			margin-bottom: 10px;
+			@include breakpoint(reverso-baby-bear) {
+				transform: rotateZ(-45deg);
+			}
 		}
 	}
 }
