@@ -41,7 +41,6 @@ thead tr {
 
 
 // responsive tables solution. Exclude it from print stylesheet
-@media not print {
 	@include breakpoint(reverso-baby-bear) {
 		table, thead, tbody, th, td, tr { 
 			display: block; 
@@ -77,4 +76,3 @@ thead tr {
 			white-space: nowrap;
 		}
 	}
-}

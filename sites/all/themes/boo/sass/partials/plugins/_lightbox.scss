@@ -12,6 +12,7 @@
   max-width: 80em;
   position: absolute;
   max-height: 80vh;
+  overflow-y: scroll;
   @include breakpoint(mama-bear) {
     left: 50%;
     top: 50%;
