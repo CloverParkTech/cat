@@ -13,8 +13,6 @@
 	}
 }
 
-
-
 .degree-table {
 	@include breakpoint(reverso-baby-bear) {
 		td:nth-of-type(1):before { content: "Course Number"; }
