@@ -4,57 +4,92 @@
    * Prints search form
    * Sets default values if sent from last search
    */
-   function printForm($dbh, $dbhcat) {
+   function printForm($dbh, $dbhcat, $node) {
     global $default_quarter;
     echo '<form action="" method="post">';
     //quarter
-
+    echo '<div class="class-search-form-wrapper">';
+echo '<div class="class-search-form-section">';
     echo '
-    <div class="col6">
     <h4>Quarter</h4> <select name="quarter">';
     
+// print the options in select menu based on quarters selected in drupal
 
-    // Summer 2015
-    echo '<option value="B455">Summer 2015</option>';
+// create array of quarter codes from Drupal interface
+$quarter_keys = array (
+  "B561" => "Summer 2015",
+  "B562" => "Fall 2015",
+  "B563" => "Winter 2016",
+  "B564" => "Spring 2016",
+  "B671" => "Summer 2016",
+  "B672" => "Fall 2016",
+  "B673" => "Winter 2017",
+  "B674" => "Spring 2017"
+);
 
 
-    // Spring 2015
-      echo '<option value="B453"';
-    if(isset($_POST['quarter']) && $_POST['quarter'] == "B454") {
-      echo ' selected';
-    } else if(!isset($_POST['quarter'])) {
-      //set up default selected based on $default_quarter
+// create array of selected quarters in Drupal 
+$quarters_array = $node->field_quarters_to_display['und'];
+
+function get_drupal_quarters($array) {
+  foreach ($array as $item) {
+    if ($item['value'] == 0) {
+      return "B561";
     }
-    echo '>Spring 2015</option>';
-
-    // winter 2015
-      echo '<option value="B453"';
-    if(isset($_POST['quarter']) && $_POST['quarter'] == "B453") {
-      echo ' selected';
-    } else if(!isset($_POST['quarter'])) {
-      //set up default selected based on $default_quarter
+    if ($item['value'] == 1) {
+      return "B562";
     }
-    echo '>Winter 2015</option>';
-
-
-
-    // fall 2014
-    echo '<option value="B452"';
-    if(isset($_POST['quarter']) && $_POST['quarter'] == "B452") {
-      echo ' selected';
-    } else if(!isset($_POST['quarter'])) {
-      //set up default selected based on $default_quarter
+    if ($item['value'] == 2) {
+      return "B563";
     }
-    echo '>Fall 2014</option>';
-    
-    
-    echo '</select>
-    ';
-    //program
-    echo '
-  
+    if ($item['value'] == 3) {
+      return "B564";
+    }
+    if ($item['value'] == 4) {
+      return "B671";
+    }
+    if ($item['value'] == 5) {
+      return "B672";
+    }
+    if ($item['value'] == 6) {
+      return "B673";
+    }
+    if ($item['value'] == 7) {
+      return "B674";
+    }
+  }
+}
 
-    <h4>Program</h4><select name="program">';
+$active_quarters = array_map("get_drupal_quarters", $quarters_array);
+
+// intersect the two arrays to create key/value array of active quarters
+$quarter_keys_flipped = array_flip($quarter_keys);
+$active_quarters_final = array_intersect($quarter_keys_flipped, $active_quarters);
+
+// this could probably be fixed elsewhere
+$active_quarters_final = array_flip($active_quarters_final);
+
+// if someone has already selected a quarter, move that quarter to the top of the array so it displays in the select text
+
+if (isset($_POST['quarter'])) {
+ $active_quarters_final = array($_POST['quarter'] => $active_quarters_final[$_POST['quarter']]) + $active_quarters_final;
+}
+
+foreach($active_quarters_final as $key => $value) {
+  echo '<option value="';
+  echo $key;
+  echo '">';
+  echo $value;
+  echo "</option>";
+}
+echo '</select>';
+
+
+
+
+//program
+
+  echo '<h4>Program</h4><select name="program">';
     //print all programs for select
    
     try {
@@ -72,13 +107,13 @@
       echo '>'. $row->name . '</option>';
     }
     echo '</select>
-    </div>
     ';
-
+echo '</div>';
+echo '<div class="class-search-form-section">';
 
     //instructor search area
     echo '
-    <div class="col6">
+
     <h4>Instructor</h4><input type="text" name="instructor" ';
     if(isset($_POST['instructor'])) {
       echo 'value="' . htmlspecialchars($_POST['instructor']) . '"';
@@ -89,12 +124,14 @@
     if(isset($_POST['keyword'])) {
       echo 'value="' . htmlspecialchars($_POST['keyword']) . '"';
     }
-    echo '>
-    </div>';
+    echo '>';
 
     //starting after time search area
+
+    echo '</div>';
+echo '<div class="class-search-form-section">';
     echo '
-    <div class="col6">
+   
     <h4>Starting After</h4>';
     if(isset($_POST['after'])) {
       printTimeOptions("after", $_POST['after']);
@@ -111,6 +148,10 @@
 
     //credits area
     //ending before time search area
+
+echo '</div>';
+echo '<div class="class-search-form-section">';
+
     echo '
 
     <h4>Credits</h4>';
@@ -119,10 +160,10 @@
     } else {
       printCreditsOptions(-1);
     }
-    echo '</div>';
+
     //location area
     $mode_l = array(null, 'Lakewood', 'South Hill', 'Online', 'Arranged', 'Off Campus');
-    echo '<div class="col6">
+    echo '
     <h4>Location</h4>';
     //check which boxes should be checked. if new search, check all. if searched, check previous checked
     for($i = 1; $i < count($mode_l); $i++) {
@@ -148,13 +189,15 @@
       if(isset($_POST['notFull'])) {
         echo ' checked';
       }
-    echo '> Not Full</label></div>';
-    
+    echo '> Not Full</label>';
+    echo '</div>';
+  
+
+     echo '</div>';
     //submit area
-    echo '<div class="schedule-form-buttons">';
     echo '<input type="submit" value="Search" class="btn btn-arrow">';
   //  echo '<input type="button" value="Reset" onclick="resetForm();" class="btn">';
-    echo '</div>';
+     
     echo '</form>';
    }
    

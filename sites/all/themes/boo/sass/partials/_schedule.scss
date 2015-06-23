@@ -1,0 +1,29 @@
+.class-schedule-form {
+	background: $site-grey;
+	padding: $gutter;
+	margin-bottom: $gutter;
+
+}
+
+
+.class-search-form-wrapper {
+
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+}
+
+.class-search-form-section {
+	margin-top: $gutter;
+	@include breakpoint(mama-bear) {
+		width: 23%;
+		margin-top: 0;
+	}
+	h4 {
+		margin-bottom: $gutter/2;
+	}
+	select,
+	input {
+		max-width: 90%;
+	}
+}

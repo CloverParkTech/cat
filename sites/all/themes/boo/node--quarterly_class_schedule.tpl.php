@@ -27,8 +27,10 @@ include "functions/schedule/printtimeoptions.php";
 include "functions/schedule/printcreditsoptions.php";
 
 
-print render($content['body']); 
 
+
+
+print render($content['body']); 
 
 
 
@@ -55,7 +57,9 @@ catch(PDOException $e) {
 
 
 // print the search form
-printForm($dbh, $dbhcat);
+echo '<div class="class-schedule-form">';
+printForm($dbh, $dbhcat, $node);
+echo '</div>';
 
 
 // run the MYSQL query to get the combined class schedule data from the database
