@@ -24,6 +24,9 @@
 	
 	//get config file
 	require('config.php');
+
+	// get database credentials
+	require('db.php');
 	
 	//GLOBALS
 	$client = new SoapClient("https://tredstone.cptc.edu/CourseData/CPTC_Courses.asmx?wsdl");
@@ -32,10 +35,9 @@
 	$look_at = 8;
 	//when finding new quarters, this checks for YRQ every x ammount of days. If a quarter isn't found, try a smaller number
 	$daysSkipped = 15;
-	$scheddb = $schedule_db['dbname'];
 	//attempt to connect to DB
 	try {
-		$dbh = new PDO('mysql:host=localhost;dbname=schedule;charset=utf8',$schedule_db['username'],$schedule_db['password']);
+		$dbh = new PDO("mysql:host=localhost;dbname=$scheduledbname", $scheduledbuser, $scheduledbpass);
 	} catch(PDOException $e) {
 		echo "Access denied: " . $e->getMessage();
 	}

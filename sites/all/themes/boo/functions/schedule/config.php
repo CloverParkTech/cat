@@ -7,15 +7,6 @@
 	 *	Note: OLD-NAME must be all caps (must match what is in the SMS)
 	 */
 
-	$schedule_db = array(
-		"username" => "root",
-		"password" => "IUUFhmKG"
-		);
-
-	$cat_db = array(
-		"username" => "root",
-		"password" => "IUUFhmKG"
-		);
 
 
 
