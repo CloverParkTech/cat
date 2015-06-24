@@ -9,15 +9,16 @@
 
 
   function printTop($row) {
-    echo '<div class="schedule-class-info"> 
+    echo '<div class="schedule-class-item-wrapper"> 
       <h2 class="schedule-class-title">';
       //Use title provided by XML if able, if not, use from database
       if($row->field_class_title_value != null && $row->field_class_title_value != "") {
         echo $row->field_class_title_value;
       } 
       echo '</h2>
+      <div class="schedule-class-item-inner">
       <h3 class="schedule-class-subtitle">' . $row->title . '</h3>
-      <table class="table table-striped table-condensed schedule-table">
+      <table class="schedule-class-table">
         <thead>
           <tr>
             <th>Item #</th>

@@ -1,0 +1,40 @@
+.schedule-class-item-wrapper {
+	margin-bottom: $gutter;
+
+}
+
+.schedule-class-item-inner {
+	background-color: $site-grey;
+	padding: $gutter;
+}
+
+.schedule-class-info {
+	background: $site-grey;
+	padding: $gutter;
+}
+
+
+
+.schedule-class-title {
+	background: $brand-alt-green;
+	color: white;
+	padding: $gutter/2 $gutter;
+	margin: 0;
+}
+
+.schedule-class-table {
+	@include breakpoint(reverso-baby-bear) {
+		td:nth-of-type(1):before { content: "Item #"; }
+		td:nth-of-type(2):before { content: "Start Time"; }
+		td:nth-of-type(3):before { content: "End Time"; }
+		td:nth-of-type(4):before { content: "Instructor"; }
+		td:nth-of-type(5):before { content: "Location"; }
+		td:nth-of-type(6):before { content: "Start Date"; }
+		td:nth-of-type(7):before { content: "End Date"; }
+		td:nth-of-type(8):before { content: "Days"; }
+		td:nth-of-type(9):before { content: "Format"; }
+		td:nth-of-type(10):before { content: "Addtl Fee"; }
+		td:nth-of-type(11):before { content: "Enrollment"; }
+
+	}
+}
