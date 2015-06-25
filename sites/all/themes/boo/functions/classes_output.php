@@ -233,7 +233,7 @@
         echo $class_item['title'];
       }
       echo "</h4>";
-      echo "<div class=\"class-wrapper\">";
+      echo "<div class=\"class-popup-wrapper\">";
       echo "<dl>";
       if(isset($class_item['item'])) {
         echo "<dt>Item #</dt>";

@@ -8,6 +8,11 @@
   background: rgba(black, .7);
 }
 
+.class-popup-wrapper {
+  padding: $gutter;
+  background: $site-grey;
+}
+
 .class-popup-window-inner {
   max-width: 80em;
   position: absolute;

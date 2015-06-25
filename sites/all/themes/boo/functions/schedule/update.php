@@ -25,8 +25,7 @@
 	//get config file
 	require('config.php');
 
-	// get database credentials
-	require('db.php');
+	
 	
 	//GLOBALS
 	$client = new SoapClient("https://tredstone.cptc.edu/CourseData/CPTC_Courses.asmx?wsdl");

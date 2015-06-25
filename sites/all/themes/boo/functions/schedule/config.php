@@ -8,35 +8,36 @@
 	 */
 
 
+// get database credentials
+	require('db.php');
+	$dbh = null;
+	try {
+		$dbh = $dbcatcred;
+	} catch(PDOException $e) {
+		echo "Access denied: " . $e->getMessage();
+	}
 
 
-	 $name_swap = array(
-		//Add names bellow:
-		"ROSE-PENNISI" => "Rose-Pennisi, T.",
-		"LOVELESS-MOR" => "Loveless-Morris, J.",
-		"HOLLAND-OHER" => "Holland-O'Hern, C.",
-		"CALLAHAN-MCC" => "Callahan-McCain, T.",
-		"CHASE-DEITRI" => "Chase-Deitrich, D.",
-		"KORSCHINOWSK" => "Korschinowski, C.",
-		"LINGENFELTER" => "Lingenfelter, R.",
-		"FELCH" => "Felch, L.",
-		"LEWANDOWSKI" => "Carson-Lewandowski, D.",
-		"SWORD" => "Sword, Y.",
-		"WESTBERRY" => "Westberry, C.",
-		"BAHRT" => "Bahrt, D.",
-		"LAZARUS" => "Lazarus, B.",
-		"CONDON" => "Condon, J.",
-		"COOPER" => "Cooper, L.",
-		"HERNANDEZ" => "Hernandez, K.",
-		"MUSSON" => "Musson",
-		"ANDERSON" => "Anderson",
-		"LARGENT" => "Largent",
-		"HENDRICKSON" => "Hendrickson, A.",
 
-		
-		//Do not modify bellow:
-		"EOF" => "EOF"
-	 );
+
+	$name_swap = array();
+
+	$sql = 'SELECT field_name_changes_first, field_name_changes_second FROM field_data_field_name_changes';
+    foreach ($dbh->query($sql) as $row) {
+    	$key = $row['field_name_changes_first'];
+    	$value = $row['field_name_changes_second'];
+    	$name_swap["$key"] = $value;
+    }
+
+    // add the EOF default to end of array
+
+    $name_swap["EOF"] = "EOF";
+
+echo "<pre>";
+    print_r($name_swap);
+    echo "</pre>";
+
+	 
 	 
 	 /**
 	 * Force item numbers to different admin_units:
@@ -228,4 +229,6 @@
 		//Do not modify bellow:
 		"EOF" => "EOF"
 	 );
+
+$dbh = null;
 ?>

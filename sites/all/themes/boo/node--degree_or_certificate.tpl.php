@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Default theme implementation to display a degree or certificate
+ * This is the degree and certificate template.
  *
  * @see template_preprocess()
  * @see template_preprocess_node()
@@ -28,39 +28,36 @@
   $current_cat = taxonomy_term_load($navtid);
   $path = taxonomy_term_uri($current_cat);
   $caturl = url($path['path']);
-  // counter used for determining total credits for sub table
-  $a = 0;
 
 
-// this isn't being used right now. Might want to delete this and the fields
-// set $degree_type variable depending on what degrees are selected
-      //aat
-      $fieldaat = field_get_items('node', $node, 'field_degree_type'); 
-      $aat = $fieldaat[0]['value'];
 
+  // set $degree_type variable depending on what degrees are selected
+  //aat
+  $fieldaat = field_get_items('node', $node, 'field_degree_type'); 
+  $aat = $fieldaat[0]['value'];
+  //aas-t
+  $fieldaast = field_get_items('node', $node, 'field_aas_t_degree');     
+  $aast = $fieldaast[0]['value'];
 
-      //aas-t
-      $fieldaast = field_get_items('node', $node, 'field_aas_t_degree');     
-       $aast = $fieldaast[0]['value'];
-
-      //certificate
-      $fieldcert = field_get_items('node', $node, 'field_certificate'); 
-      $cert = $fieldcert[0]['value'];
-
-      if($aat == 1 && $aast == 1) {
-        $degree_type = 1;
-      }
-      elseif($aat == 1) {
-        $degree_type = 2;
-      }
-      elseif($aast == 1) {
-        $degree_type = 3;
-      }
-      elseif($cert == 1) {
-        $degree_type = 4;
-      }
-
-
+  //certificate
+  $fieldcert = field_get_items('node', $node, 'field_certificate'); 
+  $cert = $fieldcert[0]['value'];
+  
+  if($aat == 1 && $aast == 1) {
+    $degree_type = 1;
+    }
+  elseif($aat == 1) {
+    $degree_type = 2;
+    }
+  elseif($aast == 1) {
+    $degree_type = 3;
+    }
+  elseif($cert == 1) {
+    $degree_type = 4;
+    }
+  else {
+    $degree_type = null;
+    }
 ?>
 
 
@@ -68,9 +65,25 @@
      <div class="glance-wrapper">
       <h5>Degree Info at a Glance</h5>
       <dl>
-        <?php if(isset($content['field_type_of_degree'])): ?>
-          <dt>Type of Degree</dt>
-          <dd><?php print render($content['field_type_of_degree']); ?></dd>
+        <?php if(isset($degree_type)): ?>
+          <dt>Type</dt>
+          <dd>
+            <?php
+            if($degree_type == 1) {
+              echo "AAT and AAS-T Degree";
+            }
+            if($degree_type == 2) {
+              echo "AAT Degree";
+            }
+            if($degree_type == 3) {
+              echo "AAS-T Degree";
+            }
+            if($degree_type == 4) {
+              echo "Certificate";
+            }
+    
+            ?>
+          </dd>
         <?php endif; ?>
         <?php if(isset($content['field_quarters'])): ?>
           <dt>Estimated # of Quarters</dt>
@@ -95,63 +108,38 @@
     <?php print render($content['body']); ?>
  </div>
 
-
-
-
-
-    
-  <?php
-
-
-
+<?php
+// output tables
 
 $node = node_load($nid);
 // set the index counter that we'll use for the classes output function
 // sort of hacky. Shouldn't be using a global variable here.
 $i = 0;
 
-
-
 // give this function the name of an entity reference field that contains classes and elective clusters
 // it outputs the whole table and popup boxes
 
   boo_function('classes_output.php');
   boo_function('degree_table_display.php');
-
-
-
-
-degree_table_display($node);
-
-
-
-      ?>
-
-
-
-  </div>
+  degree_table_display($node);
+?>
+</div>
 
 
 <div class="right-col">
-<?php boo_snippet('search.php'); ?>
-  
-  <?php 
-
+<?php boo_snippet('search.php'); 
   foreach($navnids as $navnid) {
-  // check if node's content type is degree or certificate
 
+    // display related degrees and certificates
+  // check if node's content type is degree or certificate
     $navnode = node_load($navnid);
     $type =$navnode->type;
     // check if node is the current node we're on
     $q = 0;
-
     if($type == 'degree_or_certificate' && $navnid !== $nid) {
-
       if($q == 0) {
         echo "
-        
         <h3>Related Degrees & Certificates</h3>
-
         <ul>";
       }
       echo "<li>";
@@ -161,42 +149,21 @@ degree_table_display($node);
       echo $navnode->title;
       echo "</a>";
       echo "</li>";
-      if($q == 0) {
-        echo "
-      
-
-        </ul>";
-      }
       $q++;
-
     }
-
-
-
-
   }
   ?>
-
-
   <li>
-  <a href="<?php echo $caturl;?>">View All <?php echo $current_cat->name; ?> Classes</a>
-</li>
+    <a href="<?php echo $caturl;?>">View All <?php echo $current_cat->name; ?> Classes</a>
+  </li>
 </ul>
 
 
 <?php boo_snippet('lead-form.php'); ?>
 <?php boo_snippet('sidebar-menu.php'); ?>
-
-
-
-
-
-  </nav>
+  </div>
 </div>
-</div>
-<pre>
 
-</pre>
 <div class="datestamp-wrapper">
 This page was last updated on <?php echo date("F d, Y", $node->revision_timestamp); ?>.
 </div>
