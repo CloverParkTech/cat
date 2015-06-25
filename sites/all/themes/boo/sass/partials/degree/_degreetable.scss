@@ -13,6 +13,8 @@
 	}
 }
 
+
+@media not-print {
 .degree-table {
 	margin-bottom: 2*$gutter;
 	@include breakpoint(reverso-baby-bear) {
@@ -21,4 +23,5 @@
 		td:nth-of-type(3):before { content: "Credits"; }
 
 	}
+}
 }

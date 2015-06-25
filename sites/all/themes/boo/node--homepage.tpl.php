@@ -89,7 +89,6 @@ $vid = 2;
 </ul>
   </div>
   <div class="right-col">
-    <?php boo_snippet('search.php'); ?>
     
 
   <?php boo_snippet('sidebar-menu.php'); ?>

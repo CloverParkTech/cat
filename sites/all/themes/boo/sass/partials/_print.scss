@@ -1,4 +1,8 @@
 @media print {
+
+	body {
+		color: black;
+	}
 	.catalog-header-wrapper {
 		display: none;
 	}
@@ -20,12 +24,56 @@
 		color: black;
 	}
 
+	h1 {
+		display: none;
+	}
 
-	h1,
 	h2,
 	h3 {
 		padding: 0 !important;
 		color: black !important;
 	}
 
+	.class-title {
+		color: black;
+		padding: 0;
+		margin-top: 2*$gutter;
+	}
+
+	.course-outcome-title {
+		display: none;
+	}
+	
+	.class-wrapper {
+		padding: 0;
+		margin: 0;
+		border-bottom: solid 2px $site-grey;
+	}
+
+	dt,
+	dd {
+		display: inline;
+		margin: 0;
+	}
+
+	dt {
+		padding-right: $gutter/2;
+	}
+	dd {
+		padding-right: $gutter;
+	}
+
+
+
+	.print-hide {
+		display: none;
+		
+	}
+
+}
+
+.print-hide {
+	padding: $gutter;
+	background: $site-grey;
+	border: solid 1px $brand-alt-green;
 }

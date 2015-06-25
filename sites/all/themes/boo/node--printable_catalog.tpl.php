@@ -2,9 +2,11 @@
 
 // include the class tables function
 
+echo '<div class="print-hide">';
+  print render($content['body']); 
+echo '</div>';
 
-
-
+echo '<h2>2015-16 Clover Park Technical College Catalog</h2>';
 
 // first pull the welcome message from the homepage
 
@@ -22,19 +24,7 @@ echo "</div>";
 
 
 // degrees and certificates
-
-
-
-
-
-
-
-
-
-
-
-
-echo "<h1>Degrees & Certificates</h1>";
+echo "<h2>Degrees & Certificates</h2>";
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'node')
         ->entityCondition('bundle', 'degree_or_certificate')
@@ -91,7 +81,7 @@ echo "<h1>Degrees & Certificates</h1>";
         }
 
 
-echo "<h1>Course Descriptions</h1>";
+echo "<h2>Course Descriptions</h2>";
 boo_function('class_descriptions.php');
 $vid = 2;         
 $terms = taxonomy_get_tree($vid);    
@@ -105,7 +95,7 @@ foreach ( $terms as $term ) {
 }
 
 
-echo "<h1>Academic Information</h1>";
+echo "<h2>Academic Information</h2>";
 
     $node = node_load(23);
     $field = field_get_items('node', $node, 'field_academic_information_toc');
