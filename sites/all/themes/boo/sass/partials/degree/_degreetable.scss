@@ -14,6 +14,7 @@
 }
 
 .degree-table {
+	margin-bottom: 2*$gutter;
 	@include breakpoint(reverso-baby-bear) {
 		td:nth-of-type(1):before { content: "Course Number"; }
 		td:nth-of-type(2):before { content: "Class Title"; }

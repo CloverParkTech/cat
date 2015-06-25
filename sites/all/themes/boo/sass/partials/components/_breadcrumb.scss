@@ -3,5 +3,9 @@
   padding: $gutter;
   margin: 0;
   display: inline-block;
+  margin-bottom: 2*$gutter;
 }
 
+.breadcrumb-wrapper {
+	width: 100%;
+}

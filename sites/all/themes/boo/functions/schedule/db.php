@@ -1,10 +1,17 @@
 <?php
 
 // credentials are stored in the Drupal settings file so that they're not overwritten when we move from dev to live site
+
+// this is a super hack; document_root isn't properly set on the local server
+	$currenturl = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
    $settingspath = $_SERVER['DOCUMENT_ROOT'];
-   $settingspath .= "/sites/default/settings.php";
+	if (strpos($currenturl,'localhost') !== false) {
+    	$settingspath .= "/catalog/sites/default/settings.php";
+	} else {
+    	$settingspath .= "/sites/default/settings.php";
+	}
    include "$settingspath";
-   
+
 
 
 $scheduledbname = $schedule_database['database'];

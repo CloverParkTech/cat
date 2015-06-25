@@ -15,7 +15,7 @@ $footer-height: 70px;
 
 body {
 	// sticky footer. rest is in footer partial
-	margin: 0 0 $footer-height;
+	margin: 0 0 ($footer-height + 2*$gutter);
 	hyphens: auto;
 }
 
@@ -35,4 +35,9 @@ p,
 address,
 .btn {
 	margin: 1rem 0;
+}
+
+.region-content {
+	// in case this shows up on any weird Drupal pages
+	width: 100%;
 }
