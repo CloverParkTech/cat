@@ -1,0 +1,88 @@
+
+# view_catalog_data
+
+SELECT 
+    catalog.node.title, 
+    catalog.field_data_field_description.field_description_value,
+    catalog.field_data_field_class_title.field_class_title_value,
+    catalog.field_data_field_course_outcomes.field_course_outcomes_value,
+    catalog.field_data_field_prerequisites.field_prerequisites_value,
+    catalog.field_data_field_co_requisites.field_co_requisites_value,
+    catalog.field_data_field_program.field_program_tid,
+    catalog.field_data_field_program_overrider.field_program_overrider_second,
+    newschedule.courses.instr_name,
+    newschedule.courses.class_cap,
+    newschedule.courses.class_id,
+    newschedule.courses.cr,
+    newschedule.courses.end_date,
+    newschedule.courses.end_time,
+    newschedule.courses.enr,
+    newschedule.courses.room_loc,
+    newschedule.courses.strt_date,
+    newschedule.courses.strt_time,
+    newschedule.courses.yrq,
+    newschedule.courses.start_24,
+    newschedule.courses.end_24,
+    newschedule.courses.sbctc_misc_1,
+    newschedule.courses.class_fee,
+    newschedule.courses.admin_unit
+
+FROM 
+   catalog.node
+       LEFT JOIN catalog.field_data_field_description 
+           ON catalog.node.nid = catalog.field_data_field_description.entity_id
+      LEFT JOIN catalog.field_data_field_program 
+           ON catalog.node.nid = catalog.field_data_field_program.entity_id
+       RIGHT JOIN catalog.field_data_field_class_title
+       		ON catalog.node.nid = catalog.field_data_field_class_title.entity_id
+       LEFT JOIN catalog.field_data_field_course_outcomes
+           ON catalog.node.nid = catalog.field_data_field_course_outcomes.entity_id
+       LEFT JOIN catalog.field_data_field_prerequisites
+           ON catalog.node.nid = catalog.field_data_field_prerequisites.entity_id
+       LEFT JOIN catalog.field_data_field_co_requisites
+           ON catalog.node.nid = catalog.field_data_field_co_requisites.entity_id
+       LEFT JOIN newschedule.courses
+       		ON catalog.node.title = newschedule.courses.course_id
+       LEFT JOIN catalog.field_data_field_program_overrider   
+          ON newschedule.courses.class_id = catalog.field_data_field_program_overrider.field_program_overrider_first;
+
+
+
+
+
+# view_catalog
+
+SELECT 
+  title,
+  field_description_value,
+  field_class_title_value,
+  class_id,
+  field_course_outcomes_value,
+  field_prerequisites_value,
+  field_co_requisites_value,
+  field_program_tid,
+  field_program_overrider_second,
+  instr_name,
+  class_cap,
+  cr,
+  end_date,
+  end_time,
+  enr,
+  room_loc,
+  strt_date,
+  strt_time,
+  yrq,
+  start_24,
+  end_24,
+  sbctc_misc_1,
+  class_fee,
+  admin_unit,
+IFNULL(field_program_overrider_second, field_program_tid) AS 'override'
+FROM view_catalog_data;
+
+
+
+
+
+
+

@@ -70,7 +70,9 @@ try {
 } catch(PDOException $e) {
   echo "Error with SQL.";
 }
-
+echo "<pre>";
+print_r($where);
+echo "</pre>";
 
 
 if ( !empty($_POST) ) {

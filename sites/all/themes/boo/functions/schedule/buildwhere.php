@@ -8,6 +8,7 @@
 			//by quarter
 			if($_POST['quarter'] != -1) {
 				$where .= "WHERE yrq LIKE '" . $_POST['quarter'] . "' ";
+				$where .= "AND override != -1";
 			}
 			//search by program
 			if($_POST['program'] != -1) {
@@ -24,7 +25,7 @@
 				} else if($_POST['program'] == "997") {
 					$where .= " ibest3 = 1 ";
 				} else {
-					$where .= " field_program_tid = '" . $_POST['program'] . "' ";
+					$where .= " override = '" . $_POST['program'] . "' ";
 				}
 			}
 			//search by instructor
