@@ -23,7 +23,7 @@
 }
 
 .schedule-class-table {
-	@include breakpoint(reverso-baby-bear) {
+	@media screen and (max-width: $baby-bear) {
 		td:nth-of-type(1):before { content: "Item #"; }
 		td:nth-of-type(2):before { content: "Start Time"; }
 		td:nth-of-type(3):before { content: "End Time"; }

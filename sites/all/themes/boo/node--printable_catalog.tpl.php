@@ -1,7 +1,7 @@
 <?php
 
 // include the class tables function
-
+echo '<div class="print">';
 echo '<div class="print-hide">';
   print render($content['body']); 
 echo '</div>';
@@ -114,7 +114,7 @@ echo "<h2>Academic Information</h2>";
 
     
 
-
+echo "</div>";
 
 ?>
 

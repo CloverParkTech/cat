@@ -76,6 +76,7 @@ use this like so: @include breakpoint(papa-bear) { whatevs; }
     @if $point == reverso-baby-bear {
 		@media (max-width: $baby-bear + 1px) { @content; }
     }
+
     @if $point == reverso-mama-bear {
     	@media (max-width: $mama-bear + 1px) { @content; }
     }

@@ -48,3 +48,8 @@
 .class-title {
   padding-right: 6rem; // sort of a magic number. makes room for the close button.
 }
+
+.body-inactive {
+  // freezes body while window is open to avoid funky double scroll action
+  overflow: hidden;
+}

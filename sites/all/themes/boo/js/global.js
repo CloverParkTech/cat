@@ -42,6 +42,7 @@ function openClass() {
     var windowID = "js-class-popup-window-" + id;
     var popWindow = document.getElementById(windowID);
     popWindow.classList.add("active-window");
+    document.body.classList.add("body-inactive");
 
 }
 
@@ -53,6 +54,7 @@ function closeClass() {
   var windowID = "js-class-popup-window-" + closeID;
   var popWindow = document.getElementById(windowID);
   popWindow.classList.remove("active-window");
+  document.body.classList.remove("body-inactive");
 }
 
 
