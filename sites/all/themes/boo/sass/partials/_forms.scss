@@ -1,7 +1,14 @@
 input {
   border: 1px solid $brand-purple;
+	-webkit-appearance: none;
+	border-radius: 0;
   &:focus {
     outline: none;
     border: 1px solid $brand-alt-green;
   }
+}
+
+
+input[type=”text”] {
+	
 }

@@ -49,9 +49,10 @@ $title-color: lighten($brand-purple, 50%);
 }
 
 .header-nav-ul {
+	margin: 0;
 	list-style-type: none;
 	padding: 0;
-	margin: 0;
+	
 }
 
 .header-nav-ul li {
@@ -64,10 +65,19 @@ $title-color: lighten($brand-purple, 50%);
 	.active {
 		border-bottom: solid 1px $brand-purple;
 	}
+	@include breakpoint(reverso-baby-bear) {
+		&:first-child {
+			margin-top: $gutter;
+		}
+		&:last-child {
+			margin-bottom: $gutter;
+		}
+		font-weight: bold;
+	}
 
 }
 
-.header-nav-ul	.last a {
+.header-nav-ul .last a {
 	@include linx($brand-alt-green, $brand-alt-green, $brand-purple, $brand-purple);
 		font-weight: bold;
 	}

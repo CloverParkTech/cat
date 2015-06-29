@@ -47,7 +47,7 @@ function openClass() {
     var siteFooter = document.getElementById("js-footer");
     siteFooter.classList.add("footer-hidden");
 
-    // since this essentially resets the position, need to get the position of the document
+    // need to make this not global
     window.scrollPos = document.body.scrollTop;
     console.log(window.scrollPos);
 

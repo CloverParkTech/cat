@@ -8,6 +8,8 @@ table {
   border-spacing: 0;
   margin-bottom: 20px;
   overflow: hidden; // hide overflow on mobile tables, just in case
+  // for overflow on long table titles
+  hyphens: auto;
 }
 
 th,
