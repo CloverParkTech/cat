@@ -14,15 +14,18 @@
 }
 
 .class-popup-window-inner {
-  max-width: 80em;
+  
   position: absolute;
-  max-height: 80vh;
+  width: 90%;
+  max-height: 90vh;
   overflow-y: scroll;
-  @include breakpoint(mama-bear) {
-    left: 50%;
+      left: 50%;
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
-    overflow-y: scroll;
+  @include breakpoint(mama-bear) {
+    width: auto;
+    max-width: 80em;
+
   }
 }
 
@@ -49,7 +52,28 @@
   padding-right: 6rem; // sort of a magic number. makes room for the close button.
 }
 
+
+// everything below this is to freeze scrolling on the body when overlay is hidden.
+// ios has issues with just setting overflow to hidden on the body, hence the additional overflow restriction on the HTML element itself.
+.no-scroll {
+  @include breakpoint(reverso-baby-bear) {
+    overflow-y: hidden;
+  }
+}
+
 .body-inactive {
   // freezes body while window is open to avoid funky double scroll action
-  overflow: hidden;
+  height: 0;
+  overflow-y: hidden;
+  margin: 0;
+ // position: relative;
+  @include breakpoint(baby-bear) {
+    height: 100vh;
+  }
+}
+
+
+
+.footer-hidden {
+  display: none;
 }

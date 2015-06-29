@@ -43,18 +43,31 @@ function openClass() {
     var popWindow = document.getElementById(windowID);
     popWindow.classList.add("active-window");
     document.body.classList.add("body-inactive");
+    document.documentElement.classList.add("no-scroll");
+    var siteFooter = document.getElementById("js-footer");
+    siteFooter.classList.add("footer-hidden");
+
+    // need to make this not global
+    window.scrollPos = document.body.scrollTop;
+    console.log(window.scrollPos);
+
 
 }
 
-function closeClass() {
+function closeClass(scrollPos) {
   var closeID = this.id;
   console.log(closeID);
   closeID = closeID.substr(closeID.lastIndexOf("-")+1);
-  
   var windowID = "js-class-popup-window-" + closeID;
   var popWindow = document.getElementById(windowID);
   popWindow.classList.remove("active-window");
+  var jsWrapper = document.getElementById("js-overflow-wrapper");
   document.body.classList.remove("body-inactive");
+  var siteFooter = document.getElementById("js-footer");
+  document.documentElement.classList.remove("no-scroll");
+    siteFooter.classList.remove("footer-hidden");
+
+    document.body.scrollTop = window.scrollPos;
 }
 
 
@@ -72,6 +85,13 @@ function classOpenClose() {
 }
 
 classOpenClose();
+
+
+
+
+
+
+
 
 });
 

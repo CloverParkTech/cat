@@ -2,9 +2,16 @@
 	<div class="container">
 	<header class="catalog-header">
 		<?php global $base_url; ?>
-	<a href="<?php echo base_path(); ?>"><img src="<?php echo $base_url; ?>/<?php echo drupal_get_path('theme', 'boo'); ?>/images/logo.png" class="catalog-header-logo" /></a>
+	<a href="<?php echo base_path(); ?>">
+
+		<svg width="200" height="42">
+  <image xlink:href="<?php echo $base_url; ?>/<?php echo drupal_get_path('theme', 'boo'); ?>/images/logo.svg" src="<?php echo $base_url; ?>/<?php echo drupal_get_path('theme', 'boo'); ?>/images/logo.png" width="200" height="42" class="catalog-header-logo" />
+</svg>
+
+	</a>
 	  <a href="<?php echo base_path(); ?>" class="catalog-header-title">Academic Catalog</a>
 	
+
 
 	</header>
 	</div>
