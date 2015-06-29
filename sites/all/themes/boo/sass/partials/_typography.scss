@@ -34,9 +34,10 @@ body {
 	line-height: 1.2;
 	font-weight: 200;
 	text-transform: uppercase;
-
-	&:first-child {
-		margin-top: 0;
+	@include breakpoint(baby-bear) {
+		&:first-child {
+			margin-top: 0;
+		}
 	}
 }
 

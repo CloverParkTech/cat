@@ -1,6 +1,6 @@
 input {
   border: 1px solid $brand-purple;
-	-webkit-appearance: none;
+	
 	border-radius: 0;
   &:focus {
     outline: none;
@@ -8,7 +8,7 @@ input {
   }
 }
 
-
+// ios fix
 input[type=”text”] {
-	
+	-webkit-appearance: none;
 }
