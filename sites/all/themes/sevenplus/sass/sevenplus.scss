@@ -1,0 +1,255 @@
+// ----------------------------------------------------------------
+//  CONTENT INPUT FORMS — DETAILS
+// ----------------------------------------------------------------
+
+// Why are the buttons so far apart? Let's fix that.
+input.form-submit, a.button {
+  margin-right: 0.5em;
+} 
+
+// Core field module overrides Seven styling for labels inside tables. Wha? No, please.
+form .field-multiple-table th.field-label {
+  padding-left: 10px;
+  padding-top: 4px;
+} 
+
+// Adjust typography on help text to improve visual hierachy
+ul.tips,
+div.description, 
+.form-item div.description {
+  line-height: 1.231em;
+  font-size: 0.9em;
+  color: #777;
+}
+ul.tips {
+  color: #aaa;
+}
+
+// Make text for "Show row weights" smaller, to match other help text sizes. Fixes visual hierarchy and inconsistency.  
+.div.tabledrag-toggle-weight-wrapper {
+  font-size: 0.8em;
+}
+
+.user-admin {
+  // Sometimes I uncomment this next line and use it to hide the super-repetitive directions about what HTML is allowed on imput forms. That help text get super redundent and clutters up the interface. I usually only remove this text for myself — for the admin role. Of course, you can customize this.  
+  .filter-wrapper {
+   //  display: none; 
+  } 
+  // need a bit more space under each long-text field
+  .field-type-text-long {
+    margin-bottom: 10px;
+  } 
+}
+
+// For people who do see the input filter tools, I've made some adjustments
+.filter-wrapper {
+  color: #999;
+  font-weight: normal;
+  font-size: 0.8em;
+}
+.filter-wrapper label {
+  font-weight: normal;
+  margin-right: 0.7em;
+}
+.form-wrapper div.description {
+  color: #999;
+  font-weight: normal;
+  font-size: 0.8em;
+}
+
+// ----------------------------------------------------------------
+// DATE FIELD
+// ----------------------------------------------------------------
+
+.field-type-datetime {
+  .container-inline-date .date-padding {
+    padding: 0px;
+  }
+  .container-inline-date > .form-item {
+    margin-bottom: 0;
+  }
+  .filter-wrapper .form-item, div.teaser-checkbox .form-item, .form-item .form-item {
+    padding-bottom: 0;
+    width: 100% !important;
+  }
+}
+
+// Puts the Start and End dates side-by-side (when the screen is wide enough)
+@media (min-width: 500px) {
+  .start-date-wrapper,
+  .end-date-wrapper {
+    float: left;
+    width: 50%;
+    .form-text {
+      font-size: 1em;
+      line-height: 2em;
+    }
+    &.container-inline-date .date-padding {
+      width: 85%;
+    }
+    div.description {
+      font-size: 75%;
+    }
+  }
+  .end-date-wrapper {
+    clear: none;
+    margin-top: -20px;
+  }
+}
+
+// ----------------------------------------------------------------
+// CONTEXT MODULE
+// ----------------------------------------------------------------
+// Context, I love you, but you frustrate me by making the list of contexts to choose from into a tiny box with lots of scrolling. Why? Cut it out. My screen is giant. And browser scrollbars work nicely. Let's use them. 
+#context-blockform .context-blockform-selector {
+  height: 100%;
+}
+
+
+// ----------------------------------------------------------------
+// LAYOUT OF CONTENT INPUT FORMS
+// ----------------------------------------------------------------
+// I hate the visual chaos of a complex input form. Chaos adds mental friction where we don't need it. 
+// This makes fields that are ramdomly various different lengths a unified width of 100%.
+
+.node-form .chosen-container {
+  width: 100% !important;
+}
+.form-text {
+  width: 98% !important;  
+  // Making simple text input fields have the same font size and box size as the rest of the text-based fields
+  line-height: 2em;
+  font-size: 1em;
+}
+#field-duration-add-more-wrapper .chosen-container {
+  width: 19% !important; // has to be important to override another important. Ugh. 
+}
+// Ok, let's undo that where it's not working
+@media (min-width: 600px) {
+  .location {
+    .form-item {
+      margin-bottom: 0;
+    }
+    .form-item label {
+      width: calc(30% - 30px);  
+      font-size: 0.9em;
+      text-align: right;
+      padding-right: 15px;
+      line-height: 1.5em;
+    }
+    .form-item input {
+      width: 70% !important;  
+    }
+    div.chosen-container {
+      width: calc(70% + 10px) !important;
+    }
+    &.form-wrapper div.description {
+      margin-left: calc(30% - 10px);
+    }
+  }
+}
+
+// Adding a bit of space inside and around text boxes
+input.form-autocomplete, input.form-text, input.form-file, textarea.form-textarea, select.form-select {
+  padding: 4px;
+}
+.field-type-text-with-summary + .field-widget-text-textarea,
+.field-type-text-with-summary + .field-type-text-with-summary,
+.field-widget-text-textarea + .field-type-text-with-summary,
+.field-widget-text-textarea + .field-widget-text-textarea {
+  margin-top: 1.5em;
+}
+fieldset .fieldset-wrapper {
+  padding: 0 15px 10px 15px;
+}
+
+// Removing Excess space on fieldset boxes
+.field-type-datetime,
+.field-type-image {
+  fieldset .fieldset-wrapper {
+    padding-bottom: 5px;
+  }
+  .form-item {
+    padding: 9px 0 0;
+  }
+}
+
+// Additional Fix for File upload fields
+.form-managed-file .form-file {
+  margin-right: 0.5em;
+  color: #999;
+}
+
+// Additional Fix for Link fields
+.link-field-title {
+  margin-right: 3%;
+}
+
+// Improving space on input fields with multiples 
+table.field-multiple-table {
+ td, th {
+    padding: 8px 20px 8px 10px;
+  }
+}
+
+
+// ----------------------------------------------------------------
+//  DISPLAY SUITE SUPPORT
+// ----------------------------------------------------------------
+// This makes the Display Suite "2-col" and "2-col stacked" layouts responsive. 
+
+// By the way, Display Suite has two sets of layouts — half are marked "fluid", and half are not marked fluid. Yet both the-marked-fluid-layouts AND the-not-marked-fluid-layouts actually fluid. I have no idea why. I would've expected the "not-fluid" layouts to be fixed, a la 2006. But they aren't. Everything is fluid. And nothing is responsive. 
+// That's not what I want, so I overwrote the CSS.
+ 
+// I took the not-marked-fluid fluid layout and made it responsive. These are the only two layouts I use, so these are the only two I wrote overrides for.
+// Everything is 1 column until the viewport is 900px wide, and then it breaks out into 2-col shapes. I also added a gutter down the middle because I don't like my form fields to be smashed up against each other. Who knew?
+// IE8 and earlier don't support calc, but I expect everyone entering content is doing so from a newer brower. Your experience might vary.
+
+.ds-2col > .group-left,
+.ds-2col-stacked > .group-left {
+  float: none; 
+  width: 100%;
+}
+.ds-2col > .group-right,
+.ds-2col-stacked > .group-right {
+  float: none; 
+  width: 100%;
+}
+.ds-2col-stacked > .group-footer {
+  padding-top: 20px;
+  padding-bottom: 40px;
+} 
+ 
+@media screen and (min-width: 900px) {
+  .ds-2col > .group-left,
+  .ds-2col-stacked > .group-left {
+    float: left; /* LTR */
+    width: calc(50% - 20px);
+    margin-right: 40px;
+  }
+  .ds-2col > .group-right,
+  .ds-2col-stacked > .group-right {
+    float: left; /* LTR */
+    width: calc(50% - 20px);
+  }
+}
+
+
+// ----------------------------------------------------------------
+// OVERLAY ADJUSTMENTS
+// ----------------------------------------------------------------
+
+#overlay-content {
+// Making the overlay always be at least a certain height. A super short overlay is ugly and weird.
+  min-height: 250px;
+// Added a bit of a drop shadow
+  box-shadow: 0 1px 6px rgba(0,0,0,0.8);
+// I really want to lighten the overlay background, but this CSS file doesn't load inside that part of the DOM. Javascript would be required. Or hacking core. Or something else extreme. Meh. We are stuck with a almost opaque black overlay.  
+} 
+
+
+// ----------------------------------------------------------------
+// MORE
+// ----------------------------------------------------------------
+
+// Fork this theme and add your own fixes! Or, sure, submit a issue for Seven Plus. But meanwhile, fork this theme and add you own fixes! Or make a child theme of this theme and do it there. The whole purpose of this theme is to just take control back from waiting around for issue queues and debates and bikeshedding. Just write some CSS and keep going with your project! Get it done. 

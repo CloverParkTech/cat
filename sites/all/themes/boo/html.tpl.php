@@ -52,10 +52,9 @@
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
   <?php print $scripts; ?>
-  <script src="//use.typekit.net/tyq0gtg.js" type="text/javascript"></script>
-      <script type="text/javascript">
-  try{Typekit.load();}catch(e){}
-      </script>
+
+<script src="//use.typekit.net/tyq0gtg.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
 
      <style type="text/css" media="all">
 </style> 

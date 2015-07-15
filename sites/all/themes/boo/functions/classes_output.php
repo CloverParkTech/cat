@@ -99,7 +99,20 @@
       $classes[$i]['item'] = $subnode->title;
       $classes[$i]['title'] = $subnode->field_class_title[$pagenode->language][0]['value'];
       $classes[$i]['credits']= $subnode->field_credits[$pagenode->language][0]['value'];
-      $classes[$i]['description'] = $subnode->field_description[$pagenode->language][0]['safe_value'];
+      $classes[$i]['description'] = $subnode->field_description[$pagenode->language][0]['value'];
+      if (isset($subnode->field_prerequisites[$pagenode->language][0]['value'])) {
+         $classes[$i]['prereqs'] = $subnode->field_prerequisites[$pagenode->language][0]['value'];
+      }
+
+      if (isset($subnode->field_co_requisites[$pagenode->language][0]['value'])) {
+         $classes[$i]['coreqs'] = $subnode->field_co_requisites[$pagenode->language][0]['value'];
+      }
+
+       if (isset($subnode->field_optional_notes[$pagenode->language][0]['value'])) {
+         $classes[$i]['notes'] = $subnode->field_optional_notes[$pagenode->language][0]['value'];
+      }
+
+
       if (isset($subnode->field_credit_maximum[$pagenode->language][0]['value'])) {
         $classes[$i]['creditsmax'] = $subnode->field_credit_maximum[$pagenode->language][0]['value'];
       }
@@ -255,12 +268,35 @@
       echo "</dd>";
       echo "</dl>";
 
-
-      echo "<p>";
       if (isset($class_item['description'])) {
-        echo $class_item['description'];
-      }
-      echo "</p>";
+        echo "<p>";
+          echo $class_item['description'];
+        echo "</p>";
+     }
+
+     if (isset($class_item['prereqs'])) {
+      echo "<h5>Prerequisites</h5>";
+        echo "<p>";
+          echo $class_item['prereqs'];
+        echo "</p>";
+     }
+
+     if (isset($class_item['coreqs'])) {
+      echo "<h5>Co-requisites</h5>";
+        echo "<p>";
+          echo $class_item['coreqs'];
+        echo "</p>";
+     }
+
+     if (isset($class_item['notes'])) {
+      echo "<h5>Notes</h5>";
+        echo "<p>";
+          echo $class_item['notes'];
+        echo "</p>";
+     }
+
+
+
       echo "<div class=\"popup-tables-wrapper\">";
       // output descriptions and tables for electives
 

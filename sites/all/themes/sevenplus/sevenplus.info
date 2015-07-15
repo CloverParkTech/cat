@@ -1,0 +1,23 @@
+name = Seven +
+description = The Seven theme, but better. 
+core = 7.x
+base theme  = seven
+
+; -----------------------------------------------------------------------------
+; CSS 
+; -----------------------------------------------------------------------------
+stylesheets[all][] = css/sevenplus.css
+
+
+; -----------------------------------------------------------------------------
+; SETTINGS
+; -----------------------------------------------------------------------------
+; Display the shortcut link ("+") next to an admin page title.
+settings[shortcut_module_link]    = 1
+
+; Information added by Drupal.org packaging script on 2015-07-10
+version = "7.x-1.0"
+core = "7.x"
+project = "sevenplus"
+datestamp = "1436546940"
+

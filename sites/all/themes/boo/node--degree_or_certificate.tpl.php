@@ -105,7 +105,10 @@
 
     </div>
   <div class="degree-body">
-    <?php print render($content['body']); ?>
+    <?php 
+  $body = field_get_items('node', $node, 'body');
+  print_r($body[0]['value']); 
+    ; ?>
  </div>
 
 <?php

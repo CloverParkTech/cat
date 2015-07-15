@@ -14,14 +14,15 @@
 }
 
 .class-popup-window-inner {
-  
   position: absolute;
   width: 90%;
   max-height: 90vh;
   overflow-y: scroll;
-      left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
+  // momentum scrolling for ios
+  -webkit-overflow-scrolling: touch;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
   @include breakpoint(mama-bear) {
     width: auto;
     max-width: 80em;

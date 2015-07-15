@@ -8,7 +8,7 @@
 			//by quarter
 			if($_POST['quarter'] != -1) {
 				$where .= "WHERE yrq LIKE '" . $_POST['quarter'] . "' ";
-				$where .= "AND override != -1";
+				$where .= "AND override != '-1'";
 			}
 			//search by program
 			if($_POST['program'] != -1) {
