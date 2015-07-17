@@ -122,7 +122,7 @@ $i = 0;
 // give this function the name of an entity reference field that contains classes and elective clusters
 // it outputs the whole table and popup boxes
 
-  boo_function('classes_output.php');
+  
   boo_function('degree_table_display.php');
   degree_table_display($node);
 ?>
