@@ -26,7 +26,19 @@ $menu = menu_navigation_links('menu-about-pages-nav');
 <h2 class="bar-heading">Degrees & Certificates</h2>
 <?php /* List all degrees and certificates here */ ?>
 <ul class="styled-list">
+
 <?php 
+
+// function to alphabetize degrees and certificates
+    if(!function_exists('cmp')) {
+    function cmp($a, $b) {
+        return strcmp($a->title, $b->title);
+      }
+  }
+    
+
+
+
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'node')
         ->entityCondition('bundle', 'degree_or_certificate')
@@ -35,6 +47,9 @@ $menu = menu_navigation_links('menu-about-pages-nav');
         if (!empty($result['node'])) {
           $nids = array_keys($result['node']);
           $nodes = node_load_multiple($nids);
+
+          usort($nodes, "cmp");
+
           foreach($nodes as $node) {
             echo "<li><a href=\"";
             echo boo_url($node->nid);

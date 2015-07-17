@@ -131,6 +131,8 @@ $i = 0;
 
 <div class="right-col">
 <?php boo_snippet('search.php'); 
+
+$q = 0;
   foreach($navnids as $navnid) {
 
     // display related degrees and certificates
@@ -138,7 +140,7 @@ $i = 0;
     $navnode = node_load($navnid);
     $type =$navnode->type;
     // check if node is the current node we're on
-    $q = 0;
+    
     if($type == 'degree_or_certificate' && $navnid !== $nid) {
       if($q == 0) {
         echo "

@@ -1,0 +1,3 @@
+name = Catalog Homepage Generator
+description = Generates the homepage for CPTC's online catalog
+core = 7.x
