@@ -1,0 +1,18 @@
+.homepage-area-wrapper {
+  border-left: solid $site-grey $gutter;
+  margin-bottom: 2*$gutter;
+  padding-left: $gutter;
+}
+
+.homepage-area-link {
+	text-transform: uppercase;
+	margin-bottom: $gutter;
+}
+
+.homepage-area-wrapper ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	margin-top: $gutter;
+}
+

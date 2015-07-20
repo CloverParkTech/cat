@@ -15,71 +15,61 @@
   <div class="left-col">
   <h1>Clover Park Technical College Catalog</h1>
   <?php print render($content['body']); ?>
-  <h2 class="bar-heading">About Clover Park Technical College</h2>
+
+
+
+<h2 class="bar-heading">Academic Offerings</h2>
 <?php
-// display menu that's being used for table of contents
-$menu = menu_navigation_links('menu-about-pages-nav');
- print theme('links__menu_about-pages-nav', array('links' => $menu, 'attributes' => array('class' =>array('styled-list'))));
- ?>
-
-
-<h2 class="bar-heading">Degrees & Certificates</h2>
-<?php /* List all degrees and certificates here */ ?>
-<ul class="styled-list">
-
-<?php 
-
-// function to alphabetize degrees and certificates
-    if(!function_exists('cmp')) {
-    function cmp($a, $b) {
-        return strcmp($a->title, $b->title);
-      }
-  }
-    
-
-
-
-    $query = new EntityFieldQuery();
-    $query->entityCondition('entity_type', 'node')
-        ->entityCondition('bundle', 'degree_or_certificate')
-        ->propertyCondition('status', 1);
-        $result = $query->execute();
-        if (!empty($result['node'])) {
-          $nids = array_keys($result['node']);
-          $nodes = node_load_multiple($nids);
-
-          usort($nodes, "cmp");
-
-          foreach($nodes as $node) {
-            echo "<li><a href=\"";
-            echo boo_url($node->nid);
-            echo "\">";
-            echo $node->title;
-            echo "</a></li>";
-          }
-        }
-?>
-</ul>
-
-
-<h2 class="bar-heading">Course Descriptions</h2>
-<ul class="styled-list">
-<?php
+// run through all taxonomy terms, list them and their child degrees/certs
 $vid = 2;         
   $terms = taxonomy_get_tree($vid);    
  foreach ( $terms as $term ) { 
   $path = taxonomy_term_uri($term);
   $url = url($path['path']);
-  echo "<li><a href=\"";
+  echo "<div class='homepage-area-wrapper'>";
+  echo "<h3>";
+  echo $term->name;
+  echo "</h3>";
+  echo "<a class='homepage-area-link' href=\"";
   echo $url;
    echo "\">";
+   echo "View All ";
   echo $term->name;
-  echo "</a></li>";
+  echo " Courses";
+  echo "</a>";
+// get all the nodes with this tid.
+  $degreenids = taxonomy_select_nodes($term->tid, false, false);
+  echo "<ul>";
+  foreach($degreenids as $degreenid) {
+
+    // display related degrees and certificates
+  // check if node's content type is degree or certificate
+    $degreenode = node_load($degreenid);
+    $type =$degreenode->type;
+    // check if node is the current node we're on
+    
+    if($type == 'degree_or_certificate') {
+
+      echo "<li>";
+      echo "<a href=\"";
+      echo boo_url($degreenid);
+      echo "\">";
+      echo $degreenode->title;
+      echo "</a>";
+      echo "</li>";
+
+    }
+
+
  }
+ echo "</ul>";
+ echo "</div>";
+}
+
+
 ?>
 
 
-</ul>
 
 <h2 class="bar-heading">Academic Information</h2>
 <ul class="styled-list">
@@ -102,6 +92,16 @@ $vid = 2;
 //    $output = field_view_value('node', $node, 'field_another_entity_test', $field[$delta]);
   ?>
 </ul>
+
+
+  <h2 class="bar-heading">About Clover Park Technical College</h2>
+<?php
+// display menu that's being used for table of contents
+$menu = menu_navigation_links('menu-about-pages-nav');
+ print theme('links__menu_about-pages-nav', array('links' => $menu, 'attributes' => array('class' =>array('styled-list'))));
+ ?>
+
+
   </div>
   <div class="right-col">
     
