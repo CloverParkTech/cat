@@ -9,10 +9,14 @@ function boo_table_output($classes, $index, $credits, $max_credits) {
     // index used to keep track of how many tables we've displayed.
     $a = $index;
 
-    // if this is the first table, credits will be zero.
+   
     if ($a == 0) {
         $technical_credits = $credits;
       }
+      else {
+        $technical_credits = 0;
+      }
+
 
       // if this is not the first table, technical credits are equal to the total from the first table
     if ($a > 0) {

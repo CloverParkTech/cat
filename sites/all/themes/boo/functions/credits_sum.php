@@ -4,7 +4,8 @@
 // max credits is difference between credits and max credits.
 
 function boo_credits_sum($classes_array) {
-
+$credits = 0;
+$creditsmax = 0;
   foreach ($classes_array as $class) {
     $credits += $class['credits'];
     if(isset($class['creditsmax'])) {

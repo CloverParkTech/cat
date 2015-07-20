@@ -31,57 +31,60 @@
 
 
 
-  // set $degree_type variable depending on what degrees are selected
-  //aat
-  $fieldaat = field_get_items('node', $node, 'field_degree_type'); 
-  $aat = $fieldaat[0]['value'];
-  //aas-t
-  $fieldaast = field_get_items('node', $node, 'field_aas_t_degree');     
-  $aast = $fieldaast[0]['value'];
 
-  //certificate
-  $fieldcert = field_get_items('node', $node, 'field_certificate'); 
-  $cert = $fieldcert[0]['value'];
-  
-  if($aat == 1 && $aast == 1) {
-    $degree_type = 1;
-    }
-  elseif($aat == 1) {
-    $degree_type = 2;
-    }
-  elseif($aast == 1) {
-    $degree_type = 3;
-    }
-  elseif($cert == 1) {
-    $degree_type = 4;
-    }
-  else {
-    $degree_type = null;
-    }
+
+// conver the degree type fields into their proper names.
+
+$fielddegree = field_get_items('node', $node, 'field_degree_type_new'); 
+$degree_type_id = null;
+foreach($fielddegree as $fielddegree_item) {
+  $degree_type_id .= $fielddegree_item['value'];
+}
+
+/*
+* 1 = aat
+* 2 = aas-t  
+* 12 = both aat and aast
+* 3 = certificate
+* 4 = dta/mrp
+* 5 = bachelor's of science
+*/
+$degree_type_value = null;
+switch($degree_type_id) {
+  case 1:
+    $degree_type_value = "AAT Degree";
+    break;
+  case 2:
+    $degree_type_value = "AAS-T Degree";
+    break;
+  case 12:
+    $degree_type_value = "AAT and AAS-T Degree";
+    break;
+  case 3:
+    $degree_type_value = "Certificate";
+    break;
+  case 4:
+    $degree_type_value = "DTA/MRP Degree";
+    break;
+  case 5:
+    $degree_type_value = "Bachelor of Applied Science Degree";
+    break;  
+}
 ?>
+
+
+<h4><?php echo $degree_type_value; ?></h4>
 
 
   <div class="left-col">
      <div class="glance-wrapper">
       <h5>Degree Info at a Glance</h5>
       <dl>
-        <?php if(isset($degree_type)): ?>
+        <?php if(isset($degree_type_value)): ?>
           <dt>Type</dt>
           <dd>
             <?php
-            if($degree_type == 1) {
-              echo "AAT and AAS-T Degree";
-            }
-            if($degree_type == 2) {
-              echo "AAT Degree";
-            }
-            if($degree_type == 3) {
-              echo "AAS-T Degree";
-            }
-            if($degree_type == 4) {
-              echo "Certificate";
-            }
-    
+              echo $degree_type_value;
             ?>
           </dd>
         <?php endif; ?>
