@@ -43,7 +43,7 @@ class_descriptions($current_tid);
 
 
 
-
+boo_function('display_degrees.php');
 
 //   ?>
 
@@ -52,25 +52,25 @@ class_descriptions($current_tid);
 	
 	<?php 
 		$p = 0;
+		$degree_array = array();
 		$program_nodes = node_load_multiple(taxonomy_select_nodes($current_tid, false, false));
 		foreach($program_nodes as $degreenode) {
 			$type = $degreenode->type;
 			if($type == 'degree_or_certificate') {
-			if($p == 0) {
-				echo "<h2 class=\"sidebar-top-header\">Degrees & Certificates in This Program</h2>";
-				$p++;
-				echo "<ul>";
+				$degree_array[$degreenode->nid] = $degreenode->title;
 			}
-			echo "<li>";
-			echo "<a href=\"";
-			echo boo_url($degreenode->nid);
-			echo "\">";
-			echo $degreenode->title;
-			echo "</a>";
-			echo "</li>";
+		}	
 
-		}
-	}
+		if(!empty($degree_array)) {
+ 		 echo "<h2 class=\"sidebar-top-header\">Degrees & Certificates in This Program</h2>";
+   		 echo "<ul>";
+      		boo_display_degrees($degree_array);
+    		echo "</ul>";
+
+}	
+
+
+
 			?>
 		</ul>
 

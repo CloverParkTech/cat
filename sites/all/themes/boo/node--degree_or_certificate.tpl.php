@@ -33,7 +33,7 @@
 
 
 
-// conver the degree type fields into their proper names.
+// convert the degree type fields into their proper names.
 
 $fielddegree = field_get_items('node', $node, 'field_degree_type_new'); 
 $degree_type_id = null;
@@ -73,12 +73,18 @@ switch($degree_type_id) {
 ?>
 
 
-<h4><?php echo $degree_type_value; ?></h4>
-
 
   <div class="left-col">
      <div class="glance-wrapper">
-      <h5>Degree Info at a Glance</h5>
+      <?php
+        if($degree_type_value == "Certificate") {
+          $degree_word = "certificate";
+        }
+        else {
+          $degree_word = "degree";
+        }
+      ?>
+      <h5><?php echo $degree_word; ?> Info at a Glance</h5>
       <dl>
         <?php if(isset($degree_type_value)): ?>
           <dt>Type</dt>
@@ -88,9 +94,22 @@ switch($degree_type_id) {
             ?>
           </dd>
         <?php endif; ?>
-        <?php if(isset($content['field_quarters'])): ?>
+        <?php if(isset($content['field_quarters'])): 
+
+        $quarters = field_get_items('node', $node, 'field_quarters');
+        $quarters_value = $quarters[0]['safe_value'];
+
+        if ($quarters_value == "1") {
+          $quarters_plural = "quarter";
+        }
+        else {
+          $quarters_plural = "quarters";
+        }
+
+        ?>
+
           <dt>Estimated # of Quarters</dt>
-          <dd><?php print render($content['field_quarters']); ?></dd>
+          <dd>This <?php echo $degree_word; ?> is approximately <?php echo $quarters_value; ?> <?php echo $quarters_plural; ?> long, depending on the time students need to satisfactorily complete all graduation requirements.</dd>
         <?php endif; ?>
         <?php if(isset($content['field_estimated_cost'])): ?>  
           <dt>Estimated Cost</dt>
@@ -111,7 +130,7 @@ switch($degree_type_id) {
     <?php 
   $body = field_get_items('node', $node, 'body');
   print_r($body[0]['value']); 
-    ; ?>
+     ?>
  </div>
 
 <?php
@@ -135,36 +154,39 @@ $i = 0;
 <div class="right-col">
 <?php boo_snippet('search.php'); 
 
-$q = 0;
+boo_function('display_degrees.php');
+
+
+$degree_array = array();
   foreach($navnids as $navnid) {
 
     // display related degrees and certificates
   // check if node's content type is degree or certificate
     $navnode = node_load($navnid);
     $type =$navnode->type;
+    
     // check if node is the current node we're on
     
     if($type == 'degree_or_certificate' && $navnid !== $nid) {
-      if($q == 0) {
-        echo "
-        <h3>Related Degrees & Certificates</h3>
-        <ul>";
-      }
-      echo "<li>";
-      echo "<a href=\"";
-      echo boo_url($navnid);
-      echo "\">";
-      echo $navnode->title;
-      echo "</a>";
-      echo "</li>";
-      $q++;
+      $degree_array[$navnid] = $navnode->title;
     }
   }
+
+
+if(!empty($degree_array)) {
+  echo "<h3>Related Degrees</h3>";
+    echo "<ul>";
+      boo_display_degrees($degree_array);
+    echo "</ul>";
+
+}
+
+
   ?>
-  <li>
+
     <a href="<?php echo $caturl;?>">View All <?php echo $current_cat->name; ?> Classes</a>
-  </li>
-</ul>
+
+
 
 
 <?php boo_snippet('lead-form.php'); ?>

@@ -20,52 +20,8 @@
 
 <h2 class="bar-heading">Academic Offerings</h2>
 <?php
-// run through all taxonomy terms, list them and their child degrees/certs
-$vid = 2;         
-  $terms = taxonomy_get_tree($vid);    
- foreach ( $terms as $term ) { 
-  $path = taxonomy_term_uri($term);
-  $url = url($path['path']);
-  echo "<div class='homepage-area-wrapper'>";
-  echo "<h3>";
-  echo $term->name;
-  echo "</h3>";
-  echo "<a class='homepage-area-link' href=\"";
-  echo $url;
-   echo "\">";
-   echo "View All ";
-  echo $term->name;
-  echo " Courses";
-  echo "</a>";
-// get all the nodes with this tid.
-  $degreenids = taxonomy_select_nodes($term->tid, false, false);
-  echo "<ul>";
-  foreach($degreenids as $degreenid) {
-
-    // display related degrees and certificates
-  // check if node's content type is degree or certificate
-    $degreenode = node_load($degreenid);
-    $type =$degreenode->type;
-    // check if node is the current node we're on
-    
-    if($type == 'degree_or_certificate') {
-
-      echo "<li>";
-      echo "<a href=\"";
-      echo boo_url($degreenid);
-      echo "\">";
-      echo $degreenode->title;
-      echo "</a>";
-      echo "</li>";
-
-    }
-
-
- }
- echo "</ul>";
- echo "</div>";
-}
-
+boo_function("toc_generator.php");
+toc_generator();
 
 ?>
 

@@ -208,7 +208,9 @@ function boo_table_output($classes, $index, $credits, $max_credits) {
                 }
                 echo "</td>";
                 echo "<td>";
-                echo $sub_sub_courses['title'];
+                if (isset($sub_sub_courses['title'])) {
+                 echo $sub_sub_courses['title'];
+               }
                 echo "</td>";
                 echo "<td>";
                 if (isset($sub_sub_courses['credits'])) {
