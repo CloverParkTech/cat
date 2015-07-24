@@ -29,7 +29,7 @@ body {
 /* this is all the common properties for the headings. Size changes for each one */
 @mixin heading-size ($h-size) {
 	font-size: ($h-size);
-	margin: $h-size/2 0 $h-size/2 0; /* 1 line below */
+	margin: $h-size/1 0 $h-size/2 0; /* 1 line below */
 	font-family: $heading-font;
 	line-height: 1.2;
 	font-weight: 200;

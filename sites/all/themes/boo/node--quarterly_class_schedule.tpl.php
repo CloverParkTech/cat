@@ -65,7 +65,7 @@ echo '</div>';
 
 // run the MYSQL query to get the combined class schedule data from the database
 try {
-  $stmt = $dbh->prepare("SELECT * FROM view_catalog " . $where . " ORDER BY field_class_title_value");
+  $stmt = $dbh->prepare("SELECT * FROM view_catalog " . $where . " ORDER BY title");
   $stmt->execute();
 } catch(PDOException $e) {
   echo "Error with SQL.";

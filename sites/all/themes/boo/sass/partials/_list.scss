@@ -19,7 +19,7 @@ ul,
 ol {
   padding: 0;
   margin: 0;
-  margin-left: $gutter;
+  margin-left: 2*$gutter;
 }
 
 ul ul,
@@ -27,6 +27,13 @@ ul ol,
 ol ol,
 ol ul {
   margin-bottom: 0;
+  padding-top: $gutter;
+}
+
+ul ol,
+
+ol ol {
+  list-style-type: upper-roman;
 }
 
 li {

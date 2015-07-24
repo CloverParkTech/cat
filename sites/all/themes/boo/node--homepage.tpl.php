@@ -28,34 +28,17 @@ toc_generator();
 
 
 <h2 class="bar-heading">Academic Information</h2>
-<ul class="styled-list">
-  <?php 
-    $node = node_load($nid);
-    $field = field_get_items('node', $node, 'field_academic_information_toc');
-
-    foreach($field as $item) {
-    $aca_page = $item['entity'];
- 
-    echo "<li>";
-    echo "<a href=\"";
-    echo boo_url($aca_page->nid);
-    echo "\">";
-    echo $aca_page->title;
-    echo "</a>";
-    echo "</li>";
-    
-}
-//    $output = field_view_value('node', $node, 'field_another_entity_test', $field[$delta]);
-  ?>
-</ul>
 
 
-  <h2 class="bar-heading">About Clover Park Technical College</h2>
 <?php
 // display menu that's being used for table of contents
-$menu = menu_navigation_links('menu-about-pages-nav');
- print theme('links__menu_about-pages-nav', array('links' => $menu, 'attributes' => array('class' =>array('styled-list'))));
- ?>
+$menu = menu_navigation_links('menu-homepage-academic-pages');
+ print theme('links__menu_homepage-academic-pages', array('links' => $menu, 'attributes' => array('class' =>array('styled-list'))));
+?>
+
+
+
+
 
 
   </div>

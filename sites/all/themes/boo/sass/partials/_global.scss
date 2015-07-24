@@ -6,8 +6,10 @@
 
 html {
 	// for sticky footer
+	@include breakpoint(baby-bear) {
 	position: relative;
 	min-height: 100%;
+}
 }
 
 // set height used for sticky footer
@@ -15,7 +17,9 @@ $footer-height: 70px;
 
 body {
 	// sticky footer. rest is in footer partial
+	@include breakpoint(baby-bear) {
 	margin: 0 0 ($footer-height + 2*$gutter);
+}
 	
 }
 

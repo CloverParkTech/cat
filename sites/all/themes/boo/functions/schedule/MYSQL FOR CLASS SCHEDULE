@@ -25,7 +25,8 @@ SELECT
     newschedule.courses.end_24,
     newschedule.courses.sbctc_misc_1,
     newschedule.courses.class_fee,
-    newschedule.courses.admin_unit
+    newschedule.courses.admin_unit, 
+    newschedule.courses.day_cd
 
 FROM 
    catalog.node
@@ -77,8 +78,10 @@ SELECT
   sbctc_misc_1,
   class_fee,
   admin_unit,
+  day_cd,
 IFNULL(field_program_overrider_second, field_program_tid) AS 'override'
-FROM view_catalog_data;
+FROM view_catalog_data
+ORDER BY title;
 
 
 

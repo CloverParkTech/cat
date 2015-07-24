@@ -2,9 +2,13 @@
 	background-color: $brand-purple;
 	color: white;
 	padding: $gutter;
-	position: absolute;
+	
+    width: 100%;  
+    margin-top: $gutter;
+    @include breakpoint(baby-bear) {
+    	position: absolute;
     left: 0;
     bottom: 0;
     height: $footer-height;
-    width: 100%;  
+    }
 }

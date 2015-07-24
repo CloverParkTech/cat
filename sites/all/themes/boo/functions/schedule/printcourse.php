@@ -8,6 +8,105 @@
     }
 
 
+    // convert day code to actual days of week
+    switch($row->day_cd) {
+      case 1:
+        $weekday = "M";
+        break;
+      case 2:
+        $weekday = "T";
+        break;
+      case 3:
+        $weekday = "W";
+        break;
+      case 4:
+        $weekday = "Th";
+        break;   
+      case 5:
+        $weekday = "F";
+        break;
+      case 6:
+        $weekday = "Sa";
+        break;       
+      case 7:
+        $weekday = "Daily";
+        break;
+      case 8:
+        $weekday = "MWF";
+        break;     
+      case 9:
+        $weekday = "TTH";
+        break;  
+      case 10:
+        $weekday = "MWThF";
+        break;
+      case 11:
+        $weekday = "MTWTh";
+        break;
+      case 12:
+        $weekday = "MW";
+        break;
+      case 13:
+        $weekday = "WF";
+        break;
+      case 14:
+        $weekday = "TF";
+        break;
+      case 15:
+        $weekday = "MF";
+        break;
+      case 16:
+        $weekday = "ThF";
+        break;  
+      case 17:
+        $weekday = "MWTh";
+        break; 
+      case 18:
+        $weekday = "MTWF";
+        break;
+      case 19:
+        $weekday = "MTTh";
+        break; 
+      case 20:
+        $weekday = "WTh";
+        break;
+      case 21:
+        $weekday = "MTF";
+        break; 
+      case 22:
+        $weekday = "MT";
+        break;
+      case 23:
+        $weekday = "TWThF";
+        break;
+      case 24:
+        $weekday = "Arranged";
+        break;
+      case 25:
+        $weekday = "Su";
+        break;
+      case 26:
+        $weekday = "TThF";
+        break;   
+      case 27:
+        $weekday = "TW";
+        break;
+      case 28:
+        $weekday = "MTh";
+        break; 
+      case 29:
+        $weekday = "MTW";
+        break;  
+      case 30:
+        $weekday = "MThF";
+        break;                                          
+
+      default:
+        $weekday = " ";
+
+    }
+
+
     echo '
 
 
@@ -29,7 +128,7 @@
         <td>' . formatDate($row->strt_date) . '</td>
         <td>' . formatDate($row->end_date) . '</td>
       
-        <td>' . $row->enr . '</td>
+        <td>' . $weekday . '</td>
         
         <td>' . $row->sbctc_misc_1 .'</td>
         <td>$' . $row->class_fee .'</td>
