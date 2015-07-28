@@ -16,7 +16,22 @@
             echo 'No description available.';
           }
           echo '
-          </p>
+          </p> ';
+          if($row->field_prerequisites_value) {
+            echo "<h4>Prerequisites</h4>";
+            echo "<p>";
+            echo $row->field_prerequisites_value;
+            echo "</p>";
+          }
+
+           if($row->field_co_requisites_value) {
+            echo "<h4>Co-requisites</h4>";
+            echo "<p>";
+            echo $row->field_co_requisites_value;
+            echo "</p>";
+          }
+
+echo '
           </div>
     </div>
     </div>';

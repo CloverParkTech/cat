@@ -38,6 +38,8 @@ print render($content['body']);
 // build the where query
 $where = buildWhere();
 
+
+
 // connect to the schedule database
 try {
     $dbh = $dbcred;

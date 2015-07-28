@@ -104,6 +104,8 @@
 		}
 		//return where string
 		return $where;
+
+	
 	}
 
   ?>

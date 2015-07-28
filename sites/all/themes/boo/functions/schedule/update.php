@@ -41,7 +41,7 @@
 		echo "Access denied: " . $e->getMessage();
 	}
 	
-	getQuarters('140115');
+	getQuarters('150601');
 	
 	//close database and web service connections
 	$dbh = null;
@@ -468,9 +468,21 @@
 	 * Converts removes extra spaces, leaving, at most, one space. Trims extra spaces from front and back.
 	 */
 	function formatCourseID($str) {
+
+		// insert space before the digits
+		$length = strlen($string);
+		$position = $length - 5;
+
+		$str = substr_replace($str, ' ', $position, 0);
+
+
+
 		while(strpos($str, '  ') !== false) {
 			$str = str_replace('  ', ' ', $str);
 		}
+
+
+
 		return $str;
 	}
 
