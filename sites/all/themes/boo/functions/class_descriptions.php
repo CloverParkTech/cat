@@ -1,7 +1,10 @@
 <?php
 // function that takes a taxonomy ID and outputs an alphabetized and formatted list of classes
+// used on the class description pages
 function class_descriptions($tid) {
   $program_nodes = node_load_multiple(taxonomy_select_nodes($tid, false, false));
+
+    // sort the list of nodes alphabetically by title
     if(!function_exists('cmp')) {
     function cmp($a, $b) {
         return strcmp($a->title, $b->title);
@@ -9,8 +12,10 @@ function class_descriptions($tid) {
   }
     usort($program_nodes, "cmp");
 
-
+// counter used for javascript IDs for modals
   $i = 0;
+
+// run through each class, add HTML formatting 
   foreach($program_nodes as $class) {
     if ($class->type == 'class') {
       echo "<h4 class=\"class-title\">";
@@ -32,16 +37,12 @@ function class_descriptions($tid) {
             echo "<sup class=\"tooltip\" data-hover=\"DIV designates that this course meets the diversity requirement.\">DIV</sup>";
           }
                    
-
-
-
-
       echo "</dd><dt>Credits</dt>";
       echo "<dd>";
       echo $class->field_credits['und'][0]['value'];
       echo "</dd></dl>";
       echo "<p>";
-      // definitely a better way to access safe field values
+
       echo $class->field_description['und'][0]['value'];
       echo "</p>";
       if (isset($class->field_prerequisites['und'][0]['value'])) {
@@ -72,7 +73,7 @@ function class_descriptions($tid) {
         echo "\">";
         echo "View Course Outcomes";
         echo "</span>";
-         echo "<span class=\"course-outcome-text\" id=\"js-window-";
+        echo "<span class=\"course-outcome-text\" id=\"js-window-";
         echo $i;
         echo "\">";
         echo "<p>";
@@ -80,19 +81,13 @@ function class_descriptions($tid) {
         echo "</p>";
         echo "</span>";
     }
-      
-      echo "</div>";
-      $i++;
-      
+      echo "</div>";    
     }
-
-
-
-
-
+    $i++;
   }
 
-  if($i == 0) {
+
+  if(count($program_nodes) == 0) {
       echo "<h5>No classes found</h5>";
     }
 }

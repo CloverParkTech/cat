@@ -3,10 +3,7 @@
 	padding: 0 $gutter;
 	width: 100%;
 	@include breakpoint(baby-bear) {
-		width: $baby-bear;	
-	}
-	@include breakpoint(mama-bear) {
-		width: $mama-bear; 
+		width: $baby-bear; 
 		display: flex;
 		flex-flow: row wrap;
 	}
@@ -21,8 +18,9 @@
 .left-col {
 	width: 100%;
 	overflow: hidden; // just in case it overflows on mobile views.
-	@include breakpoint(mama-bear) {
-		width: ($mama-bear - 2*$gutter) * .7;
+	@include breakpoint(baby-bear) {
+		//set this at 70% width, minus the gutters
+		width: ($baby-bear - 2*$gutter) * .7;
 		padding-right: 3*$gutter;
 		float: left;
 	}
@@ -33,8 +31,8 @@
 
 .right-col {
 	width: 100%;
-	@include breakpoint(mama-bear) {
-		width: ($mama-bear - 2*$gutter) * .3;
+	@include breakpoint(baby-bear) {
+		width: ($baby-bear - 2*$gutter) * .3;
 		padding-left: 3*$gutter;
 		float: left;
 		border-left: solid 1px $site-grey;

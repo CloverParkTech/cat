@@ -27,7 +27,8 @@ function degree_table_display ($node) {
 	boo_table_output($classes_array, $table_index, $credits_array[0], $credits_array[1]);
 	
 	// plus up the indexes
-	$classes_array_index = $classes_array_index + 1;
+	$classes_array_last_item = end($classes_array);
+	$classes_array_index = $classes_array_last_item['index'] + 1;
 	$table_index = 1;
 
 
@@ -43,7 +44,9 @@ function degree_table_display ($node) {
 	  
 	  boo_table_output($degree_array_one, $table_index, $credits_array[0], $credits_array[1]);
 
-	  $classes_array_index = $classes_array_index + 1;
+	  $classes_array_last_item = end($classes_array);
+
+		$classes_array_index = $classes_array_last_item['index'] + 1;
 	  $table_index = 2;
 	}
 

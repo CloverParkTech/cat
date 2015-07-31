@@ -8,22 +8,25 @@
  *
  * @ingroup themeable
  */
-echo "<h1>HEHHHHH</h1>";
 ?>
 
 <div class="left-col">
+  <table>
   <?php
   $vid = 2; // vocabulary ID for programs vocabulary         
   $terms = taxonomy_get_tree($vid);    
   foreach ( $terms as $term ) { 
-  	echo "<pre>";
+    echo "<tr>";
+  	echo "<td>";
     print_r($term->tid);
-    echo "</pre>";
-    echo "<pre>";
+    echo "</td>";
+    echo "<td>";
     print_r($term->name);
-    echo "</pre>";
+    echo "</td>";
+    echo "</tr>";
  }
  ?>
+</table>
 </div>
 <div class="right-col">
  

@@ -1,6 +1,7 @@
 <?php
 
 // give this the name of the field, the node object, an index counter set to 0, and whether we want the popup boxes
+// global variable needs to be removed from this. Right now it's functioning in an isolated environment
 
   function boo_classes_output($field_name, $pagenode, $popups = true) {
   // set the variables used throughout as counters
@@ -12,7 +13,6 @@
   // set the array that we'll use to store all the data from classes
   $classes = array();
   $field = field_get_items('node', $pagenode, $field_name);
- // print_r($field);
 
   foreach($field as $item) {
     $class_id = $item['target_id'];

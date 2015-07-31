@@ -5,7 +5,7 @@
 	
 	margin: $gutter 0;
 	
-	@include breakpoint(mama-bear){
+	@include breakpoint(baby-bear) {
 		width: 50%;
 		margin: $gutter;
 		float: right;

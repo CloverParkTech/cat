@@ -1,3 +1,5 @@
+//see the lightbox javascript file for how this is implemented
+
 .class-popup-window {
   display: none;
   position: fixed;
@@ -23,10 +25,9 @@
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
-  @include breakpoint(mama-bear) {
+  @include breakpoint(baby-bear) {
     width: auto;
     max-width: 80em;
-
   }
 }
 
@@ -53,7 +54,6 @@
   padding-right: 6rem; // sort of a magic number. makes room for the close button.
 }
 
-
 // everything below this is to freeze scrolling on the body when overlay is hidden.
 // ios has issues with just setting overflow to hidden on the body, hence the additional overflow restriction on the HTML element itself.
 .no-scroll {
@@ -72,8 +72,6 @@
     height: 100vh;
   }
 }
-
-
 
 .footer-hidden {
   display: none;

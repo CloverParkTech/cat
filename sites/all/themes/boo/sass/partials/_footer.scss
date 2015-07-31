@@ -2,13 +2,13 @@
 	background-color: $brand-purple;
 	color: white;
 	padding: $gutter;
-	
     width: 100%;  
     margin-top: $gutter;
     @include breakpoint(baby-bear) {
+        // sticky footer styles. Rest of this is in the global.scss file
     	position: absolute;
-    left: 0;
-    bottom: 0;
-    height: $footer-height;
+        left: 0;
+        bottom: 0;
+        height: $footer-height;
     }
 }

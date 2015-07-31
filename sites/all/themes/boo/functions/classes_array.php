@@ -1,6 +1,8 @@
  <?php
 
-  function boo_classes_array($field_name, $pagenode, $index) {
+// creates an array of class data that's used for the class tables on degrees and for the popupwindow
+// there's definitely some duplication here that could better be put into functions
+function boo_classes_array($field_name, $pagenode, $index) {
   // set the variables used throughout as counters
   $total_credits = 0;
   $max_credits = 0;
@@ -18,6 +20,7 @@
     $subnode = node_load($class_id);
    
 
+    // process for elective clusters
     if($subnode->type == 'elective_cluster') {
       $classes[$i]['index'] = $i;
       $classes[$i]['item'] = null;
@@ -74,21 +77,16 @@
                     else {
                       $classes[$i]['sub_elective_group'][$j]['sub_courses'][$k]['superscript'] = null;
                     }
-                            
-
-
                   $k++;
                 }
               }
               $j++;
-
-
         }
       }
     }
 
     
-
+    // process for classes
     if($subnode->type == 'class') {
       $classes[$i]['index'] = $i;
       $classes[$i]['item'] = $subnode->title;

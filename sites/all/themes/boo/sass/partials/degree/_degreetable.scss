@@ -1,6 +1,6 @@
 .degree-table th,
 .degree-table td {
-	@include breakpoint(mama-bear) {
+	@include breakpoint(baby-bear) {
 		&:first-child {
 			width: 20%;
 		}
@@ -13,8 +13,7 @@
 	}
 }
 
-
-
+// see tables scss file for how this is implemented
 .degree-table {
 	margin-bottom: 2*$gutter;
 	@media screen and (max-width: $baby-bear) {

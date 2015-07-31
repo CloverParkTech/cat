@@ -2,12 +2,9 @@
 	background: $site-grey;
 	padding: $gutter;
 	margin-bottom: $gutter;
-
 }
 
-
 .class-search-form-wrapper {
-
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: space-between;
@@ -15,7 +12,7 @@
 
 .class-search-form-section {
 	margin-top: $gutter;
-	@include breakpoint(mama-bear) {
+	@include breakpoint(baby-bear) {
 		width: 23%;
 		margin-top: 0;
 	}

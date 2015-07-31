@@ -1,3 +1,5 @@
+// used on the printable page. need to expand these for individual pages as well
+
 @media print {
 .print{
 	body {
@@ -62,18 +64,10 @@
 	dd {
 		padding-right: $gutter;
 	}
-
-
-
 	.print-hide {
 		display: none;
 		
 	}
-
-
-
-
-
 
 	}
 }

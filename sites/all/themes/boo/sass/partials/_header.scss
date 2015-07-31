@@ -1,14 +1,13 @@
 .catalog-header-wrapper {
 	background-color: $brand-purple;
 	width: 100%;
-	@include breakpoint(mama-bear) {
+	@include breakpoint(baby-bear) {
 		display: flex;
 	}
 }
 
 .catalog-header {
 	width: 100%;
-	color: white;
 	padding: $gutter/2 0;
 }
 
@@ -21,7 +20,7 @@ $title-color: lighten($brand-purple, 50%);
 	display: block;
 	margin-top: $gutter/2;
  	@include linx($title-color, $title-color, $title-color, $title-color);
- 	@include breakpoint(mama-bear) {
+ 	@include breakpoint(baby-bear) {
  		margin-top: 0;
  		font-size: $xxl;
  		float: right;
@@ -34,15 +33,13 @@ $title-color: lighten($brand-purple, 50%);
  	}
 }
 
-
 .header-nav {
 	background: $site-grey;
 	margin-bottom: 2*$gutter;
 }
 
-
 .header-nav .container {
-	@include breakpoint(mama-bear) {
+	@include breakpoint(baby-bear) {
 		// puts the search bar on the right side
 		justify-content: space-between;
 	}
@@ -52,7 +49,6 @@ $title-color: lighten($brand-purple, 50%);
 	margin: 0;
 	list-style-type: none;
 	padding: 0;
-	
 }
 
 .header-nav-ul li {

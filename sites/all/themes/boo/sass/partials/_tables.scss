@@ -1,6 +1,4 @@
 /* table styles adapted from Bootstrap 2 */
-
-
 table {
   width: 100%;
   background-color: transparent;
@@ -40,7 +38,6 @@ thead tr {
   font-size: $medium;
   line-height: 1.2;
 }
-
 
 // responsive tables solution. Exclude it from print stylesheet
 @media screen and (max-width: $baby-bear) {
