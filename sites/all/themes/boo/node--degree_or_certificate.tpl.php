@@ -146,7 +146,7 @@ $i = 0;
 
   
   boo_function('degree_table_display.php');
-  degree_table_display($node);
+  degree_table_display($node, $degree_type_value);
 ?>
 </div>
 

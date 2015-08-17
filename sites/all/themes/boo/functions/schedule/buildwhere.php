@@ -103,6 +103,9 @@
 			$where = "WHERE yrq LIKE '" . $default_quarter . "'";
 		}
 		//return where string
+		echo "<span style='display:none'>";
+		echo $where;
+		echo "</span>";
 		return $where;
 
 	

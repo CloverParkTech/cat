@@ -30,6 +30,9 @@ function hidenode_help($path, $arg) {
  	if($node->type == "class") {
  		return NODE_ACCESS_DENY;
  	}
+  if($node->type == "admin_help_page") {
+    return NODE_ACCESS_DENY;
+  }
 
  }
 
@@ -60,7 +63,7 @@ function hidenode_query_node_access_alter(QueryAlterableInterface $query) {
 	}
 
   if ($node && $search) {
-    $excluded_content_types = array("class", "elective_cluster");
+    $excluded_content_types = array("class", "elective_cluster", "admin_help_page");
 
     if (!empty($excluded_content_types)) {
       $query->condition($node . '.type', array($excluded_content_types), 'NOT IN');

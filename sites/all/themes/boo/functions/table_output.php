@@ -153,30 +153,22 @@ function boo_table_output($classes, $index, $credits, $max_credits) {
       echo "</dl>";
 
       if (isset($class_item['description'])) {
-        echo "<p>";
           echo $class_item['description'];
-        echo "</p>";
      }
 
      if (isset($class_item['prereqs'])) {
       echo "<h5>Prerequisites</h5>";
-        echo "<p>";
           echo $class_item['prereqs'];
-        echo "</p>";
      }
 
      if (isset($class_item['coreqs'])) {
       echo "<h5>Co-requisites</h5>";
-        echo "<p>";
           echo $class_item['coreqs'];
-        echo "</p>";
      }
 
      if (isset($class_item['notes'])) {
       echo "<h5>Notes</h5>";
-        echo "<p>";
           echo $class_item['notes'];
-        echo "</p>";
      }
 
 

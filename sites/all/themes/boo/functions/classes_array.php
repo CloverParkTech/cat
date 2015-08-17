@@ -26,9 +26,13 @@ function boo_classes_array($field_name, $pagenode, $index) {
       $classes[$i]['item'] = null;
       $classes[$i]['title'] = $subnode->title;
       $classes[$i]['credits'] = $subnode->field_total_credits[$pagenode->language][0]['value'];
-      $classes[$i]['creditsmax'] = $subnode->field_total_credits_max[$pagenode->language][0]['value'];
+      if (isset($subnode->field_total_credits_max[$pagenode->language][0]['value'])) {
+        $classes[$i]['creditsmax'] = $subnode->field_total_credits_max[$pagenode->language][0]['value'];
+      }
       $classes[$i]['superscript'] = null;
-      $classes[$i]['description'] = $subnode->field_description_aat_elective[$pagenode->language][0]['value'];
+      if (isset($subnode->field_description_aat_elective[$pagenode->language][0]['value'])) {
+        $classes[$i]['description'] = $subnode->field_description_aat_elective[$pagenode->language][0]['value'];
+      }
     
       // create the sub array of classes assigned to the elective cluster
       $j = 0;

@@ -40,6 +40,10 @@
 	} catch(PDOException $e) {
 		echo "Access denied: " . $e->getMessage();
 	}
+
+	//empty old database
+	$statement = $dbh->prepare('TRUNCATE TABLE courses');
+	$statement->execute();
 	
 	getQuarters('150601');
 	
@@ -198,11 +202,6 @@
 
 		//create json string
 		$json = json_decode($response->GetClassDataYRQResult);
-		//empty old database
-		$stmt = $dbh->prepare('DELETE FROM courses WHERE yrq = \'' . $yrq . '\'');
-		$stmt->execute();
-		
-		// write json output to json file. for dev purposes only
 		echo "<pre>";
 		print_r($json);
 		echo "</pre>";
@@ -227,6 +226,7 @@
 	 * $dbh = opened connection to database
 	 */
 	function insertViaJSON($item, $force) {
+		
 		global $dbh, $force_item;
 		$sql = "INSERT INTO courses (admin_unit, class_cap, class_fee1, class_id, course_id, course_title, cr, day_cd, end_date, end_time, enr, instr_name, org_indx, prg_indx, room_loc, sect, sect_stat, strt_date, strt_time, yrq, start_24, end_24, mode, sbctc_misc_1, class_fee, class_fee_summer)
 			VALUES (:admin_unit, :class_cap, :class_fee1, :class_id, :course_id, :course_title, :cr, :day_cd, :end_date, :end_time, :enr, :instr_name, :org_indx, :prg_indx, :room_loc, :sect, :sect_stat, :strt_date, :strt_time, :yrq, :start_24, :end_24, :mode, :sbctc_misc_1, :class_fee, :class_fee_summer)";
@@ -234,7 +234,7 @@
 		//format all the data
 		formatItems($item);
 
-		
+
 		//if forced admin_unit set, change to that admin_unit
 		if(isset($force[trim($item->COURSE_ID)]) && $force[trim($item->COURSE_ID)] != -2) {
 			$item->ADMIN_UNIT = $force[trim($item->COURSE_ID)];
@@ -252,11 +252,13 @@
 		}
 		
 		//insert if admin_unit isn't -1. -1 means unwanted course.
-		if($item->ADMIN_UNIT != -1) {
+		// also check to make sure SECT_STAT isn't X. That's how classes are cancelled in SMS
+		if($item->ADMIN_UNIT !== -1 && $item->SECT_STAT !== "X" ) {
 			$stmt = $dbh->prepare($sql);
 			bindParams($stmt, $item);
 			$stmt->execute();
 		}
+	
 	}
 	
 	/**
@@ -470,7 +472,7 @@
 	function formatCourseID($str) {
 
 		// insert space before the digits
-		$length = strlen($string);
+		$length = strlen($str);
 		$position = $length - 5;
 
 		$str = substr_replace($str, ' ', $position, 0);

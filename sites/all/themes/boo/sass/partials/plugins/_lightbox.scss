@@ -19,7 +19,7 @@
   position: absolute;
   width: 90%;
   max-height: 90vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   // momentum scrolling for ios
   -webkit-overflow-scrolling: touch;
   left: 50%;
@@ -37,9 +37,10 @@
 }
 
 .class-popup-window-close {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
+  cursor: pointer;
   @include button($brand-purple);
 }
 

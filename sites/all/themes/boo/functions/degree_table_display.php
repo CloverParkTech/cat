@@ -3,7 +3,7 @@
 // node object has to be of degree_or_certificate content type
 
 
-function degree_table_display ($node) {
+function degree_table_display ($node, $type) {
 
 
 	// call the functions used in this function
@@ -18,7 +18,14 @@ function degree_table_display ($node) {
 	$max_credits = 0; // set the counter for max credits. This is the DIFFERENCE between the max credits and total credits.
 
 	echo "<h2 class=\"bar-heading\">";
-	echo "Degree Requirements";
+	if ($type == "Certificate" ) {
+		echo "Certificate";
+	}
+	else {
+		echo "Degree";
+	}
+	echo " Requirements";
+	
 	echo "</h2>";
 
 
@@ -46,7 +53,7 @@ function degree_table_display ($node) {
 
 	  $classes_array_last_item = end($classes_array);
 
-		$classes_array_index = $classes_array_last_item['index'] + 1;
+		$classes_array_index = $classes_array_last_item['index'] + 12;
 	  $table_index = 2;
 	}
 

@@ -104,7 +104,7 @@ echo '</select>';
       echo '<option value="' . $row->tid . '"';
       if(isset($_POST['program']) && $_POST['program'] == $row->tid)
         echo 'selected';
-      echo '>'. $row->name . '</option>';
+      echo '>'. htmlentities($row->name) . '</option>';
     }
     echo '</select>
     ';
